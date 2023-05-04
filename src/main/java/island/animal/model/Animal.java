@@ -16,6 +16,7 @@ public abstract class Animal implements IAnimal{
         maxSpeed = parameters[2];
         maxFoodWeight = parameters[3];
         sex = RandomValue.getRandom();
+        fullAnimal = false;
     }
 
     public double getWeight() {
@@ -40,5 +41,25 @@ public abstract class Animal implements IAnimal{
 
     public double getMaxSpeed() {
         return maxSpeed;
+    }
+
+    @Override
+    public void eat() {
+
+    }
+
+    @Override
+    public void move() {
+
+    }
+
+    @Override
+    public void multiply() {
+
+    }
+
+    @Override
+    public void die() {
+
     }
 }
