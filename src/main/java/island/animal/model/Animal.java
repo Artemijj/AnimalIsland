@@ -5,7 +5,7 @@ public abstract class Animal implements IAnimal{
     private double weight;
 //    private int maxWeight;
     private boolean sex;
-    private boolean fold;
+    private boolean fullAnimal;
     private double maxSpeed;
     private double maxFoodWeight;
 
@@ -30,12 +30,12 @@ public abstract class Animal implements IAnimal{
         return sex;
     }
 
-    public void setFold(boolean fold) {
-        this.fold = fold;
+    public void setFullAnimal(boolean fullAnimal) {
+        this.fullAnimal = fullAnimal;
     }
 
-    public boolean isFold() {
-        return fold;
+    public boolean isFullAnimal() {
+        return fullAnimal;
     }
 
     public double getMaxSpeed() {
