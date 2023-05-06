@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cell {
     private int plantCount;
-    private List<Animal> animals = new ArrayList<>();
+    private List<Animal> animals;
     private int i;
     private int n;
     private int m;
@@ -14,6 +14,19 @@ public class Cell {
         this.i = i;
         this.n = n;
         this.m = m;
+        animals = new ArrayList<>();
+    }
+
+    public void setPlantCount(int plantCount) {
+        this.plantCount = plantCount;
+    }
+
+    public int getPlantCount() {
+        return plantCount;
+    }
+
+    public List<Animal> getAnimals() {
+        return animals;
     }
 
     public int next() {
