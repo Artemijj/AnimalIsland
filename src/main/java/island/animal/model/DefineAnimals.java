@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Plant implements Runnable{
+public class DefineAnimals implements Runnable{
     PrintWriter log;
     FileWriter logFile;
     @Override
@@ -15,7 +15,7 @@ public class Plant implements Runnable{
             ex.printStackTrace();
             return;
         }
-        log.println("The plant is planted");
+        log.println("The animal is created");
         log.flush();
     }
 }
