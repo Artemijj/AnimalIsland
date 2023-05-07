@@ -7,6 +7,7 @@ public class Island {
     private int m;
     private Cell[] arrayCells;
     private int animalCount;
+
     public Island(int n, int m) {
         this.n = n;
         this.m = m;
@@ -33,5 +34,25 @@ public class Island {
             animalCount += arrayCells[i].getAnimals().size();
         }
         return animalCount;
+    }
+
+    public void printArray() {
+        for (int i = 0; i < n * m; i++) {
+            if (i % n == 0) {
+                System.out.println();
+                for (int j = 0; j < n; j++) {
+                    System.out.printf("+----");
+                }
+                System.out.println();
+            }
+            System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
+            if (i + 1 % n == 0) {
+                System.out.print("|");
+            }
+        }
+        System.out.println();
+        for (int j = 0; j < n; j++) {
+            System.out.printf("+----");
+        }
     }
 }
