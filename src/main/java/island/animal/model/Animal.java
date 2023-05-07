@@ -15,7 +15,7 @@ public abstract class Animal implements IAnimal{
         weight = parameters[0];
         maxSpeed = parameters[2];
         maxFoodWeight = parameters[3];
-        sex = RandomValue.getRandom();
+        sex = RandomValue.getBoolRandom();
         fullAnimal = false;
     }
 

@@ -29,6 +29,21 @@ public class Cell {
         return animals;
     }
 
+    public enum Direction { UP, DOWN, LEFT, RIGHT }
+    public int nextCell(Direction dir) {
+        switch (dir) {
+            case UP:
+                return i - n < 0 ? -1 : i - n;
+            case DOWN:
+                return i + n >= m * n ? -1 : i + n;
+            case LEFT:
+                return i % n == 0 ? -1 : i - 1;
+            case RIGHT:
+                return (i + 1) % n == 0 ? -1 : i + 1;
+        }
+        return -1;
+    }
+
     public int next() {
         if (i ==0) {
             int[] arr = {i + 1, i + n};
