@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CellTest {
     @Test
-    public void testHelloWorld() {
+    public void test0() {
         Cell cell = new Cell(0, 10, 10);
         assertEquals(-1 , cell.nextCell(UP));
         assertEquals(10 , cell.nextCell(DOWN));
