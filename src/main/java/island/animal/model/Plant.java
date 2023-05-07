@@ -11,6 +11,7 @@ public class Plant implements Runnable{
     public void run() {
         try {
             logFile = new FileWriter("log.txt", true);
+            log = new PrintWriter(logFile);
         } catch (IOException ex) {
             ex.printStackTrace();
             return;

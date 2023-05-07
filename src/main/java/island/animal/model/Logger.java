@@ -3,12 +3,14 @@ package island.animal.model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
-public class DefineAnimals implements Runnable{
-    PrintWriter log;
-    FileWriter logFile;
-    @Override
-    public void run() {
+public class Logger {
+    static PrintWriter log;
+    static FileWriter logFile;
+    public static void printLog(String txt) {
+        String message = new Date() + " - " + txt;
+        System.out.println(message);
         try {
             logFile = new FileWriter("log.txt", true);
             log = new PrintWriter(logFile);
@@ -16,7 +18,7 @@ public class DefineAnimals implements Runnable{
             ex.printStackTrace();
             return;
         }
-        log.println("The animal is created");
+        log.println(message);
         log.flush();
     }
 }
