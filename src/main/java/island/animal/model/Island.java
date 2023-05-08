@@ -3,9 +3,9 @@ package island.animal.model;
 import java.sql.Array;
 
 public class Island {
-    private int n;
-    private int m;
-    private Cell[] arrayCells;
+    private static int n;
+    private static int m;
+    private static Cell[] arrayCells;
     private int animalCount;
 
     public Island(int n, int m) {
@@ -36,23 +36,55 @@ public class Island {
         return animalCount;
     }
 
-    public void printArray() {
-        for (int i = 0; i < n * m; i++) {
-            if (i % n == 0) {
-                System.out.println();
-                for (int j = 0; j < n; j++) {
-                    System.out.printf("+----");
-                }
-                System.out.println();
-            }
-            System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
-            if (i + 1 % n == 0) {
-                System.out.print("|");
-            }
-        }
-        System.out.println();
+//    public void printArray() {
+//        for (int i = 0; i < n * m; i++) {
+//            if (i % n == 0) {
+//                System.out.println();
+//                for (int j = 0; j < n; j++) {
+//                    System.out.print("+----");
+//                }
+//                System.out.println();
+//            }
+//            System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
+//            if (i + 1 % n == 0) {
+//                System.out.print("|");
+//            }
+//        }
+//        System.out.println();
+//        for (int j = 0; j < n; j++) {
+//            System.out.printf("+----");
+//        }
+//    }
+
+    public static void printArray() {
+        int i = 0;
+        int k = n;
         for (int j = 0; j < n; j++) {
-            System.out.printf("+----");
+            System.out.print("+----");
         }
+        System.out.print("+");
+        System.out.println();
+        for (int j = 0; j < m; j++) {
+            while (i < k) {
+                System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
+                i++;
+            }
+            System.out.print("|");
+            i -= n;
+            System.out.println();
+            while (i < k) {
+                System.out.printf("| %2d ", arrayCells[i].getPlantCount());
+                 i++;
+            }
+            System.out.print("|");
+            System.out.println();
+            k += n;
+            for (int l = 0; l < n; l++) {
+                System.out.print("+----");
+            }
+            System.out.print("+");
+            System.out.println();
+        }
+
     }
 }

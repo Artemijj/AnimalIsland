@@ -3,7 +3,7 @@ package island.animal.model;
 public abstract class Animal implements IAnimal{
     private int typeId;
     private double weight;
-//    private int maxWeight;
+    private double normalWeight;
     private boolean sex;
     private boolean fullAnimal;
     private double maxSpeed;
@@ -12,7 +12,7 @@ public abstract class Animal implements IAnimal{
     public Animal(int typeId) {
         this.typeId = typeId;
         double[] parameters = MainData.getAnimalParameters(typeId);
-        weight = parameters[0];
+        normalWeight = weight = parameters[0];
         maxSpeed = parameters[2];
         maxFoodWeight = parameters[3];
         sex = RandomValue.getBoolRandom();
@@ -23,9 +23,13 @@ public abstract class Animal implements IAnimal{
         return weight;
     }
 
-//    public int getMaxWeight() {
-//        return maxWeight;
-//    }
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getNormalWeight() {
+        return normalWeight;
+    }
 
     public boolean isSex() {
         return sex;
@@ -60,6 +64,8 @@ public abstract class Animal implements IAnimal{
 
     @Override
     public void die() {
-
+        if (weight <= normalWeight * 0.4) {
+//     Животное умерло
+        }
     }
 }

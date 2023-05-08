@@ -6,8 +6,8 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 public class Logger {
-    static PrintWriter log;
-    static FileWriter logFile;
+    private static PrintWriter log;
+    private static FileWriter logFile;
     public static void printLog(String txt) {
         String message = new Date() + " - " + txt;
         System.out.println(message);
