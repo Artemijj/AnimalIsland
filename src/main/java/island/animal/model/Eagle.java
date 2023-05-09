@@ -1,7 +1,7 @@
 package island.animal.model;
 
 public class Eagle extends Predator{
-    public Eagle(int typeId) {
-        super(4);
+    public Eagle(Animals animals) {
+        super(animals);;
     }
 }

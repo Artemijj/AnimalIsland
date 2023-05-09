@@ -9,6 +9,8 @@ public class DefineAnimals implements Runnable{
 //    FileWriter logFile;
     @Override
     public void run() {
+        Animal fox = new Fox(Animals.Fox);
+        Island.arrayCells[RandomValue.getIntRandom(Island.getN() * Island.getM())].addToCellAnimalList(fox);
         Logger.printLog("The animal is created");
 //        try {
 //            logFile = new FileWriter("log.txt", true);

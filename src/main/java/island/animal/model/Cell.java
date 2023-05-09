@@ -74,4 +74,15 @@ public class Cell {
             return arr[RandomValue.getIntRandom(4)];
         }
     }
+    public void addToCellAnimalList(Animal animal) {
+        animals.add(animal);
+    }
+
+    public void removeFromCellAnimalList(Animal animal) {
+        animals.remove(animal);
+    }
+
+    public void addPlant(int p) {
+        plantCount += p;
+    }
 }

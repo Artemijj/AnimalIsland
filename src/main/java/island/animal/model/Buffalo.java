@@ -1,7 +1,7 @@
 package island.animal.model;
 
 public class Buffalo extends Herbivore{
-    public Buffalo(int typeId) {
-        super(12);
+    public Buffalo(Animals animals) {
+        super(animals);
     }
 }

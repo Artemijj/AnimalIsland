@@ -8,9 +8,10 @@ public abstract class Animal implements IAnimal{
     private boolean fullAnimal;
     private double maxSpeed;
     private double maxFoodWeight;
+    private Animals animals;
 
-    public Animal(int typeId) {
-        this.typeId = typeId;
+    public Animal(Animals animals) {
+        this.animals = animals;
         double[] parameters = MainData.getAnimalParameters(typeId);
         normalWeight = weight = parameters[0];
         maxSpeed = parameters[2];

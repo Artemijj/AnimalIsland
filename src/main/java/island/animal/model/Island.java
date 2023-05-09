@@ -5,7 +5,7 @@ import java.sql.Array;
 public class Island {
     private static int n;
     private static int m;
-    private static Cell[] arrayCells;
+    public static Cell[] arrayCells;
     private int animalCount;
 
     public Island(int n, int m) {
@@ -17,11 +17,11 @@ public class Island {
         }
     }
 
-    public int getN() {
+    public static int getN() {
         return n;
     }
 
-    public int getM() {
+    public static int getM() {
         return m;
     }
 
