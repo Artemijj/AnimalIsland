@@ -17,6 +17,10 @@ public class Cell {
         animals = new ArrayList<>();
     }
 
+    public int getI() {
+        return i;
+    }
+
     public void setPlantCount(int plantCount) {
         this.plantCount = plantCount;
     }

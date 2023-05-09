@@ -49,11 +49,6 @@ public abstract class Animal implements IAnimal{
     }
 
     @Override
-    public void eat() {
-
-    }
-
-    @Override
     public void move() {
 
     }

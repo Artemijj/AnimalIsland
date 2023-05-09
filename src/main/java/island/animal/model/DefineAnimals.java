@@ -11,6 +11,8 @@ public class DefineAnimals implements Runnable{
     public void run() {
         Animal fox = new Fox(Animals.Fox);
         Island.arrayCells[RandomValue.getIntRandom(Island.getN() * Island.getM())].addToCellAnimalList(fox);
+        Animal sheep = new Sheep(Animals.Sheep);
+        Island.arrayCells[RandomValue.getIntRandom(Island.getN() * Island.getM())].addToCellAnimalList(sheep);
         Logger.printLog("The animal is created");
 //        try {
 //            logFile = new FileWriter("log.txt", true);
