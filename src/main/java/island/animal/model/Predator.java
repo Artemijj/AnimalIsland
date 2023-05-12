@@ -1,8 +1,9 @@
 package island.animal.model;
 
 public abstract class Predator extends Animal{
-    public Predator(Animals animals) {
-        super(animals);
+    private Island island;
+    public Predator(Animals animals, Island island) {
+        super(animals, island);
     }
 
     @Override

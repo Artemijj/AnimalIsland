@@ -36,6 +36,14 @@ public class Island {
         return animalCount;
     }
 
+    public Cell getCell(int i) {
+        return arrayCells[i];
+    }
+
+//    public void setCell(int i) {
+//        arrayCells[i] =
+//    }
+
 //    public void printArray() {
 //        for (int i = 0; i < n * m; i++) {
 //            if (i % n == 0) {

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private int plantCount;
+    private double plantCount;
     private List<Animal> animals;
-    private int i;
-    private int n;
-    private int m;
+    private static int i;
+    private static int n;
+    private static int m;
 
     public Cell(int i, int n, int m) {
         this.i = i;
@@ -21,11 +21,11 @@ public class Cell {
         return i;
     }
 
-    public void setPlantCount(int plantCount) {
+    public void setPlantCount(double plantCount) {
         this.plantCount = plantCount;
     }
 
-    public int getPlantCount() {
+    public double getPlantCount() {
         return plantCount;
     }
 
@@ -48,7 +48,7 @@ public class Cell {
         return -1;
     }
 
-    public int next() {
+    public static int next(int i) {
         if (i ==0) {
             int[] arr = {i + 1, i + n};
             return arr[RandomValue.getIntRandom(2)];
