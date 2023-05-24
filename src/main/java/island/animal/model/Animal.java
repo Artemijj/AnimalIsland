@@ -74,14 +74,14 @@ public abstract class Animal implements IAnimal{
     public void move() {
         int step = RandomValue.getIntRandom(maxSpeed + 1);
         for (int j = 0; j <= step; j++) {
-            int nextPosition;
-            while (true) {
+            int nextPosition = -1;
+            while (nextPosition == -1) {
                 int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
                 Cell.Direction dir = Cell.Direction.values()[randomDirection];
                 nextPosition = Cell.nextCell(dir);
-                if (nextPosition != -1) {
-                    break;
-                }
+//                if (nextPosition != -1) {
+//                    break;
+//                }
             }
             island.arrayCells[position].removeFromCellAnimalList(this);
             island.arrayCells[nextPosition].addToCellAnimalList(this);
