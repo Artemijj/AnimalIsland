@@ -74,16 +74,31 @@ public abstract class Animal implements IAnimal{
     public void move() {
         int step = RandomValue.getIntRandom(maxSpeed + 1);
         for (int j = 0; j <= step; j++) {
-            if (position != -1) {
-                island.arrayCells[position].removeFromCellAnimalList(this);
-                int nextPosition = Cell.next(position);
-                island.arrayCells[nextPosition].addToCellAnimalList(this);        //?????????????????
-                position = nextPosition;
+            int nextPosition;
+            while (true) {
+                int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
+                Cell.Direction dir = Cell.Direction.values()[randomDirection];
+                nextPosition = Cell.nextCell(dir);
+                if (nextPosition != -1) {
+                    break;
+                }
             }
-
+            island.arrayCells[position].removeFromCellAnimalList(this);
+            island.arrayCells[nextPosition].addToCellAnimalList(this);
+            position = nextPosition;
         }
-//        ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
-//        ses.scheduleWithFixedDelay(this);
+//        int step = RandomValue.getIntRandom(maxSpeed + 1);
+//        for (int j = 0; j <= step; j++) {
+//            if (position != -1) {
+//                island.arrayCells[position].removeFromCellAnimalList(this);
+//                int nextPosition = Cell.next(position);
+//                island.arrayCells[nextPosition].addToCellAnimalList(this);        //?????????????????
+//                position = nextPosition;
+//            }
+//
+//        }
+////        ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
+////        ses.scheduleWithFixedDelay(this);
     }
 
     @Override

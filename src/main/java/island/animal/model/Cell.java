@@ -34,7 +34,7 @@ public class Cell {
     }
 
     public enum Direction { UP, DOWN, LEFT, RIGHT }
-    public int nextCell(Direction dir) {
+    public static int nextCell(Direction dir) {
         switch (dir) {
             case UP:
                 return i - n < 0 ? -1 : i - n;
