@@ -6,14 +6,16 @@ import java.util.List;
 public class Cell {
     private double plantCount;
     private List<Animal> animals;
-    private static int i;
-    private static int n;
-    private static int m;
+    private int i;
+    private int n;
+    private int m;
+//    private Island island;
 
     public Cell(int i, int n, int m) {
         this.i = i;
         this.n = n;
         this.m = m;
+//        this.island = island;
         animals = new ArrayList<>();
     }
 
@@ -34,7 +36,7 @@ public class Cell {
     }
 
     public enum Direction { UP, DOWN, LEFT, RIGHT }
-    public static int nextCell(Direction dir) {
+    public int nextCell(Direction dir) {
         switch (dir) {
             case UP:
                 return i - n < 0 ? -1 : i - n;
@@ -48,7 +50,7 @@ public class Cell {
         return -1;
     }
 
-    public static int next(int i) {
+    public int next(int i) {
         if (i ==0) {
             int[] arr = {i + 1, i + n};
             return arr[RandomValue.getIntRandom(2)];

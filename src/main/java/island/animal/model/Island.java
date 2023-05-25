@@ -3,9 +3,9 @@ package island.animal.model;
 import java.sql.Array;
 
 public class Island {
-    private static int n;
-    private static int m;
-    public static Cell[] arrayCells;
+    private int n;
+    private int m;
+    public Cell[] arrayCells;
     private int animalCount;
 
     public Island(int n, int m) {
@@ -17,11 +17,11 @@ public class Island {
         }
     }
 
-    public static int getN() {
+    public int getN() {
         return n;
     }
 
-    public static int getM() {
+    public int getM() {
         return m;
     }
 
@@ -64,7 +64,7 @@ public class Island {
 //        }
 //    }
 
-    public static void printArray() {
+    public void printArray() {
         int i = 0;
         int k = n;
         for (int j = 0; j < n; j++) {

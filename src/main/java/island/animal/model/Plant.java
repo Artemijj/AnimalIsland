@@ -5,11 +5,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Plant implements Runnable{
-//    PrintWriter log;
+    private Island island;
+
+    public Plant(Island island) {
+        this.island = island;
+    }
+
+    //    PrintWriter log;
 //    FileWriter logFile;
     @Override
     public void run() {
-        Island.arrayCells[RandomValue.getIntRandom(Island.getN() * Island.getM())].addPlant(1);
+        island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
         Logger.printLog("The plant is planted");
 //        try {
 //            logFile = new FileWriter("log.txt", true);

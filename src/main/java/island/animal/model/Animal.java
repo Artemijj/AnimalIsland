@@ -78,7 +78,7 @@ public abstract class Animal implements IAnimal{
             while (nextPosition == -1) {
                 int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
                 Cell.Direction dir = Cell.Direction.values()[randomDirection];
-                nextPosition = Cell.nextCell(dir);
+                nextPosition = island.arrayCells[position].nextCell(dir);
 //                if (nextPosition != -1) {
 //                    break;
 //                }

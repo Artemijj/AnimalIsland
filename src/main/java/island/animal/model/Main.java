@@ -25,8 +25,8 @@ public class Main {
 
 
         ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
-        ses.scheduleWithFixedDelay(new Plant(), 1, 2, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(new Plant(island), 1, 2, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(new DefineAnimals(island), 1, 10, TimeUnit.SECONDS);
-        ses.scheduleWithFixedDelay(new Statistics(), 1, 5, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(new Statistics(island), 1, 5, TimeUnit.SECONDS);
     }
 }
