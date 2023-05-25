@@ -3,6 +3,7 @@ package island.animal.model;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public abstract class Animal implements IAnimal{
     private int typeId;
@@ -29,6 +30,8 @@ public abstract class Animal implements IAnimal{
         position = -1;
         uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
+
+    ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
 
     public double getWeight() {
         return weight;
@@ -86,6 +89,7 @@ public abstract class Animal implements IAnimal{
             island.arrayCells[position].removeFromCellAnimalList(this);
             island.arrayCells[nextPosition].addToCellAnimalList(this);
             position = nextPosition;
+            ses.scheduleWithFixedDelay(this.eat(), 1, 5, TimeUnit.SECONDS);
         }
 //        int step = RandomValue.getIntRandom(maxSpeed + 1);
 //        for (int j = 0; j <= step; j++) {

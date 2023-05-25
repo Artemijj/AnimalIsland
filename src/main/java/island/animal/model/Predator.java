@@ -7,7 +7,8 @@ public abstract class Predator extends Animal{
     }
 
     @Override
-    public void eat() {
+    public Runnable eat() {
 
+        return null;
     }
 }

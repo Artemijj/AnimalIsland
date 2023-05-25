@@ -8,11 +8,12 @@ public abstract class Herbivore extends Animal{
     }
 
     @Override
-    public void eat() {
+    public Runnable eat() {
         double plantCount = island.arrayCells[getPosition()].getPlantCount();
         if (plantCount > 0) {
             this.setWeight(this.getWeight() + 1);
             island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
         }
+        return null;
     }
 }

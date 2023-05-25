@@ -1,7 +1,7 @@
 package island.animal.model;
 
 public interface IAnimal {
-    void eat();
+    Runnable eat();
     void move();
     void multiply();
     void die();
