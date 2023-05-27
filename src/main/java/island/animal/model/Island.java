@@ -95,4 +95,12 @@ public class Island {
         }
 
     }
+
+    public void start() {
+        for (int j = 0; j < n * m; j++) {
+            for (Animal animal: arrayCells[j].getAnimals()) {
+                animal.move();
+            }
+        }
+    }
 }

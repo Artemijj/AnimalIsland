@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private double plantCount;
+    private int plantCount;
     private List<Animal> animals;
     private int i;
     private int n;
@@ -23,11 +23,11 @@ public class Cell {
         return i;
     }
 
-    public void setPlantCount(double plantCount) {
+    public void setPlantCount(int plantCount) {
         this.plantCount = plantCount;
     }
 
-    public double getPlantCount() {
+    public int getPlantCount() {
         return plantCount;
     }
 

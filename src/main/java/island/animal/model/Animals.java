@@ -3,12 +3,12 @@ package island.animal.model;
 import java.util.EnumMap;
 
 public enum Animals {
-    Fox(20, 3, 4) {
+    Fox(20, 2, 4) {
 		void fillCanEat() {
 			canEat.put(Sheep,30);
 		}
 	},
-	Sheep(10, 2, 5) {
+	Sheep(10, 3, 5) {
 		void fillCanEat() {};
 	};
 

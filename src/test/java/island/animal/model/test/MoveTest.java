@@ -13,9 +13,10 @@ public class MoveTest {
         Animal sheep = new Sheep(Animals.Sheep, island);
         island.arrayCells[15].addToCellAnimalList(sheep);
         sheep.setPosition(15);
+        System.out.println("Start position = " + sheep.getPosition());
         sheep.move();
         int position = sheep.getPosition();
-        System.out.println(position);
+        System.out.println("New position = " + position);
         assertNotEquals(15, position);
     }
 }

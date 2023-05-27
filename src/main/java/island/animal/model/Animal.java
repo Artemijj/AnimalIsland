@@ -76,20 +76,31 @@ public abstract class Animal implements IAnimal{
     @Override
     public void move() {
         int step = RandomValue.getIntRandom(maxSpeed + 1);
-        for (int j = 0; j <= step; j++) {
-            int nextPosition = -1;
-            while (nextPosition == -1) {
-                int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
-                Cell.Direction dir = Cell.Direction.values()[randomDirection];
-                nextPosition = island.arrayCells[position].nextCell(dir);
-//                if (nextPosition != -1) {
-//                    break;
-//                }
+        System.out.println("Step = " + step); //!!!!!!!!!!!!!!
+        if (step != 0) {
+            int y = 0; //!!!!!!!!!!!!!!
+            for (int j = 0; j < step; j++) {
+                int nextPosition = -1;
+                System.out.println("for = " + j); //!!!!!!!!!!!!!!
+                while (nextPosition == -1) {
+                    System.out.println("while = " + y); //!!!!!!!!!!!!!!
+                    int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
+                    Cell.Direction dir = Cell.Direction.values()[randomDirection];
+                    System.out.println("Dir = " + dir); //!!!!!!!!!!!!!!
+                    nextPosition = island.arrayCells[position].nextCell(dir);
+                    System.out.println("W nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
+                    if (nextPosition == position) {
+                    nextPosition = -1;
+                    }
+                    y++; //!!!!!!!!!!!!!!
+                }
+//            System.out.println("Dir = " + dir);
+                System.out.println("F nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
+                island.arrayCells[position].removeFromCellAnimalList(this);
+                island.arrayCells[nextPosition].addToCellAnimalList(this);
+                position = nextPosition;
+//            ses.scheduleWithFixedDelay(this.eat(), 1, 5, TimeUnit.SECONDS);
             }
-            island.arrayCells[position].removeFromCellAnimalList(this);
-            island.arrayCells[nextPosition].addToCellAnimalList(this);
-            position = nextPosition;
-            ses.scheduleWithFixedDelay(this.eat(), 1, 5, TimeUnit.SECONDS);
         }
 //        int step = RandomValue.getIntRandom(maxSpeed + 1);
 //        for (int j = 0; j <= step; j++) {
