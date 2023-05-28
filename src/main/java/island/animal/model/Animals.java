@@ -3,24 +3,26 @@ package island.animal.model;
 import java.util.EnumMap;
 
 public enum Animals {
-    Fox(20, 2, 4) {
+    Fox(8, 2, 2, "🐺") {
 		void fillCanEat() {
 			canEat.put(Sheep,30);
 		}
 	},
-	Sheep(10, 3, 5) {
+	Sheep(70, 3, 15, "🐑") {
 		void fillCanEat() {};
 	};
 
 	public double weight;
-	public int     speed;
-	public double  feed;
+	public int speed;
+	public double feed;
+	public String icon;
 	public EnumMap<Animals,Integer> canEat ;
 
-	Animals(double weight,int speed,double  feed) {
+	Animals(double weight, int speed, double  feed, String icon) {
 		this.weight = weight;
 		this.speed = speed;
 		this.feed = feed;
+		this.icon = icon;
 	}
 	abstract void fillCanEat();
 

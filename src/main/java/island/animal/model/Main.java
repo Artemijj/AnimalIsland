@@ -20,9 +20,9 @@ public class Main {
             }
         }
 
-//        for (int j = 0; j < island.getN() * island.getM() * 0.5; j++) {
-//            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
-//        }
+        for (int j = 0; j < island.getN() * island.getM() * 1.5; j++) {
+            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
+        }
 
 ////        island.printArray();
 

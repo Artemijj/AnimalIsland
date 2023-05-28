@@ -1,6 +1,8 @@
 package island.animal.model;
 
 import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Island {
     private int n;
@@ -81,26 +83,47 @@ public class Island {
             i -= n;
             System.out.println();
             while (i < k) {
-                System.out.printf("| %2d ", arrayCells[i].getPlantCount());
+                int plantCount = arrayCells[i].getPlantCount();
+                if (plantCount == 0) {
+                    System.out.printf("| %2d ", plantCount);
+                } else {
+                    System.out.printf("|🌱%2d ", plantCount);
+                }
                  i++;
             }
-            System.out.print("|");
-            System.out.println();
+            System.out.println("|");
+//            System.out.println();
             k += n;
             for (int l = 0; l < n; l++) {
                 System.out.print("+----");
             }
-            System.out.print("+");
-            System.out.println();
+            System.out.println("+");
+//            System.out.println();
         }
 
     }
 
+//    public void start() {
+//        for (int j = 0; j < n * m; j++) {
+//            for (Animal animal: arrayCells[j].getAnimals()) {
+//                animal.move();
+//            }
+//        }
+//    }
+
     public void start() {
+        try {
+        System.out.println("start");
         for (int j = 0; j < n * m; j++) {
-            for (Animal animal: arrayCells[j].getAnimals()) {
-                animal.move();
+            List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
+            for (Animal animal: list) {
+                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
+                    animal.move();
+                 System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
             }
+        }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 }

@@ -45,6 +45,10 @@ public abstract class Animal implements IAnimal{
         return normalWeight;
     }
 
+    public double getMaxFoodWeight() {
+        return maxFoodWeight;
+    }
+
     public boolean isSex() {
         return sex;
     }
@@ -114,6 +118,7 @@ public abstract class Animal implements IAnimal{
 //        }
 ////        ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
 ////        ses.scheduleWithFixedDelay(this);
+        eat();
     }
 
     @Override
@@ -123,9 +128,9 @@ public abstract class Animal implements IAnimal{
 
     @Override
     public void die() {
-        if (weight <= normalWeight * 0.4) {
+//        if (weight <= normalWeight * 0.4) {
             island.arrayCells[position].removeFromCellAnimalList(this);
             Logger.printLog("Animal " + this.getClass().getName() + "(" + this.uuid + ")" + " is dead...");
-        }
+//        }
     }
 }
