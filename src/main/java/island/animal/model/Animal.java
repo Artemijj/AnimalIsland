@@ -1,5 +1,8 @@
 package island.animal.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -9,12 +12,13 @@ public abstract class Animal implements IAnimal{
     private int typeId;
     private double weight;
     private double normalWeight;
+    private double maxAnimalWeight;
     private boolean sex;
     private boolean fullAnimal;
     private int maxSpeed;
     private double maxFoodWeight;
-    private Animals animals;
-    private Island island;
+    Animals animals;
+    Island island;
     private int position;
     private long uuid;
 
@@ -25,13 +29,19 @@ public abstract class Animal implements IAnimal{
         normalWeight = weight = animals.weight;
         maxSpeed = animals.speed;
         maxFoodWeight = animals.feed;
+        maxAnimalWeight = normalWeight + maxFoodWeight;
         sex = RandomValue.getBoolRandom();
         fullAnimal = false;
         position = -1;
         uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
-    ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
+//    ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
+
+
+    public Animals getAnimals() {
+        return animals;
+    }
 
     public double getWeight() {
         return weight;
@@ -47,6 +57,10 @@ public abstract class Animal implements IAnimal{
 
     public double getMaxFoodWeight() {
         return maxFoodWeight;
+    }
+
+    public double getMaxAnimalWeight() {
+        return maxAnimalWeight;
     }
 
     public boolean isSex() {
@@ -118,19 +132,26 @@ public abstract class Animal implements IAnimal{
 //        }
 ////        ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
 ////        ses.scheduleWithFixedDelay(this);
-        eat();
+//        eat();
     }
 
     @Override
-    public void multiply() {
-
+    public void reproduction() {
+        String type = this.getClass().getSimpleName();
+        List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
+        for (Animal animal : list) {
+            if (type == animal.getClass().getSimpleName() && this.isSex() != animal.isSex()) {
+                new DefineAnimals(island).createAnimal(type.toLowerCase(), getPosition());
+                Logger.printLog("Animal " + this.getClass().getSimpleName() + " was born.");
+            }
+        }
     }
 
     @Override
     public void die() {
 //        if (weight <= normalWeight * 0.4) {
             island.arrayCells[position].removeFromCellAnimalList(this);
-            Logger.printLog("Animal " + this.getClass().getName() + "(" + this.uuid + ")" + " is dead...");
+            Logger.printLog("Animal " + this.getClass().getSimpleName() + " (" + this.uuid + ")" + " is dead...");
 //        }
     }
 }

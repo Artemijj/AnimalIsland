@@ -2,8 +2,8 @@ package island.animal.model;
 
 public abstract class Herbivore extends Animal{
 
-    private Animals animals;
-    private Island island;
+    Animals animals;
+    Island island;
     public Herbivore(Animals animals, Island island) {
         super(animals, island);
         this.animals = animals;
@@ -14,7 +14,7 @@ public abstract class Herbivore extends Animal{
     public void eat() {
         System.out.println("Weight " + this.getWeight());
         int plantCount = island.arrayCells[getPosition()].getPlantCount();
-        if (plantCount > 0 && this.getWeight() <= this.getNormalWeight() + this.getMaxFoodWeight()) {
+        if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
             this.setWeight(this.getWeight() + 1);
             island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
         } else {

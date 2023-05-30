@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         Island island = new Island(20, 10);
         Map<String, Integer> animalMap = new HashMap<>();
-//        animalMap.put("fox", 10);
-        animalMap.put("sheep", 1);
+        animalMap.put("fox", 10);
+        animalMap.put("sheep", 10);
 
         for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
             for (int j = 0; j < entry.getValue(); j++) {
@@ -27,10 +27,12 @@ public class Main {
 ////        island.printArray();
 
 
-        ScheduledExecutorService ses = Executors.newScheduledThreadPool(3);
+        ScheduledExecutorService ses = Executors.newScheduledThreadPool(4);
 //        ses.scheduleWithFixedDelay(new Plant(island), 1, 2, TimeUnit.SECONDS);
 //        ses.scheduleWithFixedDelay(new DefineAnimals(island), 1, 10, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(new Statistics(island), 1, 5, TimeUnit.SECONDS);
-        ses.scheduleWithFixedDelay(() -> island.start(), 1, 5, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(() -> island.startMove(), 1, 1, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(() -> island.startEat(), 1, 2, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(() -> island.startReproduction(), 1, 5, TimeUnit.SECONDS);
     }
 }

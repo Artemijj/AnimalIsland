@@ -3,10 +3,10 @@ package island.animal.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Predator extends Animal{
+public abstract class Omnivorous extends Animal{
     Animals animals;
     Island island;
-    public Predator(Animals animals, Island island) {
+    public Omnivorous(Animals animals, Island island) {
         super(animals, island);
         this.animals = animals;
         this.island = island;
@@ -14,6 +14,7 @@ public abstract class Predator extends Animal{
 
     @Override
     public void eat() {
+        int plantCount = island.arrayCells[getPosition()].getPlantCount();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
             if (animals.canEat.containsKey(animal.getAnimals())) {
@@ -23,13 +24,13 @@ public abstract class Predator extends Animal{
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {
                     double foodWeight = animal.getWeight() <= potentialFoodWeight ? animal.getWeight() : potentialFoodWeight;
                     this.setWeight(this.getWeight() + foodWeight);
-                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
-                    Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
                     animal.die();
+                } else if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
+                    this.setWeight(this.getWeight() + 1);
+                    island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
                 } else {
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= this.getNormalWeight() * 0.4) {
-                        Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " died of starvation.");
                         die();
                     }
                 }

@@ -8,7 +8,7 @@ public enum Animals {
 			canEat.put(Sheep,30);
 		}
 	},
-	Sheep(70, 3, 15, "🐑") {
+	Sheep(15, 3, 7, "🐑") {
 		void fillCanEat() {};
 	};
 
