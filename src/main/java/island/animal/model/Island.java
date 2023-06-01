@@ -116,15 +116,15 @@ public class Island {
     ExecutorService executorService = Executors.newCachedThreadPool();
     public void startMove() {
         try {
-        System.out.println("startMove");
+//        System.out.println("startMove");
         for (int j = 0; j < n * m; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
-                System.out.println(animal.getClass().getSimpleName() + " " + animal.isSex());
-                System.out.println(animal.getClass().getSimpleName() + " move for cell:"+j+" animal position:"+animal.getPosition());
+//                System.out.println(animal.getClass().getSimpleName() + " " + animal.isSex());
+//                System.out.println(animal.getClass().getSimpleName() + " move for cell:"+j+" animal position:"+animal.getPosition());
 //                    animal.move();
                 executorService.execute(() -> animal.move());
-                System.out.println(animal.getClass().getSimpleName() + " move for cell end:"+j+" animal position:"+animal.getPosition());
+//                System.out.println(animal.getClass().getSimpleName() + " move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }
         } catch (Exception ex) {
@@ -134,7 +134,7 @@ public class Island {
 
     public void startEat() {
         try {
-        System.out.println("startEat");
+//        System.out.println("startEat");
         for (int j = 0; j < n * m; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
@@ -150,7 +150,7 @@ public class Island {
 
     public void startReproduction() {
         try {
-        System.out.println("startReproduction");
+//        System.out.println("startReproduction");
         for (int j = 0; j < n * m; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {

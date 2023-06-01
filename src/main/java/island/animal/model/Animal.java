@@ -94,30 +94,30 @@ public abstract class Animal implements IAnimal{
     @Override
     public void move() {
         int step = RandomValue.getIntRandom(maxSpeed + 1);
-        System.out.println("Step = " + step); //!!!!!!!!!!!!!!
+//        System.out.println("Step = " + step); //!!!!!!!!!!!!!!
         if (step != 0) {
-            int y = 0; //!!!!!!!!!!!!!!
+//            int y = 0; //!!!!!!!!!!!!!!
             for (int j = 0; j < step; j++) {
                 int nextPosition = -1;
-                System.out.println("for = " + j); //!!!!!!!!!!!!!!
+//                System.out.println("for = " + j); //!!!!!!!!!!!!!!
                 while (nextPosition == -1) {
-                    System.out.println("while = " + y); //!!!!!!!!!!!!!!
+//                    System.out.println("while = " + y); //!!!!!!!!!!!!!!
                     int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
                     Cell.Direction dir = Cell.Direction.values()[randomDirection];
-                    System.out.println("Dir = " + dir); //!!!!!!!!!!!!!!
+//                    System.out.println("Dir = " + dir); //!!!!!!!!!!!!!!
                     nextPosition = island.arrayCells[position].nextCell(dir);
-                    System.out.println("W nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
+//                    System.out.println("W nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
                     if (nextPosition == position) {
                     nextPosition = -1;
                     }
-                    y++; //!!!!!!!!!!!!!!
+//                    y++; //!!!!!!!!!!!!!!
                 }
 //            System.out.println("Dir = " + dir);
-                System.out.println("F nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
+//                System.out.println("F nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
                 island.arrayCells[position].removeFromCellAnimalList(this);
                 island.arrayCells[nextPosition].addToCellAnimalList(this);
                 position = nextPosition;
-//            ses.scheduleWithFixedDelay(this.eat(), 1, 5, TimeUnit.SECONDS);
+                Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
             }
         }
 //        int step = RandomValue.getIntRandom(maxSpeed + 1);
@@ -142,7 +142,7 @@ public abstract class Animal implements IAnimal{
         for (Animal animal : list) {
             if (type == animal.getClass().getSimpleName() && this.isSex() != animal.isSex()) {
                 new DefineAnimals(island).createAnimal(type.toLowerCase(), getPosition());
-                Logger.printLog("Animal " + this.getClass().getSimpleName() + " was born.");
+                Logger.printLog(this.getClass().getSimpleName() + " was born.");
             }
         }
     }
@@ -151,7 +151,7 @@ public abstract class Animal implements IAnimal{
     public void die() {
 //        if (weight <= normalWeight * 0.4) {
             island.arrayCells[position].removeFromCellAnimalList(this);
-            Logger.printLog("Animal " + this.getClass().getSimpleName() + " (" + this.uuid + ")" + " is dead...");
+///            Logger.printLog("Animal " + this.getClass().getSimpleName() + " (" + this.uuid + ")" + " is dead...");
 //        }
     }
 }

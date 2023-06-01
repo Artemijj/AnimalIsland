@@ -23,13 +23,14 @@ public abstract class Predator extends Animal{
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {
                     double foodWeight = animal.getWeight() <= potentialFoodWeight ? animal.getWeight() : potentialFoodWeight;
                     this.setWeight(this.getWeight() + foodWeight);
-                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
+//                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
+                    Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
                     Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
                     animal.die();
                 } else {
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= this.getNormalWeight() * 0.4) {
-                        Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " died of starvation.");
+                        Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
                         die();
                     }
                 }

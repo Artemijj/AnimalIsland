@@ -12,17 +12,19 @@ public abstract class Herbivore extends Animal{
 
     @Override
     public void eat() {
-        System.out.println("Weight " + this.getWeight());
+    //    System.out.println("Weight " + this.getWeight());
         int plantCount = island.arrayCells[getPosition()].getPlantCount();
         if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
             this.setWeight(this.getWeight() + 1);
             island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
+            Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a plant.");
         } else {
             this.setWeight(this.getWeight() - 1);
             if (this.getWeight() <= this.getNormalWeight() * 0.4){
+                Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
                 die();
             }
         }
-        System.out.println("Weight " + this.getWeight());
+    //    System.out.println("Weight " + this.getWeight());
     }
 }

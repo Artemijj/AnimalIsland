@@ -12,7 +12,7 @@ public class Logger {
         String message = new Date() + " - " + txt;
         System.out.println(message);
         try {
-            logFile = new FileWriter("log.txt", true);
+            logFile = new FileWriter("log.txt"); //, true);
             log = new PrintWriter(logFile);
         } catch (IOException ex) {
             ex.printStackTrace();

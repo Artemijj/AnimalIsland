@@ -24,13 +24,17 @@ public abstract class Omnivorous extends Animal{
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {
                     double foodWeight = animal.getWeight() <= potentialFoodWeight ? animal.getWeight() : potentialFoodWeight;
                     this.setWeight(this.getWeight() + foodWeight);
+                    Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
+                    Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
                     animal.die();
                 } else if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
                     this.setWeight(this.getWeight() + 1);
                     island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
+                    Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a plant.");
                 } else {
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= this.getNormalWeight() * 0.4) {
+                        Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
                         die();
                     }
                 }
