@@ -7,23 +7,29 @@ import java.io.PrintWriter;
 public class DefineAnimals implements Runnable{
     private static Island island;
 
-    public DefineAnimals(Island island) {
-        this.island = island;
-    }
+//    public DefineAnimals(Island island) {
+//        this.island = island;
+//    }
 
-    public static void createAnimal(String type, int i) {
+    public static Animal createAnimal(Island island, String type, int i) {
         switch (type) {
+            case "wolf" :
+                Animal wolf = new Fox(Animals.Fox, island);
+                island.arrayCells[i].addToCellAnimalList(wolf);
+                wolf.setPosition(i);
+                return wolf;
             case "fox" :
                 Animal fox = new Fox(Animals.Fox, island);
                 island.arrayCells[i].addToCellAnimalList(fox);
                 fox.setPosition(i);
-                break;
+                return fox;
             case "sheep" :
                 Animal sheep = new Sheep(Animals.Sheep, island);
                 island.arrayCells[i].addToCellAnimalList(sheep);
                 sheep.setPosition(i);
-                break;
+                return sheep;
         }
+        return null;
     }
 
 

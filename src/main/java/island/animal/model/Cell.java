@@ -31,7 +31,7 @@ public class Cell {
         return plantCount;
     }
 
-    public List<Animal> getAnimals() {
+    public synchronized List<Animal> getAnimals() {
         return animals;
     }
 
@@ -80,15 +80,15 @@ public class Cell {
             return arr[RandomValue.getIntRandom(4)];
         }
     }
-    public void addToCellAnimalList(Animal animal) {
+    public synchronized void addToCellAnimalList(Animal animal) {
         animals.add(animal);
     }
 
-    public void removeFromCellAnimalList(Animal animal) {
+    public synchronized void removeFromCellAnimalList(Animal animal) {
         animals.remove(animal);
     }
 
-    public void addPlant(int p) {
+    public synchronized void addPlant(int p) {
         plantCount += p;
     }
 }

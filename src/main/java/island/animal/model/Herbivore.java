@@ -2,17 +2,19 @@ package island.animal.model;
 
 public abstract class Herbivore extends Animal{
 
-    Animals animals;
-    Island island;
+//    Animals animals;
+//    Island island;
+//    String type;
     public Herbivore(Animals animals, Island island) {
         super(animals, island);
-        this.animals = animals;
-        this.island = island;
+//        type = "Herbivore";
+//        this.animals = animals;
+//        this.island = island;
     }
 
     @Override
     public void eat() {
-    //    System.out.println("Weight " + this.getWeight());
+//        System.out.println("Weight " + this.getWeight());
         int plantCount = island.arrayCells[getPosition()].getPlantCount();
         if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
             this.setWeight(this.getWeight() + 1);
@@ -25,6 +27,6 @@ public abstract class Herbivore extends Animal{
                 die();
             }
         }
-    //    System.out.println("Weight " + this.getWeight());
+//        System.out.println("Weight " + this.getWeight());
     }
 }

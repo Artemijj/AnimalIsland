@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Omnivorous extends Animal{
-    Animals animals;
-    Island island;
+//    Animals animals;
+//    Island island;
+    String type = "Omnivorous";
     public Omnivorous(Animals animals, Island island) {
         super(animals, island);
-        this.animals = animals;
-        this.island = island;
+//        this.animals = animals;
+//        this.island = island;
     }
 
     @Override

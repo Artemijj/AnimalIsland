@@ -9,14 +9,16 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public abstract class Animal implements IAnimal{
-    private int typeId;
+//    private String type;
     private double weight;
+    private int quantity;
     private double normalWeight;
     private double maxAnimalWeight;
     private boolean sex;
     private boolean fullAnimal;
     private int maxSpeed;
     private double maxFoodWeight;
+    private String icon;
     Animals animals;
     Island island;
     private int position;
@@ -26,9 +28,12 @@ public abstract class Animal implements IAnimal{
         this.animals = animals;
         this.island = island;
 //        double[] parameters = MainData.getAnimalParameters(typeId);
+//        type = "";
         normalWeight = weight = animals.weight;
         maxSpeed = animals.speed;
+        quantity = animals.quantity;
         maxFoodWeight = animals.feed;
+        icon = animals.icon;
         maxAnimalWeight = normalWeight + maxFoodWeight;
         sex = RandomValue.getBoolRandom();
         fullAnimal = false;
@@ -38,6 +43,10 @@ public abstract class Animal implements IAnimal{
 
 //    ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
 
+
+//    public String getType() {
+//        return type;
+//    }
 
     public Animals getAnimals() {
         return animals;
@@ -61,6 +70,14 @@ public abstract class Animal implements IAnimal{
 
     public double getMaxAnimalWeight() {
         return maxAnimalWeight;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getIcon() {
+        return icon;
     }
 
     public boolean isSex() {
@@ -97,6 +114,7 @@ public abstract class Animal implements IAnimal{
 //        System.out.println("Step = " + step); //!!!!!!!!!!!!!!
         if (step != 0) {
 //            int y = 0; //!!!!!!!!!!!!!!
+            int tempPosition = position;
             for (int j = 0; j < step; j++) {
                 int nextPosition = -1;
 //                System.out.println("for = " + j); //!!!!!!!!!!!!!!
@@ -105,19 +123,27 @@ public abstract class Animal implements IAnimal{
                     int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
                     Cell.Direction dir = Cell.Direction.values()[randomDirection];
 //                    System.out.println("Dir = " + dir); //!!!!!!!!!!!!!!
-                    nextPosition = island.arrayCells[position].nextCell(dir);
+                    nextPosition = island.arrayCells[tempPosition].nextCell(dir);
 //                    System.out.println("W nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
-                    if (nextPosition == position) {
+                    if (nextPosition == tempPosition) {
                     nextPosition = -1;
                     }
 //                    y++; //!!!!!!!!!!!!!!
                 }
 //            System.out.println("Dir = " + dir);
 //                System.out.println("F nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
+//                island.arrayCells[position].removeFromCellAnimalList(this);
+//                island.arrayCells[nextPosition].addToCellAnimalList(this);
+                tempPosition = nextPosition;
+//                Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
+            }
+            Integer counter = (int)island.arrayCells[tempPosition].getAnimals().stream().filter(getClass()::equals).count();
+            if (counter < quantity) {
                 island.arrayCells[position].removeFromCellAnimalList(this);
-                island.arrayCells[nextPosition].addToCellAnimalList(this);
-                position = nextPosition;
-                Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
+                island.arrayCells[tempPosition].addToCellAnimalList(this);
+                position = tempPosition;
+                Logger.printLog(getClass().getSimpleName() + " " + icon + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
+//                System.out.println("Type - " + this.getType());
             }
         }
 //        int step = RandomValue.getIntRandom(maxSpeed + 1);
@@ -137,12 +163,12 @@ public abstract class Animal implements IAnimal{
 
     @Override
     public void reproduction() {
-        String type = this.getClass().getSimpleName();
+        String type = getClass().getSimpleName();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
-            if (type == animal.getClass().getSimpleName() && this.isSex() != animal.isSex()) {
-                new DefineAnimals(island).createAnimal(type.toLowerCase(), getPosition());
-                Logger.printLog(this.getClass().getSimpleName() + " was born.");
+            if (type == animal.getClass().getSimpleName() && isSex() != animal.isSex()) {
+                Animal newAnimal = DefineAnimals.createAnimal(island, type.toLowerCase(), getPosition());
+                Logger.printLog(newAnimal.getClass().getSimpleName() + " " + newAnimal.icon + " (" + newAnimal.getUuid() + ") was born.");
             }
         }
     }

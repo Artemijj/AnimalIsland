@@ -3,9 +3,14 @@ package island.animal.model;
 import java.util.EnumMap;
 
 public enum Animals {
-    Fox(8, 30, 2, 2, "🐺") {
+    Wolf(50, 30, 3, 8, "🐺") {
 		void fillCanEat() {
-			canEat.put(Sheep,30);
+			canEat.put(Sheep, 70);
+		}
+	},
+	Fox(8, 30, 2, 2, "🦊") {
+		void fillCanEat() {
+			canEat.put(Sheep, 30);
 		}
 	},
 	Sheep(15, 140, 3, 7, "🐑") {

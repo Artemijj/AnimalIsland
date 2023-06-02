@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Predator extends Animal{
-    Animals animals;
-    Island island;
+//    Animals animals;
+//    Island island;
+    String type = "Predator";
     public Predator(Animals animals, Island island) {
         super(animals, island);
-        this.animals = animals;
-        this.island = island;
+//        this.animals = animals;
+//        this.island = island;
     }
 
     @Override

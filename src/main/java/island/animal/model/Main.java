@@ -11,12 +11,14 @@ public class Main {
     public static void main(String[] args) {
         Island island = new Island(20, 10);
         Map<String, Integer> animalMap = new HashMap<>();
+        animalMap.put("wolf", 10);
         animalMap.put("fox", 10);
         animalMap.put("sheep", 10);
 
         for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
             for (int j = 0; j < entry.getValue(); j++) {
-                new DefineAnimals(island).createAnimal(entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
+                DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
+//                System.out.println("Create " + entry.getKey());
             }
         }
 
