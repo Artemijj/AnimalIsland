@@ -18,7 +18,7 @@ public class Main {
         for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
             for (int j = 0; j < entry.getValue(); j++) {
                 DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
-//                System.out.println("Create " + entry.getKey());
+                System.out.println("Create " + entry.getKey());
             }
         }
 
