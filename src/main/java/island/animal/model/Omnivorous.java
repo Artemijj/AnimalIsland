@@ -17,8 +17,8 @@ public abstract class Omnivorous extends Animal{
         int plantCount = island.arrayCells[position].getPlantCount();
         List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
-            if (species.canEat.containsKey(animal.getAnimals())) {
-                int potentialProbability = species.canEat.get(animal.getAnimals());
+            if (species.canEat.containsKey(animal.getSpecies())) {
+                int potentialProbability = species.canEat.get(animal.getSpecies());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = this.getMaxAnimalWeight() - this.getWeight();
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {

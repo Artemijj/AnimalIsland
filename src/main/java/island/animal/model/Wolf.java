@@ -13,8 +13,8 @@ public class Wolf extends Predator{
         super.eat(island, position);
         List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
-            if (species.canEat.containsKey(animal.getAnimals())) {
-                int potentialProbability = species.canEat.get(animal.getAnimals());
+            if (species.canEat.containsKey(animal.getSpecies())) {
+                int potentialProbability = species.canEat.get(animal.getSpecies());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = getMaxAnimalWeight() - getWeight();
                 Integer counter = (int)island.arrayCells[position].getAnimals().stream().filter(getClass()::equals).count();

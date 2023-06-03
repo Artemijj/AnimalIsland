@@ -23,7 +23,7 @@ public abstract class Animal implements IAnimal{
         uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
-    public Species getAnimals() {
+    public Species getSpecies() {
         return species;
     }
 
@@ -72,7 +72,7 @@ public abstract class Animal implements IAnimal{
             }
             stepPosition = calculatedPosition;
         }
-        Integer counter = (int) island.arrayCells[stepPosition].getAnimals().stream().filter(getClass()::equals).count();
+        Integer counter = (int)island.arrayCells[stepPosition].animalsCount(getSpecies());
         if (counter < species.quantity) {
             island.arrayCells[initialPosition].removeFromCellAnimalList(this);
             island.arrayCells[stepPosition].addToCellAnimalList(this);

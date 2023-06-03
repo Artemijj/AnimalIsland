@@ -50,35 +50,8 @@ public class Cell {
         return -1;
     }
 
-    public int next(int i) {
-        if (i ==0) {
-            int[] arr = {i + 1, i + n};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n - 1) {
-            int[] arr = {i - 1, i + n};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n * m - n) {
-            int[] arr = {i + 1, i - n};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n * m - 1) {
-            int[] arr = {i - 1, i - n};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i > 0 && i < n - 1) {
-            int[] arr = {i + 1, i - 1, i + n};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > 0 && i < n * m - n && i % n == 0) {
-            int[] arr = {i + 1, i + n, i - n};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > n * m - n && i < n * m) {
-            int[] arr = {i + 1, i - 1, i - n};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > n - 1 && (i + 1) % n == 0 && i < n * m - 1) {
-            int[] arr = {i - 1, i + n, i - n};
-            return arr[RandomValue.getIntRandom(3)];
-        } else {
-            int[] arr = {i + 1, i - 1, i + n, i - n};
-            return arr[RandomValue.getIntRandom(4)];
-        }
+    public synchronized int animalsCount(Species species) {
+        return (int) getAnimals().stream().filter((x) -> { return x.getSpecies() == species; }).count();
     }
     public synchronized void addToCellAnimalList(Animal animal) {
         animals.add(animal);
