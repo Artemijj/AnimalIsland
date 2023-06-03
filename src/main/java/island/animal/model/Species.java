@@ -7,14 +7,17 @@ public enum Species {
 		void fillCanEat() {
 			canEat.put(Sheep, 70);
 		}
+		Animal create() { return new Wolf(this); }
 	},
 	Fox(8, 30, 2, 2, "🦊") {
 		void fillCanEat() {
 			canEat.put(Sheep, 30);
 		}
+		Animal create() { return new Fox(this); }
 	},
 	Sheep(15, 140, 3, 7, "🐑") {
 		void fillCanEat() {};
+		Animal create() { return new Sheep(this); }
 	};
 
 	public double weight;
@@ -32,6 +35,7 @@ public enum Species {
 		this.icon = icon;
 	}
 	abstract void fillCanEat();
+	abstract Animal create();
 
 	// static initializator
 	static {

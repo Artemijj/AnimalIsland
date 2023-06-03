@@ -4,27 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Island island = new Island(20, 10);
-        Map<String, Integer> animalMap = new HashMap<>();
-        animalMap.put("wolf", 10);
-        animalMap.put("fox", 10);
-        animalMap.put("sheep", 10);
+        Island island = new Island(new ModelParameter());
 
-        for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
-            for (int j = 0; j < entry.getValue(); j++) {
-                DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
-                System.out.println("Create " + entry.getKey());
-            }
-        }
 
-        for (int j = 0; j < island.getN() * island.getM() * 1.5; j++) {
-            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
-        }
+
 
 ////        island.printArray();
 

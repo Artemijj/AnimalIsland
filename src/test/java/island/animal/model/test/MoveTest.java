@@ -9,7 +9,7 @@ public class MoveTest {
 
     @Test
     public void test0() {
-        Island island = new Island(20, 10);
+        Island island = new Island(new ModelParameter());
         Animal sheep = new Sheep(Species.Sheep);
         island.arrayCells[15].addToCellAnimalList(sheep);
         System.out.println("Start position = " + 15);
