@@ -9,15 +9,15 @@ public class Wolf extends Predator{
     }
 
     @Override
-    public void eat(Island island) {
-        super.eat(island);
-        List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
+    public void eat(Island island, int position) {
+        super.eat(island, position);
+        List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getAnimals())) {
                 int potentialProbability = species.canEat.get(animal.getAnimals());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = getMaxAnimalWeight() - getWeight();
-                Integer counter = (int)island.arrayCells[getPosition()].getAnimals().stream().filter(getClass()::equals).count();
+                Integer counter = (int)island.arrayCells[position].getAnimals().stream().filter(getClass()::equals).count();
                 if (probability > potentialProbability && getWeight() < getMaxAnimalWeight()) {
                     double foodWeight = animal.getWeight() <= potentialFoodWeight ? animal.getWeight() : potentialFoodWeight;
                     setWeight(getWeight() + foodWeight);
@@ -31,12 +31,12 @@ public class Wolf extends Predator{
                             }
                         }
                     }
-                    animal.die(island);
+                    animal.die(island, position);
                 } else {
                     setWeight(getWeight() - 1);
                     if (getWeight() <= species.weight * 0.4) {
                         Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ") died of starvation.");
-                        die(island);
+                        die(island, position);
                     }
                 }
             }

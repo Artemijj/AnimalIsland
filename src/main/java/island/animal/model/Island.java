@@ -114,19 +114,16 @@ public class Island {
 //    }
 
     ExecutorService executorService = Executors.newCachedThreadPool();
+
     public void startMove() {
         try {
-//        System.out.println("startMove");
-        for (int j = 0; j < n * m; j++) {
-            List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
-            for (Animal animal: list) {
-//                System.out.println(animal.getClass().getSimpleName() + " " + animal.isSex());
-//                System.out.println(animal.getClass().getSimpleName() + " move for cell:"+j+" animal position:"+animal.getPosition());
-//                    animal.move();
-                executorService.execute(() -> animal.move(this));
-//                System.out.println(animal.getClass().getSimpleName() + " move for cell end:"+j+" animal position:"+animal.getPosition());
+            for (int j = 0; j < n * m; j++) {
+                List<Animal> list = new ArrayList<>(arrayCells[j].getAnimals());
+                for (Animal animal : list) {
+                    int initialPosition = j;
+                    executorService.execute(() -> animal.move(this, initialPosition));
+                }
             }
-        }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -139,7 +136,8 @@ public class Island {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
 //                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.eat(this));
+                int position = j;
+                executorService.execute(() -> animal.eat(this, position));
 //                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }
@@ -155,7 +153,8 @@ public class Island {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
 //                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.reproduction(this));
+                int position = j;
+                executorService.execute(() -> animal.reproduction(this, position));
 //                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }

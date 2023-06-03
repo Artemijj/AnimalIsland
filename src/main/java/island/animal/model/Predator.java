@@ -11,8 +11,8 @@ public abstract class Predator extends Animal{
     }
 
     @Override
-    public void eat(Island island) {
-        List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
+    public void eat(Island island, int position) {
+        List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getAnimals())) {
                 int potentialProbability = species.canEat.get(animal.getAnimals());
@@ -24,12 +24,12 @@ public abstract class Predator extends Animal{
 //                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
                     Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
                     Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
-                    animal.die(island);
+                    animal.die(island, position);
                 } else {
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= species.weight * 0.4) {
                         Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
-                        die(island);
+                        die(island, position);
                     }
                 }
             }

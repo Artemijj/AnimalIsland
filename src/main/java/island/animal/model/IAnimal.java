@@ -1,8 +1,8 @@
 package island.animal.model;
 
 public interface IAnimal {
-    void eat(Island island);
-    void move(Island island);
-    void reproduction(Island island);
-    void die(Island island);
+    void eat(Island island, int position);
+    int move(Island island, int initialPosition);
+    void reproduction(Island island, int position);
+    void die(Island island, int position);
 }
