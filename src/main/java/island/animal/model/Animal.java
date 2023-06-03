@@ -22,8 +22,9 @@ public abstract class Animal implements IAnimal{
         maxAnimalWeight = species.weight  + species.feed;
         sex = RandomValue.getBoolRandom();
         fullAnimal = false;
-        uuid = lastUuid;
-        lastUuid++;
+        synchronized (species) {
+            uuid = lastUuid++;
+        }
     }
 
     public Species getSpecies() {
@@ -91,6 +92,9 @@ public abstract class Animal implements IAnimal{
 
     @Override
     public void reproduction(Island island, int position) {
+        if (! isSex())  return; // only for boys
+        Integer counter = (int)island.arrayCells[position].animalsCount(getSpecies());
+        if (counter >= species.quantity) return;
         String type = getClass().getSimpleName();
         List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
@@ -98,7 +102,7 @@ public abstract class Animal implements IAnimal{
                 Animal newAnimal = species.create();
                 island.arrayCells[position].addToCellAnimalList(newAnimal);
                 Logger.printLog(newAnimal.getDescription() + " was born, position:"+position);
-                Logger.printLog("parents: "+getDescription() + ":" + animal.getDescription());
+                Logger.printLog(newAnimal.getDescription() +" parents: "+getDescription() + ":" + animal.getDescription());
             }
         }
     }
