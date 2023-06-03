@@ -16,7 +16,7 @@ public abstract class Herbivore extends Animal{
             Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a plant.");
         } else {
             this.setWeight(this.getWeight() - 1);
-            if (this.getWeight() <= this.getNormalWeight() * 0.4){
+            if (this.getWeight() <= species.weight * 0.4){
                 Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
                 die(island);
             }

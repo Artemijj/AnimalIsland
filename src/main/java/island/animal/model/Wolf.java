@@ -23,7 +23,7 @@ public class Wolf extends Predator{
                     setWeight(getWeight() + foodWeight);
                     Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
                     Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
-                    if (counter > 1 && animal.getWeight() > getMaxFoodWeight()) {
+                    if (counter > 1 && animal.getWeight() > species.feed) {
                         double sharedFood = (animal.getWeight() - foodWeight) / counter;
                         for (Animal wolf : list) {
                             if (wolf.getClass().getSimpleName().equals(getClass().getSimpleName()) && wolf.getUuid() != getUuid()) {
@@ -34,7 +34,7 @@ public class Wolf extends Predator{
                     animal.die(island);
                 } else {
                     setWeight(getWeight() - 1);
-                    if (getWeight() <= getNormalWeight() * 0.4) {
+                    if (getWeight() <= species.weight * 0.4) {
                         Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ") died of starvation.");
                         die(island);
                     }
