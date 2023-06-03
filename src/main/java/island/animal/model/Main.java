@@ -9,22 +9,22 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Island island = new Island(20, 10);
-        Map<Species, Integer> animalMap = new HashMap<>();
-        animalMap.put(Species.Wolf, 10);
-        animalMap.put(Species.Fox, 10);
-        animalMap.put(Species.Sheep, 10);
-
-        for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
-            for (int j = 0; j < entry.getValue(); j++) {
-                DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
-                System.out.println("Create " + entry.getKey());
-            }
-        }
-
-        for (int j = 0; j < island.getN() * island.getM() * 1.5; j++) {
-            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
-        }
+        Island island = new Island(new ModelParameter());
+//        Map<Species, Integer> animalMap = new HashMap<>();
+//        animalMap.put(Species.Wolf, 10);
+//        animalMap.put(Species.Fox, 10);
+//        animalMap.put(Species.Sheep, 10);
+//
+//        for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
+//            for (int j = 0; j < entry.getValue(); j++) {
+//                DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
+//                System.out.println("Create " + entry.getKey());
+//            }
+//        }
+//
+//        for (int j = 0; j < island.getN() * island.getM() * 1.5; j++) {
+//            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
+//        }
 
 ////        island.printArray();
 

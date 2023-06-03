@@ -15,7 +15,7 @@ public class Plant implements Runnable{
 //    FileWriter logFile;
     @Override
     public void run() {
-        island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
+        island.arrayCells[RandomValue.getIntRandom(island.getWidth() * island.getHeight())].addPlant(1);
         Logger.printLog("The plant is planted");
 //        try {
 //            logFile = new FileWriter("log.txt", true);

@@ -4,39 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Predator extends Animal{
-//    Animals animals;
-//    Island island;
-    String type = "Predator";
-    public Predator(Species species, Island island) {
-        super(species, island);
-//        this.animals = animals;
-//        this.island = island;
+    public Predator(Species species) {
+        super(species);
     }
 
     @Override
-    public void eat() {
-        List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
+    public void eat(Island island, int position) {
+        List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getSpecies())) {
                 int potentialProbability = species.canEat.get(animal.getSpecies());
                 int probability = RandomValue.getIntRandom(101);
-                double potentialFoodWeight = this.getMaxAnimalWeight() - this.getWeight();
-                if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {
+                double potentialFoodWeight = getMaxAnimalWeight() - getWeight();
+                if (probability > potentialProbability && getWeight() < getMaxAnimalWeight()) {
                     double foodWeight = animal.getWeight() <= potentialFoodWeight ? animal.getWeight() : potentialFoodWeight;
-                    this.setWeight(this.getWeight() + foodWeight);
-//                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
-                    Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
-                    Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
-                    animal.die();
+                    setWeight(getWeight() + foodWeight);
+                    Logger.printLog(getDescription() + " ate a " + animal.getDescription() + ".");
+                    Logger.printLog(animal.getDescription() + " is eaten, at field " + position);
+                    animal.die(island, position);
                 } else {
-                    this.setWeight(this.getWeight() - 1);
-                    if (this.getWeight() <= this.getNormalWeight() * 0.4) {
-                        Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
-                        die();
+                    setWeight(getWeight() - 1);
+                    if (getWeight() <= species.weight * 0.4) {
+                        Logger.printLog(getDescription() + " died of starvation, at field " + position);
+                        die(island, position);
                     }
                 }
             }
         }
-
     }
 }

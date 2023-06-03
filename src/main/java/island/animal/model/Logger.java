@@ -8,16 +8,18 @@ import java.util.Date;
 public class Logger {
     private static PrintWriter log;
     private static FileWriter logFile;
-    public static void printLog(String txt) {
+    public synchronized static void printLog(String txt) {
+        if (logFile == null) {
+            try {
+                logFile = new FileWriter("log.txt"); //, true);
+                log = new PrintWriter(logFile);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return;
+            }
+        }
         String message = new Date() + " - " + txt;
         System.out.println(message);
-        try {
-            logFile = new FileWriter("log.txt"); //, true);
-            log = new PrintWriter(logFile);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return;
-        }
         log.println(message);
         log.flush();
     }

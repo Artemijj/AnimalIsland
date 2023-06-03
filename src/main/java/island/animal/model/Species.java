@@ -8,8 +8,8 @@ public enum Species {
             canEat.put(Sheep, 70);
         }
 
-        Animal create(Island island) {
-            return new Wolf(this, island);
+        Animal create() {
+            return new Wolf(this);
         }
     },
     Fox(8, 30, 2, 2, "🦊", "Predator") {
@@ -17,16 +17,16 @@ public enum Species {
             canEat.put(Sheep, 30);
         }
 
-        Animal create(Island island) {
-            return new Fox(this, island);
+        Animal create() {
+            return new Fox(this);
         }
     },
     Sheep(15, 140, 3, 7, "🐑", "Herbivore") {
         void fillCanEat() {
         }
 
-        Animal create(Island island) {
-            return new Sheep(this, island);
+        Animal create() {
+            return new Sheep(this);
         }
     };
 
@@ -49,7 +49,7 @@ public enum Species {
 
     abstract void fillCanEat();
 
-    abstract Animal create(Island island);
+    abstract Animal create();
 
     // static initializator
     static {

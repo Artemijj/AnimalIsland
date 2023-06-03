@@ -1,32 +1,29 @@
 package island.animal.model;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Island {
-    private int n;
-    private int m;
     public Cell[] arrayCells;
     private int animalCount;
+    private ModelParameter modelParameter;
 
-    public Island(int n, int m) {
-        this.n = n;
-        this.m = m;
-        arrayCells = new Cell[n * m];
-        for (int i = 0; i < n * m; i++) {
-            arrayCells[i] = new Cell(i, n, m);
+    public Island(ModelParameter modelParameter) {
+        this.modelParameter = modelParameter;
+        arrayCells = new Cell[modelParameter.widthIsland * modelParameter.heightIsland];
+        for (int i = 0; i < arrayCells.length; i++) {
+            arrayCells[i] = new Cell(i, modelParameter.widthIsland, modelParameter.heightIsland);
         }
     }
 
-    public int getN() {
-        return n;
+    public int getWidth() {
+        return modelParameter.widthIsland;
     }
 
-    public int getM() {
-        return m;
+    public int getHeight() {
+        return modelParameter.heightIsland;
     }
 
     public Cell[] getArrayCells() {
@@ -34,7 +31,7 @@ public class Island {
     }
 
     public int getAnimalCount() {
-        for (int i = 0; i < n * m; i++) {
+        for (int i = 0; i < arrayCells.length; i++) {
             animalCount += arrayCells[i].getAnimals().size();
         }
         return animalCount;
@@ -44,45 +41,21 @@ public class Island {
         return arrayCells[i];
     }
 
-//    public void setCell(int i) {
-//        arrayCells[i] =
-//    }
-
-//    public void printArray() {
-//        for (int i = 0; i < n * m; i++) {
-//            if (i % n == 0) {
-//                System.out.println();
-//                for (int j = 0; j < n; j++) {
-//                    System.out.print("+----");
-//                }
-//                System.out.println();
-//            }
-//            System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
-//            if (i + 1 % n == 0) {
-//                System.out.print("|");
-//            }
-//        }
-//        System.out.println();
-//        for (int j = 0; j < n; j++) {
-//            System.out.printf("+----");
-//        }
-//    }
-
     public void printArray() {
         int i = 0;
-        int k = n;
-        for (int j = 0; j < n; j++) {
+        int k = getWidth();
+        for (int j = 0; j < getWidth(); j++) {
             System.out.print("+----");
         }
         System.out.print("+");
         System.out.println();
-        for (int j = 0; j < m; j++) {
+        for (int j = 0; j < getHeight(); j++) {
             while (i < k) {
                 System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
                 i++;
             }
             System.out.print("|");
-            i -= n;
+            i -= getWidth();
             System.out.println();
             while (i < k) {
                 int plantCount = arrayCells[i].getPlantCount();
@@ -94,37 +67,22 @@ public class Island {
                  i++;
             }
             System.out.println("|");
-//            System.out.println();
-            k += n;
-            for (int l = 0; l < n; l++) {
+            k += getWidth();
+            for (int l = 0; l < getWidth(); l++) {
                 System.out.print("+----");
             }
             System.out.println("+");
-//            System.out.println();
         }
-
     }
-
-//    public void start() {
-//        for (int j = 0; j < n * m; j++) {
-//            for (Animal animal: arrayCells[j].getAnimals()) {
-//                animal.move();
-//            }
-//        }
-//    }
 
     ExecutorService executorService = Executors.newCachedThreadPool();
     public void startMove() {
         try {
-//        System.out.println("startMove");
-        for (int j = 0; j < n * m; j++) {
+        for (int j = 0; j < arrayCells.length; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
-//                System.out.println(animal.getClass().getSimpleName() + " " + animal.isSex());
-//                System.out.println(animal.getClass().getSimpleName() + " move for cell:"+j+" animal position:"+animal.getPosition());
-//                    animal.move();
-                executorService.execute(() -> animal.move());
-//                System.out.println(animal.getClass().getSimpleName() + " move for cell end:"+j+" animal position:"+animal.getPosition());
+                int initialPosition = j;
+                executorService.execute(() -> animal.move(this, initialPosition));
             }
         }
         } catch (Exception ex) {
@@ -134,13 +92,11 @@ public class Island {
 
     public void startEat() {
         try {
-//        System.out.println("startEat");
-        for (int j = 0; j < n * m; j++) {
+        for (int j = 0; j < arrayCells.length; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
-//                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.eat());
-//                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
+                int position = j;
+                executorService.execute(() -> animal.eat(this, position));
             }
         }
         } catch (Exception ex) {
@@ -150,13 +106,11 @@ public class Island {
 
     public void startReproduction() {
         try {
-//        System.out.println("startReproduction");
-        for (int j = 0; j < n * m; j++) {
+        for (int j = 0; j < arrayCells.length; j++) {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
-//                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.reproduction());
-//                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
+                int position = j;
+                executorService.execute(() -> animal.reproduction(this, position));
             }
         }
         } catch (Exception ex) {

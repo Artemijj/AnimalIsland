@@ -2,49 +2,24 @@ package island.animal.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public abstract class Animal implements IAnimal{
-//    private String type;
     private double weight;
-    private int quantity;
-    private double normalWeight;
-    private double maxAnimalWeight;
+    final double maxAnimalWeight;
     private boolean sex;
-    private boolean fullAnimal;
-    private int maxSpeed;
-    private double maxFoodWeight;
-    private String icon;
-    private String parentType;
     Species species;
     Island island;
-    private int position;
     private long uuid;
+    static long lastUuid = 1;
 
-    public Animal(Species species, Island island) {
+    public Animal(Species species) {
         this.species = species;
-        this.island = island;
-//        double[] parameters = MainData.getAnimalParameters(typeId);
-//        type = "";
-        normalWeight = weight = species.weight;
-        maxSpeed = species.speed;
-        quantity = species.quantity;
-        maxFoodWeight = species.feed;
-        icon = species.icon;
-        parentType = species.parentType;
-        maxAnimalWeight = normalWeight + maxFoodWeight;
+        weight = species.weight;
+        maxAnimalWeight = species.weight + species.feed;
         sex = RandomValue.getBoolRandom();
-        fullAnimal = false;
-        position = -1;
-        uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        uuid = lastUuid;
+        lastUuid++;
     }
-
-//    ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
-
-
-//    public String getType() {
-//        return type;
-//    }
 
     public Species getSpecies() {
         return species;
@@ -58,125 +33,72 @@ public abstract class Animal implements IAnimal{
         this.weight = weight;
     }
 
-    public double getNormalWeight() {
-        return normalWeight;
-    }
-
-    public double getMaxFoodWeight() {
-        return maxFoodWeight;
-    }
-
     public double getMaxAnimalWeight() {
         return maxAnimalWeight;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public String getParentType() {
-        return parentType;
     }
 
     public boolean isSex() {
         return sex;
     }
 
-    public void setFullAnimal(boolean fullAnimal) {
-        this.fullAnimal = fullAnimal;
-    }
-
-    public boolean isFullAnimal() {
-        return fullAnimal;
-    }
-
-    public double getMaxSpeed() {
-        return maxSpeed;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     public long getUuid() {
         return uuid;
     }
 
+    public String getDescription() {
+        return species + " " + species.icon + " (" + getUuid() + ") weight " + getWeight();
+    }
+
     @Override
-    public void move() {
-        int step = RandomValue.getIntRandom(maxSpeed + 1);
+    public int move(Island island, int initialPosition) {
+        int step = RandomValue.getIntRandom(species.speed + 1);
         if (step == 0) {
-            return;
+            return initialPosition;
         }
-        int initialPosition = position;
+        int stepPosition = initialPosition;
         for (int j = 0; j < step; j++) {
-            int nextPosition = -1;
-            while (nextPosition == -1) {
+            int calculatePosition = -1;
+            while (calculatePosition == -1) {
                 int randomDirection = RandomValue.getIntRandom(Cell.Direction.values().length);
                 Cell.Direction dir = Cell.Direction.values()[randomDirection];
-                nextPosition = island.arrayCells[initialPosition].nextCell(dir);
-                if (nextPosition == initialPosition) {
-                    nextPosition = -1;
+                calculatePosition = island.arrayCells[stepPosition].nextCell(dir);
+                if (calculatePosition == initialPosition) {
+                    calculatePosition = -1;
                 }
             }
-//            System.out.println("Dir = " + dir);
-//                System.out.println("F nextPosition = " + nextPosition); //!!!!!!!!!!!!!!
-//                island.arrayCells[position].removeFromCellAnimalList(this);
-//                island.arrayCells[nextPosition].addToCellAnimalList(this);
-            initialPosition = nextPosition;
-//                Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
+            stepPosition = calculatePosition;
         }
-//////            ArrayList<Animal> tempList = (ArrayList<Animal>)island.arrayCells[initialPosition].getAnimals().clone();
-//            Integer counter = (int)island.arrayCells[initialPosition].getAnimals().stream().filter(getClass()::equals).count();
-        Integer counter = (int) island.arrayCells[initialPosition].animalsCount(getSpecies());
-        if (counter >= quantity) {
-            return;
+        Integer counter = island.arrayCells[initialPosition].animalsCount(getSpecies());
+        if (counter < species.quantity) {
+            island.arrayCells[initialPosition].removeFromCellAnimalList(this);
+            island.arrayCells[stepPosition].addToCellAnimalList(this);
+            Logger.printLog(getDescription() + " move to field " + stepPosition);
+            return stepPosition;
+        } else {
+            return initialPosition;
         }
-        island.arrayCells[position].removeFromCellAnimalList(this);
-        island.arrayCells[initialPosition].addToCellAnimalList(this);
-        position = initialPosition;
-        Logger.printLog(getClass().getSimpleName() + " " + icon + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + getPosition());
-//        }
-//        int step = RandomValue.getIntRandom(maxSpeed + 1);
-//        for (int j = 0; j <= step; j++) {
-//            if (position != -1) {
-//                island.arrayCells[position].removeFromCellAnimalList(this);
-//                int nextPosition = Cell.next(position);
-//                island.arrayCells[nextPosition].addToCellAnimalList(this);        //?????????????????
-//                position = nextPosition;
-//            }
-//
-//        }
-////        ScheduledExecutorService ses = new ScheduledThreadPoolExecutor(3);
-////        ses.scheduleWithFixedDelay(this);
-//        eat();
     }
 
-    @Override
-    public void reproduction() {
-//        String animalType = getClass().getSimpleName();
-        List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
+    public void reproduction(Island island, int position) {
+        if (!isSex()) {
+            return;
+        }
+        Integer counter = island.arrayCells[position].animalsCount(getSpecies());
+        if (counter >= species.quantity) {
+            return;
+        }
+        List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
-            if (getSpecies().equals(animal.getSpecies()) && isSex() != animal.isSex()) {
-                Animal newAnimal = DefineAnimals.createAnimal(island, getSpecies(), getPosition());
-                Logger.printLog(newAnimal.getClass().getSimpleName() + " " + newAnimal.icon + " (" + newAnimal.getUuid() + ") was born.");
+            if (species.equals(animal.species) && isSex() != animal.isSex()) {
+                Animal newAnimal = species.create();
+                island.arrayCells[position].addToCellAnimalList(newAnimal);
+                Logger.printLog(newAnimal.getDescription() + " was born, at field " + position);
+                Logger.printLog(newAnimal.getDescription() + "parents: " + getDescription() + " & " + animal.getDescription());
             }
         }
     }
 
-    @Override
-    public void die() {
-//        if (weight <= normalWeight * 0.4) {
-            island.arrayCells[position].removeFromCellAnimalList(this);
-///            Logger.printLog("Animal " + this.getClass().getSimpleName() + " (" + this.uuid + ")" + " is dead...");
-//        }
+    public void die(Island island, int position) {
+            this.island.arrayCells[position].removeFromCellAnimalList(this);
     }
 }
