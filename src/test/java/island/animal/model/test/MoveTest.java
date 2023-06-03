@@ -10,7 +10,7 @@ public class MoveTest {
     @Test
     public void test0() {
         Island island = new Island(20, 10);
-        Animal sheep = new Sheep(Animals.Sheep, island);
+        Animal sheep = new Sheep(Species.Sheep, island);
         island.arrayCells[15].addToCellAnimalList(sheep);
         sheep.setPosition(15);
         System.out.println("Start position = " + sheep.getPosition());

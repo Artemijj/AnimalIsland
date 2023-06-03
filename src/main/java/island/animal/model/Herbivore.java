@@ -5,8 +5,8 @@ public abstract class Herbivore extends Animal{
 //    Animals animals;
 //    Island island;
 //    String type;
-    public Herbivore(Animals animals, Island island) {
-        super(animals, island);
+    public Herbivore(Species species, Island island) {
+        super(species, island);
 //        type = "Herbivore";
 //        this.animals = animals;
 //        this.island = island;

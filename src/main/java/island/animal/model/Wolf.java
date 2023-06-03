@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Wolf extends Predator{
-    public Wolf(Animals animals, Island island) {
-        super(animals, island);
+    public Wolf(Species species, Island island) {
+        super(species, island);
     }
 
     @Override
@@ -13,8 +13,8 @@ public class Wolf extends Predator{
         super.eat();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
-            if (animals.canEat.containsKey(animal.getAnimals())) {
-                int potentialProbability = animals.canEat.get(animal.getAnimals());
+            if (species.canEat.containsKey(animal.getAnimals())) {
+                int potentialProbability = species.canEat.get(animal.getAnimals());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = getMaxAnimalWeight() - getWeight();
                 Integer counter = (int)island.arrayCells[getPosition()].getAnimals().stream().filter(getClass()::equals).count();

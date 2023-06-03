@@ -2,7 +2,7 @@ package island.animal.model;
 
 import java.util.EnumMap;
 
-public enum Animals {
+public enum Species {
     Wolf(50, 30, 3, 8, "🐺") {
 		void fillCanEat() {
 			canEat.put(Sheep, 70);
@@ -22,9 +22,9 @@ public enum Animals {
 	public int speed;
 	public double feed;
 	public String icon;
-	public EnumMap<Animals,Integer> canEat ;
+	public EnumMap<Species,Integer> canEat ;
 
-	Animals(double weight, int quantity, int speed, double  feed, String icon) {
+	Species(double weight, int quantity, int speed, double  feed, String icon) {
 		this.weight = weight;
 		this.quantity = quantity;
 		this.speed = speed;
@@ -35,8 +35,8 @@ public enum Animals {
 
 	// static initializator
 	static {
-	   for (Animals animal : Animals.values()) {
-		animal.canEat = new EnumMap<>(Animals.class);
+	   for (Species animal : Species.values()) {
+		animal.canEat = new EnumMap<>(Species.class);
 		animal.fillCanEat();
 	   }
         }

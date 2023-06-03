@@ -2,11 +2,7 @@ package island.animal.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Animal implements IAnimal{
 //    private String type;
@@ -19,21 +15,21 @@ public abstract class Animal implements IAnimal{
     private int maxSpeed;
     private double maxFoodWeight;
     private String icon;
-    Animals animals;
+    Species species;
     Island island;
     private int position;
     private long uuid;
 
-    public Animal(Animals animals, Island island) {
-        this.animals = animals;
+    public Animal(Species species, Island island) {
+        this.species = species;
         this.island = island;
 //        double[] parameters = MainData.getAnimalParameters(typeId);
 //        type = "";
-        normalWeight = weight = animals.weight;
-        maxSpeed = animals.speed;
-        quantity = animals.quantity;
-        maxFoodWeight = animals.feed;
-        icon = animals.icon;
+        normalWeight = weight = species.weight;
+        maxSpeed = species.speed;
+        quantity = species.quantity;
+        maxFoodWeight = species.feed;
+        icon = species.icon;
         maxAnimalWeight = normalWeight + maxFoodWeight;
         sex = RandomValue.getBoolRandom();
         fullAnimal = false;
@@ -48,8 +44,8 @@ public abstract class Animal implements IAnimal{
 //        return type;
 //    }
 
-    public Animals getAnimals() {
-        return animals;
+    public Species getAnimals() {
+        return species;
     }
 
     public double getWeight() {
