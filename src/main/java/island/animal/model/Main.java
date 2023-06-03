@@ -10,12 +10,12 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) {
         Island island = new Island(20, 10);
-        Map<String, Integer> animalMap = new HashMap<>();
-        animalMap.put("wolf", 10);
-        animalMap.put("fox", 10);
-        animalMap.put("sheep", 10);
+        Map<Species, Integer> animalMap = new HashMap<>();
+        animalMap.put(Species.Wolf, 10);
+        animalMap.put(Species.Fox, 10);
+        animalMap.put(Species.Sheep, 10);
 
-        for (Map.Entry<String, Integer> entry : animalMap.entrySet()) {
+        for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
             for (int j = 0; j < entry.getValue(); j++) {
                 DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
                 System.out.println("Create " + entry.getKey());

@@ -91,4 +91,8 @@ public class Cell {
     public synchronized void addPlant(int p) {
         plantCount += p;
     }
+
+    public synchronized int animalsCount(Species species) {
+        return (int) getAnimals().stream().filter((x) -> x.getSpecies() == species).count();
+    }
 }

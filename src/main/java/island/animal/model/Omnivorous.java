@@ -7,8 +7,8 @@ public abstract class Omnivorous extends Animal{
 //    Animals animals;
 //    Island island;
     String type = "Omnivorous";
-    public Omnivorous(Animals animals, Island island) {
-        super(animals, island);
+    public Omnivorous(Species species, Island island) {
+        super(species, island);
 //        this.animals = animals;
 //        this.island = island;
     }
@@ -18,8 +18,8 @@ public abstract class Omnivorous extends Animal{
         int plantCount = island.arrayCells[getPosition()].getPlantCount();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
-            if (animals.canEat.containsKey(animal.getAnimals())) {
-                int potentialProbability = animals.canEat.get(animal.getAnimals());
+            if (species.canEat.containsKey(animal.getSpecies())) {
+                int potentialProbability = species.canEat.get(animal.getSpecies());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = this.getMaxAnimalWeight() - this.getWeight();
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {

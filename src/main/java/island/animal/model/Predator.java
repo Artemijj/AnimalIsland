@@ -7,8 +7,8 @@ public abstract class Predator extends Animal{
 //    Animals animals;
 //    Island island;
     String type = "Predator";
-    public Predator(Animals animals, Island island) {
-        super(animals, island);
+    public Predator(Species species, Island island) {
+        super(species, island);
 //        this.animals = animals;
 //        this.island = island;
     }
@@ -17,8 +17,8 @@ public abstract class Predator extends Animal{
     public void eat() {
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
-            if (animals.canEat.containsKey(animal.getAnimals())) {
-                int potentialProbability = animals.canEat.get(animal.getAnimals());
+            if (species.canEat.containsKey(animal.getSpecies())) {
+                int potentialProbability = species.canEat.get(animal.getSpecies());
                 int probability = RandomValue.getIntRandom(101);
                 double potentialFoodWeight = this.getMaxAnimalWeight() - this.getWeight();
                 if (probability > potentialProbability && this.getWeight() < this.getMaxAnimalWeight()) {
