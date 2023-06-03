@@ -1,7 +1,7 @@
 package island.animal.model;
 
 public class Rabbit extends Herbivore{
-    public Rabbit(Species species, Island island) {
-        super(species, island);
+    public Rabbit(Species species) {
+        super(species);
     }
 }

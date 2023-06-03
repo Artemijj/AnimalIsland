@@ -10,11 +10,11 @@ public class MoveTest {
     @Test
     public void test0() {
         Island island = new Island(20, 10);
-        Animal sheep = new Sheep(Species.Sheep, island);
+        Animal sheep = new Sheep(Species.Sheep);
         island.arrayCells[15].addToCellAnimalList(sheep);
         sheep.setPosition(15);
         System.out.println("Start position = " + sheep.getPosition());
-        sheep.move();
+        sheep.move(island);
         int position = sheep.getPosition();
         System.out.println("New position = " + position);
         assertNotEquals(15, position);

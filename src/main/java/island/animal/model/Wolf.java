@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Wolf extends Predator{
-    public Wolf(Species species, Island island) {
-        super(species, island);
+    public Wolf(Species species) {
+        super(species);
     }
 
     @Override
-    public void eat() {
-        super.eat();
+    public void eat(Island island) {
+        super.eat(island);
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getAnimals())) {
@@ -31,12 +31,12 @@ public class Wolf extends Predator{
                             }
                         }
                     }
-                    animal.die();
+                    animal.die(island);
                 } else {
                     setWeight(getWeight() - 1);
                     if (getWeight() <= getNormalWeight() * 0.4) {
                         Logger.printLog(getClass().getSimpleName() + " (" + getUuid() + ") died of starvation.");
-                        die();
+                        die(island);
                     }
                 }
             }

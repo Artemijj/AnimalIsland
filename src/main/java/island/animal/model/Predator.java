@@ -4,17 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Predator extends Animal{
-//    Animals animals;
 //    Island island;
     String type = "Predator";
-    public Predator(Species species, Island island) {
-        super(species, island);
-//        this.animals = animals;
-//        this.island = island;
+    public Predator(Species species) {
+        super(species);
     }
 
     @Override
-    public void eat() {
+    public void eat(Island island) {
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getAnimals())) {
@@ -27,12 +24,12 @@ public abstract class Predator extends Animal{
 //                    System.out.println(animal.getClass().getSimpleName() + " is eaten..."); //!!!!!!!!!!!!!!!!!
                     Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
                     Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
-                    animal.die();
+                    animal.die(island);
                 } else {
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= this.getNormalWeight() * 0.4) {
                         Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
-                        die();
+                        die(island);
                     }
                 }
             }

@@ -123,7 +123,7 @@ public class Island {
 //                System.out.println(animal.getClass().getSimpleName() + " " + animal.isSex());
 //                System.out.println(animal.getClass().getSimpleName() + " move for cell:"+j+" animal position:"+animal.getPosition());
 //                    animal.move();
-                executorService.execute(() -> animal.move());
+                executorService.execute(() -> animal.move(this));
 //                System.out.println(animal.getClass().getSimpleName() + " move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }
@@ -139,7 +139,7 @@ public class Island {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
 //                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.eat());
+                executorService.execute(() -> animal.eat(this));
 //                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }
@@ -155,7 +155,7 @@ public class Island {
             List<Animal> list =  new ArrayList<>(arrayCells[j].getAnimals());
             for (Animal animal: list) {
 //                System.out.println("move for cell:"+j+" animal position:"+animal.getPosition());
-                executorService.execute(() -> animal.reproduction());
+                executorService.execute(() -> animal.reproduction(this));
 //                System.out.println("move for cell end:"+j+" animal position:"+animal.getPosition());
             }
         }

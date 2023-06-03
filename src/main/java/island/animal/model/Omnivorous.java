@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Omnivorous extends Animal{
-//    Animals animals;
-//    Island island;
+
     String type = "Omnivorous";
-    public Omnivorous(Species species, Island island) {
-        super(species, island);
+    public Omnivorous(Species species) {
+        super(species);
 //        this.animals = animals;
 //        this.island = island;
     }
 
     @Override
-    public void eat() {
+    public void eat(Island island) {
         int plantCount = island.arrayCells[getPosition()].getPlantCount();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
@@ -27,7 +26,7 @@ public abstract class Omnivorous extends Animal{
                     this.setWeight(this.getWeight() + foodWeight);
                     Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a " + animal.getClass().getSimpleName().toLowerCase() + ".");
                     Logger.printLog(animal.getClass().getSimpleName() + " (" + animal.getUuid() + ")" + " is eaten...");
-                    animal.die();
+                    animal.die(island);
                 } else if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
                     this.setWeight(this.getWeight() + 1);
                     island.arrayCells[getPosition()].setPlantCount(plantCount - 1);
@@ -36,7 +35,7 @@ public abstract class Omnivorous extends Animal{
                     this.setWeight(this.getWeight() - 1);
                     if (this.getWeight() <= this.getNormalWeight() * 0.4) {
                         Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
-                        die();
+                        die(island);
                     }
                 }
             }

@@ -16,13 +16,12 @@ public abstract class Animal implements IAnimal{
     private double maxFoodWeight;
     private String icon;
     Species species;
-    Island island;
+
     private int position;
     private long uuid;
 
-    public Animal(Species species, Island island) {
+    public Animal(Species species) {
         this.species = species;
-        this.island = island;
 //        double[] parameters = MainData.getAnimalParameters(typeId);
 //        type = "";
         normalWeight = weight = species.weight;
@@ -105,7 +104,7 @@ public abstract class Animal implements IAnimal{
     }
 
     @Override
-    public void move() {
+    public void move(Island island) {
         int step = RandomValue.getIntRandom(maxSpeed + 1);
 //        System.out.println("Step = " + step); //!!!!!!!!!!!!!!
         if (step != 0) {
@@ -158,7 +157,7 @@ public abstract class Animal implements IAnimal{
     }
 
     @Override
-    public void reproduction() {
+    public void reproduction(Island island) {
         String type = getClass().getSimpleName();
         List<Animal> list =  new ArrayList<>(island.arrayCells[getPosition()].getAnimals());
         for (Animal animal : list) {
@@ -170,7 +169,7 @@ public abstract class Animal implements IAnimal{
     }
 
     @Override
-    public void die() {
+    public void die(Island island) {
 //        if (weight <= normalWeight * 0.4) {
             island.arrayCells[position].removeFromCellAnimalList(this);
 ///            Logger.printLog("Animal " + this.getClass().getSimpleName() + " (" + this.uuid + ")" + " is dead...");
