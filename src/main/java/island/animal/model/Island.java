@@ -25,7 +25,7 @@ public class Island {
                 int position = RandomValue.getIntRandom(arrayCells.length);
                 Animal animal = entry.getKey().create();
                 arrayCells[position].addToCellAnimalList(animal);
-                System.out.println("Create " + entry.getKey() + "position:" + position);
+                Logger.printLog(animal.getDescription() + " create in position:" + position);
             }
         }
         // create grass
@@ -79,7 +79,7 @@ public class Island {
                 if (plantCount == 0) {
                     System.out.printf("| %2d ", plantCount);
                 } else {
-                    System.out.printf("|🌱%2d ", plantCount);
+                    System.out.printf("|🌱%2d", plantCount);
                 }
                  i++;
             }

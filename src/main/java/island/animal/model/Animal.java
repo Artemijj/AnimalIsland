@@ -12,6 +12,8 @@ public abstract class Animal implements IAnimal{
 
     private long uuid;
 
+    static long lastUuid = 1;
+
     final double maxAnimalWeight;
 
     public Animal(Species species) {
@@ -20,7 +22,8 @@ public abstract class Animal implements IAnimal{
         maxAnimalWeight = species.weight  + species.feed;
         sex = RandomValue.getBoolRandom();
         fullAnimal = false;
-        uuid = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
+        uuid = lastUuid;
+        lastUuid++;
     }
 
     public Species getSpecies() {
@@ -76,10 +79,14 @@ public abstract class Animal implements IAnimal{
         if (counter < species.quantity) {
             island.arrayCells[initialPosition].removeFromCellAnimalList(this);
             island.arrayCells[stepPosition].addToCellAnimalList(this);
-            Logger.printLog(getClass().getSimpleName() + " " + species.icon + " (" + getUuid() + ")" + " weight " + getWeight() + " move to field " + stepPosition);
+            Logger.printLog(getDescription() + " move to field " + stepPosition);
             return stepPosition;
         } else
             return initialPosition;
+    }
+
+    public String getDescription() {
+        return "" + species + " " + species.icon + " (" + getUuid() + ")" + " weight " + getWeight();
     }
 
     @Override
@@ -88,8 +95,10 @@ public abstract class Animal implements IAnimal{
         List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (type == animal.getClass().getSimpleName() && isSex() != animal.isSex()) {
-                Animal newAnimal = DefineAnimals.createAnimal(island, type.toLowerCase(), position);
-                Logger.printLog(newAnimal.getClass().getSimpleName() + " " + species.icon + " (" + newAnimal.getUuid() + ") was born.");
+                Animal newAnimal = species.create();
+                island.arrayCells[position].addToCellAnimalList(newAnimal);
+                Logger.printLog(newAnimal.getDescription() + " was born, position:"+position);
+                Logger.printLog("parents: "+getDescription() + ":" + animal.getDescription());
             }
         }
     }

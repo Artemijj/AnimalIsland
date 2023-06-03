@@ -13,11 +13,11 @@ public abstract class Herbivore extends Animal{
         if (plantCount > 0 && this.getWeight() < this.getMaxAnimalWeight()) {
             this.setWeight(this.getWeight() + 1);
             island.arrayCells[position].setPlantCount(plantCount - 1);
-            Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") ate a plant.");
+            Logger.printLog(getDescription() + " ate a plant. field:" +position);
         } else {
             this.setWeight(this.getWeight() - 1);
             if (this.getWeight() <= species.weight * 0.4){
-                Logger.printLog(this.getClass().getSimpleName() + " (" + this.getUuid() + ") died of starvation.");
+                Logger.printLog(getDescription() + " died of starvation. field:"+position);
                 die(island, position);
             }
         }
