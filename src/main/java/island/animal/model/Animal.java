@@ -3,7 +3,7 @@ package island.animal.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Animal implements IAnimal{
+public abstract class Animal implements IAnimal {
     private double weight;
     final double maxAnimalWeight;
     private boolean sex;
@@ -87,18 +87,18 @@ public abstract class Animal implements IAnimal{
         if (counter >= species.quantity) {
             return;
         }
-        List<Animal> list =  new ArrayList<>(island.arrayCells[position].getAnimals());
+        List<Animal> list = new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (species.equals(animal.species) && isSex() != animal.isSex()) {
                 Animal newAnimal = species.create();
                 island.arrayCells[position].addToCellAnimalList(newAnimal);
                 Logger.printLog(newAnimal.getDescription() + " was born, at field " + position);
-                Logger.printLog(newAnimal.getDescription() + "parents: " + getDescription() + " & " + animal.getDescription());
+                Logger.printLog(newAnimal.getDescription() + " parents: " + getDescription() + " & " + animal.getDescription());
             }
         }
     }
 
     public void die(Island island, int position) {
-            this.island.arrayCells[position].removeFromCellAnimalList(this);
+        island.arrayCells[position].removeFromCellAnimalList(this);
     }
 }

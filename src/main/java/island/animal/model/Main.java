@@ -9,32 +9,41 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        Island island = new Island(new ModelParameter());
+        ModelParameter modelParameter = new ModelParameter();
+        Island island = new Island(modelParameter);
+        int islandSize = modelParameter.getWidthIsland() * modelParameter.getHeightIsland();
 //        Map<Species, Integer> animalMap = new HashMap<>();
 //        animalMap.put(Species.Wolf, 10);
 //        animalMap.put(Species.Fox, 10);
 //        animalMap.put(Species.Sheep, 10);
 //
-//        for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
-//            for (int j = 0; j < entry.getValue(); j++) {
-//                DefineAnimals.createAnimal(island, entry.getKey(), RandomValue.getIntRandom(island.getN() * island.getM()));
-//                System.out.println("Create " + entry.getKey());
-//            }
-//        }
-//
-//        for (int j = 0; j < island.getN() * island.getM() * 1.5; j++) {
-//            island.arrayCells[RandomValue.getIntRandom(island.getN() * island.getM())].addPlant(1);
-//        }
+        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
+            for (int j = 0; j < entry.getValue(); j++) {
+                Animal newAnimal = entry.getKey().create();
+                island.arrayCells[RandomValue.getIntRandom(islandSize)].addToCellAnimalList(newAnimal);
+            }
+        }
+
+        for (int j = 0; j < islandSize * modelParameter.getPlantDensity(); j++) {
+            island.arrayCells[RandomValue.getIntRandom(islandSize)].addPlant(1);
+        }
 
 ////        island.printArray();
 
 
-        ScheduledExecutorService ses = Executors.newScheduledThreadPool(4);
+        ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
 //        ses.scheduleWithFixedDelay(new Plant(island), 1, 2, TimeUnit.SECONDS);
 //        ses.scheduleWithFixedDelay(new DefineAnimals(island), 1, 10, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(new Statistics(island), 1, 5, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(() -> island.startMove(), 1, 1, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(() -> island.startEat(), 1, 2, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(() -> island.startReproduction(), 1, 5, TimeUnit.SECONDS);
+        ses.scheduleWithFixedDelay(() -> {
+            if (island.getAnimalCount() == 0) {
+                System.out.println("Count of animal is " + island.getAnimalCount());
+                System.exit(0);
+            }
+        }, 1, 5, TimeUnit.SECONDS);
+//        ses.scheduleWithFixedDelay(() -> island.isAnimalZero(), 1, 5, TimeUnit.SECONDS);
     }
 }

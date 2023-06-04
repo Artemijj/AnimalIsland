@@ -7,23 +7,23 @@ import java.util.concurrent.Executors;
 
 public class Island {
     public Cell[] arrayCells;
-    private int animalCount;
+    private static int animalCount;
     private ModelParameter modelParameter;
 
     public Island(ModelParameter modelParameter) {
         this.modelParameter = modelParameter;
-        arrayCells = new Cell[modelParameter.widthIsland * modelParameter.heightIsland];
+        arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
         for (int i = 0; i < arrayCells.length; i++) {
-            arrayCells[i] = new Cell(i, modelParameter.widthIsland, modelParameter.heightIsland);
+            arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
         }
     }
 
     public int getWidth() {
-        return modelParameter.widthIsland;
+        return modelParameter.getWidthIsland();
     }
 
     public int getHeight() {
-        return modelParameter.heightIsland;
+        return modelParameter.getHeightIsland();
     }
 
     public Cell[] getArrayCells() {
@@ -31,6 +31,7 @@ public class Island {
     }
 
     public int getAnimalCount() {
+        animalCount = 0;
         for (int i = 0; i < arrayCells.length; i++) {
             animalCount += arrayCells[i].getAnimals().size();
         }
@@ -115,6 +116,14 @@ public class Island {
         }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void isAnimalZero() {
+        System.out.println("Count of animal is " + getAnimalCount());
+        if (getAnimalCount() == 0) {
+            System.out.println("Count of animal is " + getAnimalCount());
+            System.exit(0);
         }
     }
 }
