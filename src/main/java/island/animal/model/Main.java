@@ -43,7 +43,7 @@ public class Main {
                 System.out.println("Count of animal is " + island.getAnimalCount());
                 System.exit(0);
             }
-        }, 1, 5, TimeUnit.SECONDS);
-//        ses.scheduleWithFixedDelay(() -> island.isAnimalZero(), 1, 5, TimeUnit.SECONDS);
+        }, 1, 10, TimeUnit.SECONDS);
+//        ses.scheduleWithFixedDelay(() -> island.isAnimalZero(), 1, 10, TimeUnit.SECONDS);
     }
 }

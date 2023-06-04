@@ -8,13 +8,16 @@ public class ModelParameter {
     private int heightIsland = 10;
 
     private double plantDensity = 1.5;
+    private int numberWolf = 10;
+    private int numberFox = 10;
+    private int numberSheep = 10;
 
     private Map<Species, Integer> animalMap = new HashMap<>();
 
     public ModelParameter() {
-        animalMap.put(Species.Wolf, 10);
-        animalMap.put(Species.Fox, 10);
-        animalMap.put(Species.Sheep, 10);
+        animalMap.put(Species.Wolf, numberWolf);
+        animalMap.put(Species.Fox, numberFox);
+        animalMap.put(Species.Sheep, numberSheep);
     }
 
     public int getWidthIsland() {
