@@ -1,0 +1,16 @@
+# island parameters
+widthIsland = 30
+heightIsland = 20
+
+# plant parameters
+plantDensity = 2
+
+# numbers of animal
+numberWolf = 20
+numberFox = 20
+numberSheep = 20
+
+# animals quantity
+wolfMaxQuantity = 40
+foxMaxQuantity = 40
+seepMaxQuantity = 150

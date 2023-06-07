@@ -11,22 +11,22 @@ public class Main {
     public static void main(String[] args) {
         ModelParameter modelParameter = new ModelParameter();
         Island island = new Island(modelParameter);
-        int islandSize = modelParameter.getWidthIsland() * modelParameter.getHeightIsland();
+////        int islandSize = modelParameter.getWidthIsland() * modelParameter.getHeightIsland();
 //        Map<Species, Integer> animalMap = new HashMap<>();
 //        animalMap.put(Species.Wolf, 10);
 //        animalMap.put(Species.Fox, 10);
 //        animalMap.put(Species.Sheep, 10);
 //
-        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
-            for (int j = 0; j < entry.getValue(); j++) {
-                Animal newAnimal = entry.getKey().create();
-                island.arrayCells[RandomValue.getIntRandom(islandSize)].addToCellAnimalList(newAnimal);
-            }
-        }
-
-        for (int j = 0; j < islandSize * modelParameter.getPlantDensity(); j++) {
-            island.arrayCells[RandomValue.getIntRandom(islandSize)].addPlant(1);
-        }
+//        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
+//            for (int j = 0; j < entry.getValue(); j++) {
+//                Animal newAnimal = entry.getKey().create();
+//                island.arrayCells[RandomValue.getIntRandom(islandSize)].addToCellAnimalList(newAnimal);
+//            }
+//        }
+//
+//        for (int j = 0; j < islandSize * modelParameter.getPlantDensity(); j++) {
+//            island.arrayCells[RandomValue.getIntRandom(islandSize)].addPlant(1);
+//        }
 
 ////        island.printArray();
 

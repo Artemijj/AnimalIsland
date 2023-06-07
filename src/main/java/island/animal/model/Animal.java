@@ -8,7 +8,6 @@ public abstract class Animal implements IAnimal {
     final double maxAnimalWeight;
     private boolean sex;
     Species species;
-    Island island;
     private long uuid;
     static long lastUuid = 1;
 

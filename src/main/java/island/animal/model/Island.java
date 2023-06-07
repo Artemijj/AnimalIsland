@@ -2,6 +2,7 @@ package island.animal.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,6 +16,18 @@ public class Island {
         arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
         for (int i = 0; i < arrayCells.length; i++) {
             arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
+        }
+        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
+            for (int j = 0; j < entry.getValue(); j++) {
+                int position = RandomValue.getIntRandom(arrayCells.length);
+                Animal animal = entry.getKey().create();
+                arrayCells[position].addToCellAnimalList(animal);
+                Logger.printLog(animal.getDescription() + " create in position:" + position);
+            }
+        }
+
+        for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
+            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(1);
         }
     }
 
