@@ -80,7 +80,10 @@ public class ModelParameter {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.startsWith("#")) {
-                    String[] tempArr = line.split(" = ");
+                    String[] tempArr = line.split("=");
+                    System.out.println(tempArr.length);
+                    System.out.println("0" + tempArr[0]);
+                    System.out.println("1" + tempArr[1]);
                     parametersMap.put(tempArr[0].strip(), tempArr[1].strip());
                 }
             }

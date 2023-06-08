@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell {
-    private int plantCount;
+    private double plantCount;
     private List<Animal> animals;
-    private int i;
-    private int n;
-    private int m;
+    private int index;
+    private int width;
+    private int height;
 //    private Island island;
 
-    public Cell(int i, int n, int m) {
-        this.i = i;
-        this.n = n;
-        this.m = m;
+    public Cell(int index, int width, int height) {
+        this.index = index;
+        this.width = width;
+        this.height = height;
 //        this.island = island;
         animals = new ArrayList<>();
     }
 
-    public int getI() {
-        return i;
+    public int getIndex() {
+        return index;
     }
 
-    public void setPlantCount(int plantCount) {
+    public void setPlantCount(double plantCount) {
         this.plantCount = plantCount;
     }
 
-    public int getPlantCount() {
+    public double getPlantCount() {
         return plantCount;
     }
 
@@ -39,44 +39,44 @@ public class Cell {
     public int nextCell(Direction dir) {
         switch (dir) {
             case UP:
-                return i - n < 0 ? -1 : i - n;
+                return index - width < 0 ? -1 : index - width;
             case DOWN:
-                return i + n >= m * n ? -1 : i + n;
+                return index + width >= height * width ? -1 : index + width;
             case LEFT:
-                return i % n == 0 ? -1 : i - 1;
+                return index % width == 0 ? -1 : index - 1;
             case RIGHT:
-                return (i + 1) % n == 0 ? -1 : i + 1;
+                return (index + 1) % width == 0 ? -1 : index + 1;
         }
         return -1;
     }
 
     public int next(int i) {
         if (i ==0) {
-            int[] arr = {i + 1, i + n};
+            int[] arr = {i + 1, i + width};
             return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n - 1) {
-            int[] arr = {i - 1, i + n};
+        } else if (i == width - 1) {
+            int[] arr = {i - 1, i + width};
             return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n * m - n) {
-            int[] arr = {i + 1, i - n};
+        } else if (i == width * height - width) {
+            int[] arr = {i + 1, i - width};
             return arr[RandomValue.getIntRandom(2)];
-        } else if (i == n * m - 1) {
-            int[] arr = {i - 1, i - n};
+        } else if (i == width * height - 1) {
+            int[] arr = {i - 1, i - width};
             return arr[RandomValue.getIntRandom(2)];
-        } else if (i > 0 && i < n - 1) {
-            int[] arr = {i + 1, i - 1, i + n};
+        } else if (i > 0 && i < width - 1) {
+            int[] arr = {i + 1, i - 1, i + width};
             return arr[RandomValue.getIntRandom(3)];
-        } else if (i > 0 && i < n * m - n && i % n == 0) {
-            int[] arr = {i + 1, i + n, i - n};
+        } else if (i > 0 && i < width * height - width && i % width == 0) {
+            int[] arr = {i + 1, i + width, i - width};
             return arr[RandomValue.getIntRandom(3)];
-        } else if (i > n * m - n && i < n * m) {
-            int[] arr = {i + 1, i - 1, i - n};
+        } else if (i > width * height - width && i < width * height) {
+            int[] arr = {i + 1, i - 1, i - width};
             return arr[RandomValue.getIntRandom(3)];
-        } else if (i > n - 1 && (i + 1) % n == 0 && i < n * m - 1) {
-            int[] arr = {i - 1, i + n, i - n};
+        } else if (i > width - 1 && (i + 1) % width == 0 && i < width * height - 1) {
+            int[] arr = {i - 1, i + width, i - width};
             return arr[RandomValue.getIntRandom(3)];
         } else {
-            int[] arr = {i + 1, i - 1, i + n, i - n};
+            int[] arr = {i + 1, i - 1, i + width, i - width};
             return arr[RandomValue.getIntRandom(4)];
         }
     }

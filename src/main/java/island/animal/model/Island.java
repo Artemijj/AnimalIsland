@@ -59,31 +59,31 @@ public class Island {
         int i = 0;
         int k = getWidth();
         for (int j = 0; j < getWidth(); j++) {
-            System.out.print("+----");
+            System.out.print("+-----------");
         }
         System.out.print("+");
         System.out.println();
         for (int j = 0; j < getHeight(); j++) {
             while (i < k) {
-                System.out.printf("| %2d ", arrayCells[i].getAnimals().size());
+                System.out.printf("|        %2d ", arrayCells[i].getAnimals().size());
                 i++;
             }
             System.out.print("|");
             i -= getWidth();
             System.out.println();
             while (i < k) {
-                int plantCount = arrayCells[i].getPlantCount();
+                double plantCount = arrayCells[i].getPlantCount();
                 if (plantCount == 0) {
-                    System.out.printf("| %2d ", plantCount);
+                    System.out.printf("| %2f ", plantCount);
                 } else {
-                    System.out.printf("|🌱%2d ", plantCount);
+                    System.out.printf("|🌱%2f ", plantCount);
                 }
                  i++;
             }
             System.out.println("|");
             k += getWidth();
             for (int l = 0; l < getWidth(); l++) {
-                System.out.print("+----");
+                System.out.print("+-----------");
             }
             System.out.println("+");
         }
