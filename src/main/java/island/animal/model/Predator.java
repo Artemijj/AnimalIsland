@@ -24,7 +24,7 @@ public abstract class Predator extends Animal{
                     animal.die(island, position);
                 }
             } else {
-                setWeight(getWeight() - 1);
+                setWeight(getWeight() * 0.95);
                 if (getWeight() <= species.weight * 0.4) {
                     Logger.printLog(getDescription() + " died of starvation, at field " + position);
                     die(island, position);

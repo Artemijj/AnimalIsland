@@ -5,6 +5,9 @@ heightIsland = 20
 # plant parameters
 plantDensity = 2
 
+# duration of tact
+durationOfTact = 2000
+
 # numbers of animal
 numberWolf = 20
 numberFox = 20

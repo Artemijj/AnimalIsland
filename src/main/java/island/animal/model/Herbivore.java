@@ -14,7 +14,7 @@ public abstract class Herbivore extends Animal{
             island.arrayCells[position].setPlantCount(plantCount - 1);
             Logger.printLog(getDescription() + " ate a plant, at field " + position);
         } else {
-            setWeight(getWeight() - 1);
+            setWeight(getWeight() * 0.95);
             if (getWeight() <= species.weight * 0.4){
                 Logger.printLog(getDescription() + " died of starvation, at field " + position);
                 die(island, position);

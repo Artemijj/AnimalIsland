@@ -9,14 +9,14 @@ public class ModelParameter {
     private int heightIsland = 10;
 
     private double plantDensity = 1.5;
-    private int durationOfTact;
+    private int durationOfTact = 1000;
     private int numberWolf = 10;
     private int numberFox = 10;
     private int numberSheep = 10;
 
-    private int wolfMaxQuantity;
-    private int foxMaxQuantity;
-    private int seepMaxQuantity;
+    private int wolfMaxQuantity = 40;
+    private int foxMaxQuantity = 40;
+    private int seepMaxQuantity = 150;
 
     private Map<Species, Integer> animalMap = new HashMap<>();
 
