@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Island {
-    public Cell[] arrayCells;
+    public static Cell[] arrayCells;
     private static int animalCount;
     private ModelParameter modelParameter;
 
@@ -29,7 +29,7 @@ public class Island {
         }
 
         for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
-            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(1);
+            plantedPlant();
         }
     }
 
@@ -41,8 +41,8 @@ public class Island {
         return modelParameter.getHeightIsland();
     }
 
-    public Cell[] getArrayCells() {
-        return arrayCells;
+    public Cell getArrayCell(int i) {
+        return arrayCells[i];
     }
 
     public int getAnimalCount() {
@@ -60,10 +60,10 @@ public class Island {
     ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
 
     public void start() {
-//        ses.scheduleWithFixedDelay(new Statistics(island), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> plantedPlant(), 5, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> {
             if (getAnimalCount() == 0) {
                 System.out.println("Count of animal is " + getAnimalCount());
@@ -113,6 +113,10 @@ public class Island {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void plantedPlant() {
+        arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(1);
     }
 
     public void isAnimalZero() {

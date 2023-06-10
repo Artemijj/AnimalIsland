@@ -8,7 +8,7 @@ public class ModelParameter {
     private int widthIsland = 20;
     private int heightIsland = 10;
 
-    private double plantDensity = 1.5;
+    private double plantDensity = 1;
     private int durationOfTact = 1000;
     private int numberWolf = 10;
     private int numberFox = 10;

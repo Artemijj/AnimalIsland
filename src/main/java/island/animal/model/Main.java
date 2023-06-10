@@ -32,7 +32,6 @@ public class Main {
 
         ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
 //        ses.scheduleWithFixedDelay(new Plant(island), 1, 2, TimeUnit.SECONDS);
-//        ses.scheduleWithFixedDelay(new DefineAnimals(island), 1, 10, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(new Statistics(island), 5, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
 //        ses.scheduleWithFixedDelay(() -> island.startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
 //        ses.scheduleWithFixedDelay(() -> island.startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
