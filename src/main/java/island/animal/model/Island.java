@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Island {
     public Cell[] arrayCells;
@@ -55,38 +57,19 @@ public class Island {
         return arrayCells[i];
     }
 
-    public void printArray() {
-        int i = 0;
-        int k = getWidth();
-        for (int j = 0; j < getWidth(); j++) {
-            System.out.print("+-----------");
-        }
-        System.out.print("+");
-        System.out.println();
-        for (int j = 0; j < getHeight(); j++) {
-            while (i < k) {
-                System.out.printf("|        %2d ", arrayCells[i].getAnimals().size());
-                i++;
+    ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
+
+    public void start() {
+//        ses.scheduleWithFixedDelay(new Statistics(island), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> {
+            if (getAnimalCount() == 0) {
+                System.out.println("Count of animal is " + getAnimalCount());
+                System.exit(0);
             }
-            System.out.print("|");
-            i -= getWidth();
-            System.out.println();
-            while (i < k) {
-                double plantCount = arrayCells[i].getPlantCount();
-                if (plantCount == 0) {
-                    System.out.printf("| %2f ", plantCount);
-                } else {
-                    System.out.printf("|🌱%2f ", plantCount);
-                }
-                 i++;
-            }
-            System.out.println("|");
-            k += getWidth();
-            for (int l = 0; l < getWidth(); l++) {
-                System.out.print("+-----------");
-            }
-            System.out.println("+");
-        }
+        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
 
     ExecutorService executorService = Executors.newCachedThreadPool();
@@ -138,5 +121,9 @@ public class Island {
             System.out.println("Count of animal is " + getAnimalCount());
             System.exit(0);
         }
+    }
+
+    public void stop() {
+        ses.shutdown();
     }
 }

@@ -20,7 +20,10 @@ public class ModelParameter {
 
     private Map<Species, Integer> animalMap = new HashMap<>();
 
-    public ModelParameter() {
+    public ModelParameter(String fileName) {
+        if (fileName != null) {
+            readParameters(fileName);
+        }
         animalMap.put(Species.Wolf, numberWolf);
         animalMap.put(Species.Fox, numberFox);
         animalMap.put(Species.Sheep, numberSheep);

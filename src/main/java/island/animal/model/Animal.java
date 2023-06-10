@@ -1,5 +1,6 @@
 package island.animal.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +45,10 @@ public abstract class Animal implements IAnimal {
         return uuid;
     }
 
+    DecimalFormat myFormat = new DecimalFormat("#.##");
+
     public String getDescription() {
-        return species + " " + species.icon + " (" + getUuid() + ") weight " + getWeight();
+        return species + " " + species.icon + " (" + getUuid() + ") weight " + myFormat.format(getWeight());
     }
 
     @Override
