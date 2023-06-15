@@ -9,7 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Island {
-    public static Cell[] arrayCells;
+    public Cell[] arrayCells;
     private static int animalCount;
     private ModelParameter modelParameter;
 
@@ -53,23 +53,28 @@ public class Island {
         return animalCount;
     }
 
+    public ModelParameter getModelParameter() {
+        return modelParameter;
+    }
+
     public Cell getCell(int i) {
         return arrayCells[i];
     }
 
-    ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
+    ScheduledExecutorService ses; // = Executors.newScheduledThreadPool(5);
 
     public void start() {
+        ses = Executors.newScheduledThreadPool(5);
         ses.scheduleWithFixedDelay(() -> startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> plantedPlant(), 5, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
-        ses.scheduleWithFixedDelay(() -> {
-            if (getAnimalCount() == 0) {
-                System.out.println("Count of animal is " + getAnimalCount());
-                System.exit(0);
-            }
-        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
+//        ses.scheduleWithFixedDelay(() -> {
+//            if (getAnimalCount() == 0) {
+//                System.out.println("Count of animal is " + getAnimalCount());
+//                System.exit(0);
+//            }
+//        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
 
     ExecutorService executorService = Executors.newCachedThreadPool();

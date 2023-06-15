@@ -77,7 +77,7 @@ public class Statistics implements Runnable{
 //        System.out.println();
 //        for (Cell cell : island.arrayCells) {
 //            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
 //            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
 //            allPlants += cell.getPlantCount();
 //        }

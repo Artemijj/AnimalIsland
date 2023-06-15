@@ -36,12 +36,12 @@ public class Main {
 //        ses.scheduleWithFixedDelay(() -> island.startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
 //        ses.scheduleWithFixedDelay(() -> island.startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
 //        ses.scheduleWithFixedDelay(() -> island.startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
-//        ses.scheduleWithFixedDelay(() -> {
-//            if (island.getAnimalCount() == 0) {
-//                System.out.println("Count of animal is " + island.getAnimalCount());
-//                System.exit(0);
-//            }
-//        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> {
+            if (island.getAnimalCount() == 0) {
+                System.out.println("Count of animal is " + island.getAnimalCount());
+                System.exit(0);
+            }
+        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
 //        ses.scheduleWithFixedDelay(() -> island.isAnimalZero(), 1, 5, TimeUnit.SECONDS);
         island.start();
     }

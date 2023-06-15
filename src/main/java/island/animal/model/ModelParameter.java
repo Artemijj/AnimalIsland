@@ -19,14 +19,25 @@ public class ModelParameter {
     private int seepMaxQuantity = 150;
 
     private Map<Species, Integer> animalMap = new HashMap<>();
+    private Map<Species, Integer> maxQuantity = new HashMap<>();
 
     public ModelParameter(String fileName) {
-        if (fileName != null) {
+        if (!fileName.equals("")) {
             readParameters(fileName);
         }
+        addParameters();
+    }
+
+    private void addParameters() {
+        // Numbers of animals
         animalMap.put(Species.Wolf, numberWolf);
         animalMap.put(Species.Fox, numberFox);
         animalMap.put(Species.Sheep, numberSheep);
+
+        // Quantity of animals
+        maxQuantity.put(Species.Wolf, wolfMaxQuantity);
+        maxQuantity.put(Species.Fox, foxMaxQuantity);
+        maxQuantity.put(Species.Sheep, seepMaxQuantity);
     }
 
     public int getWidthIsland() {
@@ -73,6 +84,10 @@ public class ModelParameter {
         return animalMap;
     }
 
+    public Map<Species, Integer> getMaxQuantity() {
+        return maxQuantity;
+    }
+
     public void readParameters(String fileName) {
         File file = new File(fileName);
         BufferedReader bufferedReader;
@@ -84,9 +99,9 @@ public class ModelParameter {
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.startsWith("#")) {
                     String[] tempArr = line.split("=");
-                    System.out.println(tempArr.length);
-                    System.out.println("0" + tempArr[0]);
-                    System.out.println("1" + tempArr[1]);
+//                    System.out.println(tempArr.length);
+//                    System.out.println("0" + tempArr[0]);
+//                    System.out.println("1" + tempArr[1]);
                     parametersMap.put(tempArr[0].strip(), tempArr[1].strip());
                 }
             }
