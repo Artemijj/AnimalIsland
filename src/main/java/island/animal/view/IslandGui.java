@@ -49,6 +49,7 @@ public class IslandGui implements IIslandGui{
     private JLabel animalCellLabel;
     private JPanel plantCellPanel;
     private JLabel plantCellLabel;
+    private JLabel[] plantCellLabels;
     private int widthIsland = island.getModelParameter().getWidthIsland();
     private int heightIsland = island.getModelParameter().getHeightIsland();
     private JLabel predatorStatLabel;
@@ -165,6 +166,7 @@ public class IslandGui implements IIslandGui{
     public void loadGridPanel() {
 //        gridPanel.removeAll();
         int i = 0;
+        plantCellLabels = new JLabel[heightIsland * widthIsland];
         for (int j = 0; j < heightIsland; j++) {
             for (int k = 0; k < widthIsland; k++) {
                 JPanel cellPanel = new JPanel();//new FlowLayout(FlowLayout.LEFT));
@@ -212,6 +214,7 @@ public class IslandGui implements IIslandGui{
 //                }
                 plantCellLabel = new JLabel("      ");
                 plantCellLabel.setOpaque(true);
+                plantCellLabels[i] = plantCellLabel;
 //                if (island.arrayCells[i].getPlantCount() != 0) {
 //                    plantCellLabel.setBackground(Color.GREEN);
 //                    plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
@@ -340,6 +343,7 @@ public class IslandGui implements IIslandGui{
             animalCellLabel.setText(sba.toString());
         }
         if (island.arrayCells[i].getPlantCount() != 0) {
+            plantCellLabel = plantCellLabels[i];
             plantCellLabel.setBackground(Color.GREEN);
             plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
         }
