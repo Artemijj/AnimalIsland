@@ -43,10 +43,14 @@ public class IslandGui implements IIslandGui{
     private JPanel gridPanel;
     private JPanel statPanel;
     private JLabel predatorCellLabel;
+    private JLabel[] predatorCellLabels;
     private JLabel omnivorousCellLabel;
+    private JLabel[] omnivorousCellLabels;
     private JLabel herbivoreCellLabel;
+    private JLabel[] herbivoreCellLabels;
     private JPanel animalCellPanel;
     private JLabel animalCellLabel;
+    private JLabel[] animalCellLabels;
     private JPanel plantCellPanel;
     private JLabel plantCellLabel;
     private JLabel[] plantCellLabels;
@@ -155,8 +159,10 @@ public class IslandGui implements IIslandGui{
         mainPanel.add(statPanel);
         mainPanel.add(Box.createVerticalStrut(5));
         window.add(mainPanel);
+        window.setPreferredSize(new Dimension(1400,900));
         window.pack();
         window.setVisible(true);
+
     }
 
     public void setFileSelectLabel(String filename) {
@@ -167,6 +173,11 @@ public class IslandGui implements IIslandGui{
 //        gridPanel.removeAll();
         int i = 0;
         plantCellLabels = new JLabel[heightIsland * widthIsland];
+        predatorCellLabels = new JLabel[heightIsland * widthIsland];
+        omnivorousCellLabels = new JLabel[heightIsland * widthIsland];
+        herbivoreCellLabels = new JLabel[heightIsland * widthIsland];
+        animalCellLabels = new JLabel[heightIsland * widthIsland];
+
         for (int j = 0; j < heightIsland; j++) {
             for (int k = 0; k < widthIsland; k++) {
                 JPanel cellPanel = new JPanel();//new FlowLayout(FlowLayout.LEFT));
@@ -178,6 +189,7 @@ public class IslandGui implements IIslandGui{
 //                int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
 //                String predatorString = String.format("Predators - %d", predators);
                 predatorCellLabel = new JLabel();
+                predatorCellLabels[i] = predatorCellLabel;
 //                if (predators != 0) {
 //                    predatorCellLabel.setText(predatorString);
 //                } else {
@@ -187,6 +199,7 @@ public class IslandGui implements IIslandGui{
 //                int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
 //                String omnivorousString = String.format("Omnivorous - %d", omnivorous);
                 omnivorousCellLabel = new JLabel();
+                omnivorousCellLabels[i] = omnivorousCellLabel;
 //                if (omnivorous != 0) {
 //                    omnivorousCellLabel.setText(omnivorousString);
 //                } else {
@@ -196,6 +209,7 @@ public class IslandGui implements IIslandGui{
 //                int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
 //                String herbivoreString = String.format("Herbivores - %d", herbivores);
                 herbivoreCellLabel = new JLabel();
+                herbivoreCellLabels[i] = herbivoreCellLabel;
 //                if (herbivores != 0) {
 //                    herbivoreCellLabel.setText(herbivoreString);
 //                } else {
@@ -204,6 +218,7 @@ public class IslandGui implements IIslandGui{
 
                 animalCellLabel = new JLabel("      ");
                 animalCellLabel.setOpaque(true);
+                animalCellLabels[i] = animalCellLabel;
 //                StringBuffer sba = new StringBuffer();
 //                if (island.arrayCells[i].getAnimals().size() != 0) {
 //                    for (Animal animal : island.arrayCells[i].getAnimals()) {
@@ -312,12 +327,13 @@ public class IslandGui implements IIslandGui{
     private void setTextCellLabels(int i) {
         int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
         String predatorString = String.format("Predators - %d", predators);
+        predatorCellLabel = predatorCellLabels[i];
         if (predators != 0) {
             predatorCellLabel.setText(predatorString);
         } else {
             predatorCellLabel.setText("      ");
         }
-
+        omnivorousCellLabel = omnivorousCellLabels[i];
         int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
         String omnivorousString = String.format("Omnivorous - %d", omnivorous);
         if (omnivorous != 0) {
@@ -325,7 +341,7 @@ public class IslandGui implements IIslandGui{
         } else {
             omnivorousCellLabel.setText("      ");
         }
-
+         herbivoreCellLabel = herbivoreCellLabels[i];
         int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
         String herbivoreString = String.format("Herbivores - %d", herbivores);
         if (herbivores != 0) {
@@ -333,7 +349,7 @@ public class IslandGui implements IIslandGui{
         } else {
             herbivoreCellLabel.setText("      ");
         }
-
+        animalCellLabel = animalCellLabels[i];
         StringBuffer sba = new StringBuffer();
         if (island.arrayCells[i].getAnimals().size() != 0) {
             for (Animal animal : island.arrayCells[i].getAnimals()) {
