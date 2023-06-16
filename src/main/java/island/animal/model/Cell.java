@@ -16,6 +16,10 @@ public class Cell {
         this.width = width;
         this.height = height;
 //        this.island = island;
+        createList();
+    }
+
+    private synchronized void createList() {
         animals = new ArrayList<>();
     }
 

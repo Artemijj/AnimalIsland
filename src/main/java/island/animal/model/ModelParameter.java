@@ -22,7 +22,7 @@ public class ModelParameter {
     private Map<Species, Integer> maxQuantity = new HashMap<>();
 
     public ModelParameter(String fileName) {
-        if (!fileName.equals("")) {
+        if (fileName != null) {
             readParameters(fileName);
         }
         addParameters();

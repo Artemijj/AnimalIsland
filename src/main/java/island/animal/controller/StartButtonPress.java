@@ -18,6 +18,7 @@ public class StartButtonPress implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         island.start();
+        islandGui.loadGridPanel();
         islandGui.panelUpdateStart();
     }
 }

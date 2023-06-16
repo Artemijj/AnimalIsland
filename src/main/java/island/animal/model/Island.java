@@ -15,22 +15,22 @@ public class Island {
 
     public Island(ModelParameter modelParameter) {
         this.modelParameter = modelParameter;
-        arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
-        for (int i = 0; i < arrayCells.length; i++) {
-            arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
-        }
-        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
-            for (int j = 0; j < entry.getValue(); j++) {
-                int position = RandomValue.getIntRandom(arrayCells.length);
-                Animal animal = entry.getKey().create();
-                arrayCells[position].addToCellAnimalList(animal);
-                Logger.printLog(animal.getDescription() + " create in position:" + position);
-            }
-        }
-
-        for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
-            plantedPlant();
-        }
+//        arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
+//        for (int i = 0; i < arrayCells.length; i++) {
+//            arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
+//        }
+//        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
+//            for (int j = 0; j < entry.getValue(); j++) {
+//                int position = RandomValue.getIntRandom(arrayCells.length);
+//                Animal animal = entry.getKey().create();
+//                arrayCells[position].addToCellAnimalList(animal);
+//                Logger.printLog(animal.getDescription() + " create in position:" + position);
+//            }
+//        }
+//
+//        for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
+//            plantedPlant();
+//        }
     }
 
     public int getWidth() {
@@ -64,6 +64,23 @@ public class Island {
     ScheduledExecutorService ses; // = Executors.newScheduledThreadPool(5);
 
     public void start() {
+        arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
+        for (int i = 0; i < arrayCells.length; i++) {
+            arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
+        }
+        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
+            for (int j = 0; j < entry.getValue(); j++) {
+                int position = RandomValue.getIntRandom(arrayCells.length);
+                Animal animal = entry.getKey().create();
+                arrayCells[position].addToCellAnimalList(animal);
+                Logger.printLog(animal.getDescription() + " create in position:" + position);
+            }
+        }
+
+        for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
+            plantedPlant();
+        }
+
         ses = Executors.newScheduledThreadPool(5);
         ses.scheduleWithFixedDelay(() -> startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
