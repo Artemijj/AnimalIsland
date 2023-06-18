@@ -70,12 +70,18 @@ public class IslandGui implements IIslandGui{
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+        JPanel toolPanel = new JPanel();
+        toolPanel.setLayout(new BoxLayout(toolPanel, BoxLayout.X_AXIS));
+        toolPanel.setAlignmentX(LEFT_ALIGNMENT);
 
         tb = new JToolBar();
         tb.setFloatable(false);
         tb.setAlignmentX(LEFT_ALIGNMENT);
 
         tb.setBackground(Color.GREEN);  //?????????????????????????????
+
 
         start = new JButton("Start");
         start.addActionListener(new StartButtonPress(this, island));
@@ -86,6 +92,8 @@ public class IslandGui implements IIslandGui{
         tb.add(stop);
         tb.addSeparator();
         tb.addSeparator();
+
+        toolPanel.add(tb);
 
         fileSelectLabel = new JLabel("Select preference file.");
         fileSelectLabel.setPreferredSize(new Dimension(300, fileSelectLabel.getPreferredSize().height));
@@ -133,10 +141,16 @@ public class IslandGui implements IIslandGui{
         statPanel.add(herbivoreStatLabel);
         statPanel.add(plantStatLabel);
 
-        mainPanel.add(tb);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+        bottomPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+        bottomPanel.add(statPanel);
+
+        mainPanel.add(toolPanel);
         mainPanel.add(scrollPane);
         mainPanel.add(Box.createVerticalStrut(5));
-        mainPanel.add(statPanel);
+        mainPanel.add(bottomPanel);
         mainPanel.add(Box.createVerticalStrut(5));
         window.add(mainPanel);
         window.pack();
