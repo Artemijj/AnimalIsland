@@ -184,7 +184,7 @@ public class IslandGui implements IIslandGui{
                 JPanel cellPanel = new JPanel();//new FlowLayout(FlowLayout.LEFT));
                 cellPanel.setLayout(new BoxLayout(cellPanel, BoxLayout.Y_AXIS));
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-                cellPanel.setPreferredSize(new Dimension(100, 77));
+                cellPanel.setMinimumSize(new Dimension(300, 200));
 
                 tooltipArray[i] = cellPanel;
                 cellPanel.setToolTipText(toolTipText(i));
