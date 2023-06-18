@@ -10,6 +10,6 @@ numberWolf = 20
 numberFox = 20
 numberSheep = 20
 # animals quantity
-wolfMaxQuantity = 40
-foxMaxQuantity = 40
-seepMaxQuantity = 150
+quantityWolf = 40
+quantityFox = 40
+quantitySheep = 150

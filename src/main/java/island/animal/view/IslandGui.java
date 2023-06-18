@@ -13,6 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 
 import java.awt.*;
 
@@ -30,25 +31,21 @@ public class IslandGui implements IIslandGui{
     private JToolBar tb;
     private JButton start;
     private JButton stop;
-//    private JCheckBox checkBox1;
-//    private JRadioButton radioButton1;
-//    private JLabel radioButtonLabel1;
-//    private JRadioButton radioButton2;
-    private JPanel parameterPanel;
-    private JPanel horizontalPanel;
     private JLabel fileSelectLabel;
     private JButton fileSelectButton;
-//    private JCheckBox checkBox2;
-//    private JLabel checkBoxLabel2;
     private JPanel gridPanel;
     private JPanel statPanel;
     private JLabel predatorCellLabel;
+    private JLabel[] predatorCellLabels;
     private JLabel omnivorousCellLabel;
+    private JLabel[] omnivorousCellLabels;
     private JLabel herbivoreCellLabel;
-    private JPanel animalCellPanel;
+    private JLabel[] herbivoreCellLabels;
     private JLabel animalCellLabel;
-    private JPanel plantCellPanel;
+    private JLabel[] animalCellLabels;
     private JLabel plantCellLabel;
+    private JLabel[] plantCellLabels;
+    private JPanel[] tooltipArray;
     private int widthIsland = island.getModelParameter().getWidthIsland();
     private int heightIsland = island.getModelParameter().getHeightIsland();
     private JLabel predatorStatLabel;
@@ -57,10 +54,6 @@ public class IslandGui implements IIslandGui{
     private JLabel plantStatLabel;
     private DecimalFormat myFormat = new DecimalFormat("#.##");
     private ScheduledExecutorService ses;
-
-    public JPanel getGridPanel() {
-        return gridPanel;
-    }
 
     public static void main(String[] args) {
         IIslandGui islandGui = new IslandGui(island);
@@ -82,36 +75,20 @@ public class IslandGui implements IIslandGui{
         tb.setFloatable(false);
         tb.setAlignmentX(LEFT_ALIGNMENT);
 
+        tb.setBackground(Color.GREEN);  //?????????????????????????????
+
         start = new JButton("Start");
         start.addActionListener(new StartButtonPress(this, island));
         stop = new JButton("Stop");
         stop.addActionListener(new StopButtonPress(this, island));
-//        radioButton1 = new JRadioButton();
-//        radioButtonLabel1 = new JLabel("Parameter file 1.");
-//        radioButton2 = new JRadioButton();
-//        radioButtonLabel2 = new JLabel("Parameter file 2.");
 
         tb.add(start);
         tb.add(stop);
         tb.addSeparator();
         tb.addSeparator();
-//        tb.add(radioButton1);
-//        tb.addSeparator();
-//        tb.add(radioButtonLabel1);
-//        tb.addSeparator();
-//        tb.add(radioButton2);
-//        tb.addSeparator();
-//        tb.add(radioButtonLabel2);
-
-//        parameterPanel = new JPanel();
-//        parameterPanel.setLayout(new BoxLayout(parameterPanel, BoxLayout.Y_AXIS));
-//
-//        horizontalPanel = new JPanel();
-//        horizontalPanel.setLayout(new BoxLayout(horizontalPanel, BoxLayout.X_AXIS));
-//        horizontalPanel.setBackground(Color.RED);
 
         fileSelectLabel = new JLabel("Select preference file.");
-        fileSelectLabel.setPreferredSize(new Dimension(200, fileSelectLabel.getPreferredSize().height));
+        fileSelectLabel.setPreferredSize(new Dimension(300, fileSelectLabel.getPreferredSize().height));
 
         fileSelectButton = new JButton("...");
         fileSelectButton.addActionListener(new SelectButtonPress(this, island));
@@ -125,16 +102,26 @@ public class IslandGui implements IIslandGui{
 
 
 
-        gridPanel = new JPanel(new GridLayout(heightIsland, widthIsland, 1, 1));
+        gridPanel = new JPanel();
         gridPanel.setAlignmentX(LEFT_ALIGNMENT);
+        gridPanel.setPreferredSize(new Dimension(2019, 779));
+
+        gridPanel.setBackground(Color.CYAN);   //?????????????????????????
+
 ////        loadGridPanel();
 //        gridPanel.repaint();
 //        gridPanel.revalidate();
 //        gridPanelUpdateStart();
 
+        JScrollPane scrollPane = new JScrollPane(gridPanel);
+
 
         statPanel = new JPanel();
         statPanel.setLayout(new BoxLayout(statPanel, BoxLayout.Y_AXIS));
+        statPanel.setAlignmentX(LEFT_ALIGNMENT);
+
+        statPanel.setBackground(Color.RED);  //?????????????????????????????????????
+
 //        statPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         predatorStatLabel = new JLabel("Predators - 0");
         omnivorousStatLabel = new JLabel("Omnivorous - 0");
@@ -145,11 +132,9 @@ public class IslandGui implements IIslandGui{
         statPanel.add(omnivorousStatLabel);
         statPanel.add(herbivoreStatLabel);
         statPanel.add(plantStatLabel);
-//        loadStatPanel();
 
         mainPanel.add(tb);
-//        mainPanel.add(parameterPanel);
-        mainPanel.add(gridPanel);
+        mainPanel.add(scrollPane);
         mainPanel.add(Box.createVerticalStrut(5));
         mainPanel.add(statPanel);
         mainPanel.add(Box.createVerticalStrut(5));
@@ -163,59 +148,49 @@ public class IslandGui implements IIslandGui{
     }
 
     public void loadGridPanel() {
-//        gridPanel.removeAll();
+        gridPanel.removeAll();
+
+        widthIsland = island.getModelParameter().getWidthIsland();
+        heightIsland = island.getModelParameter().getHeightIsland();
+
+        gridPanel.setLayout(new GridLayout(heightIsland, widthIsland, 1, 1));
+
+        window.setTitle("Island " + widthIsland + "x" + heightIsland);
+
         int i = 0;
+        int arraySize = heightIsland * widthIsland;
+        predatorCellLabels = new JLabel[arraySize];
+        omnivorousCellLabels = new JLabel[arraySize];
+        herbivoreCellLabels = new JLabel[arraySize];
+        animalCellLabels = new JLabel[arraySize];
+        plantCellLabels = new JLabel[arraySize];
+        tooltipArray = new JPanel[arraySize];
         for (int j = 0; j < heightIsland; j++) {
             for (int k = 0; k < widthIsland; k++) {
                 JPanel cellPanel = new JPanel();//new FlowLayout(FlowLayout.LEFT));
                 cellPanel.setLayout(new BoxLayout(cellPanel, BoxLayout.Y_AXIS));
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+                cellPanel.setPreferredSize(new Dimension(100, 77));
 
+                tooltipArray[i] = cellPanel;
                 cellPanel.setToolTipText(toolTipText(i));
 
-//                int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-//                String predatorString = String.format("Predators - %d", predators);
                 predatorCellLabel = new JLabel();
-//                if (predators != 0) {
-//                    predatorCellLabel.setText(predatorString);
-//                } else {
-//                    predatorCellLabel.setText("      ");
-//                }
-//
-//                int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
-//                String omnivorousString = String.format("Omnivorous - %d", omnivorous);
+                predatorCellLabels[i] = predatorCellLabel;
+
                 omnivorousCellLabel = new JLabel();
-//                if (omnivorous != 0) {
-//                    omnivorousCellLabel.setText(omnivorousString);
-//                } else {
-//                    omnivorousCellLabel.setText("      ");
-//                }
-//
-//                int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
-//                String herbivoreString = String.format("Herbivores - %d", herbivores);
+                omnivorousCellLabels[i] = omnivorousCellLabel;
+
                 herbivoreCellLabel = new JLabel();
-//                if (herbivores != 0) {
-//                    herbivoreCellLabel.setText(herbivoreString);
-//                } else {
-//                    herbivoreCellLabel.setText("      ");
-//                }
+                herbivoreCellLabels[i] = herbivoreCellLabel;
 
                 animalCellLabel = new JLabel("      ");
                 animalCellLabel.setOpaque(true);
-//                StringBuffer sba = new StringBuffer();
-//                if (island.arrayCells[i].getAnimals().size() != 0) {
-//                    for (Animal animal : island.arrayCells[i].getAnimals()) {
-//                        sba.append(animal.getSpecies().icon);
-//                    }
-//                    animalCellLabel.setBackground(Color.RED);
-//                    animalCellLabel.setText(sba.toString());
-//                }
+                animalCellLabels[i] = animalCellLabel;
+
                 plantCellLabel = new JLabel("      ");
                 plantCellLabel.setOpaque(true);
-//                if (island.arrayCells[i].getPlantCount() != 0) {
-//                    plantCellLabel.setBackground(Color.GREEN);
-//                    plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
-//                }
+                plantCellLabels[i] = plantCellLabel;
 
                 cellPanel.add(predatorCellLabel);
                 cellPanel.add(omnivorousCellLabel);
@@ -223,20 +198,19 @@ public class IslandGui implements IIslandGui{
                 cellPanel.add(animalCellLabel);
                 cellPanel.add(plantCellLabel);
 
+                cellPanel.setBackground(Color.LIGHT_GRAY);
 
-////        panel.add(component);//, BorderLayout.SOUTH);
-////        panel.add(Box.createHorizontalGlue());
                 gridPanel.add(cellPanel);
                 setTextCellLabels(i);
                 i++;
             }
         }
-//        gridPanel.repaint();
-//        gridPanel.revalidate();
+//        gridPanel.setPreferredSize(new Dimension(widthIsland * 200, heightIsland * 77));
+//        window.repaint();
+//        window.revalidate();
     }
 
     private void loadStatPanel() {
-//        statPanel.removeAll();
         int allPredators = 0;
         int allOmnivorous = 0;
         int allHerbivores = 0;
@@ -255,25 +229,14 @@ public class IslandGui implements IIslandGui{
         herbivoreStatLabel.setText(herbivoreString);
         String plantString = String.format("Plants - %S", myFormat.format(allPlants));
         plantStatLabel.setText(plantString);
-//        statPanel.add(predatorStatLabel);
-//        statPanel.add(omnivorousStatLabel);
-//        statPanel.add(herbivoreStatLabel);
-//        statPanel.add(plantStatLabel);
-
-//        statPanel.repaint();
-//        statPanel.revalidate();
     }
 
     public void gridPanelUpdate() {
-        gridPanel.repaint();
-        gridPanel.revalidate();
+//        window.removeAll();
+        gridPanel.setPreferredSize(new Dimension(widthIsland * 200, heightIsland * 77));
+        window.repaint();
+        window.revalidate();
     }
-
-//    private void gridPanelUpdateStart() {
-//        GridPanelUpdate gpu = new GridPanelUpdate(this);
-//        Timer timer = new Timer(5000, gpu);
-//        timer.start();
-//    }
 
     public void panelUpdateStart() {
         ses = Executors.newScheduledThreadPool(5);
@@ -282,8 +245,8 @@ public class IslandGui implements IIslandGui{
         ses.scheduleWithFixedDelay(() -> {
             if (island.getAnimalCount() == 0) {
                 System.out.println("Count of animal is " + island.getAnimalCount());
-//                System.exit(0);
                 island.stop();
+                alertDialog("<html>" + "This is the END." + "<br>" + "<br>" + "All animals is dead..." + "</html>");
             }
         }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
@@ -309,6 +272,7 @@ public class IslandGui implements IIslandGui{
     private void setTextCellLabels(int i) {
         int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
         String predatorString = String.format("Predators - %d", predators);
+        predatorCellLabel = predatorCellLabels[i];
         if (predators != 0) {
             predatorCellLabel.setText(predatorString);
         } else {
@@ -317,6 +281,7 @@ public class IslandGui implements IIslandGui{
 
         int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
         String omnivorousString = String.format("Omnivorous - %d", omnivorous);
+        omnivorousCellLabel = omnivorousCellLabels[i];
         if (omnivorous != 0) {
             omnivorousCellLabel.setText(omnivorousString);
         } else {
@@ -325,6 +290,7 @@ public class IslandGui implements IIslandGui{
 
         int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
         String herbivoreString = String.format("Herbivores - %d", herbivores);
+        herbivoreCellLabel = herbivoreCellLabels[i];
         if (herbivores != 0) {
             herbivoreCellLabel.setText(herbivoreString);
         } else {
@@ -332,17 +298,28 @@ public class IslandGui implements IIslandGui{
         }
 
         StringBuffer sba = new StringBuffer();
+        animalCellLabel = animalCellLabels[i];
         if (island.arrayCells[i].getAnimals().size() != 0) {
             for (Animal animal : island.arrayCells[i].getAnimals()) {
-                sba.append(animal.getSpecies().icon);
+                sba.append(animal.getSpecies().icon + "(" + animal.getUuid() + ")");
             }
             animalCellLabel.setBackground(Color.RED);
             animalCellLabel.setText(sba.toString());
+        } else {
+            animalCellLabel.setBackground(Color.LIGHT_GRAY);
+            animalCellLabel.setText("      ");
         }
+        plantCellLabel = plantCellLabels[i];
         if (island.arrayCells[i].getPlantCount() != 0) {
             plantCellLabel.setBackground(Color.GREEN);
             plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
+        } else {
+            plantCellLabel.setBackground(Color.LIGHT_GRAY);
+            plantCellLabel.removeAll();
+            plantCellLabel.setText("      ");
         }
+
+        tooltipArray[i].setToolTipText(toolTipText(i));
     }
 
     private void gridPanelUpdateStart() {
@@ -353,5 +330,9 @@ public class IslandGui implements IIslandGui{
                 i++;
             }
         }
+    }
+
+    public void alertDialog(String alert) {
+        JOptionPane.showMessageDialog(window, alert);
     }
 }

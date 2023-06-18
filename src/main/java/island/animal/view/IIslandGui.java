@@ -7,4 +7,5 @@ public interface IIslandGui {
     void setFileSelectLabel(String filename);
     void panelUpdateStart();
     void panelUpdateStop();
+    void alertDialog(String alert);
 }
