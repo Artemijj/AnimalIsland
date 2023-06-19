@@ -220,7 +220,7 @@ public class IslandGui implements IIslandGui{
 
                 cellPanel.setToolTipText(toolTipText(i));
 
-                cellPanel.setBackground(Color.LIGHT_GRAY);
+//                cellPanel.setBackground(Color.LIGHT_GRAY);
 
                 gridPanel.add(cellPanel);
                 setTextCellLabels(i);
@@ -328,7 +328,7 @@ public class IslandGui implements IIslandGui{
             animalCellLabel.setBackground(Color.RED);
             animalCellLabel.setText(sba.toString());
         } else {
-            animalCellLabel.setBackground(Color.LIGHT_GRAY);
+            animalCellLabel.setBackground(null); //Color.LIGHT_GRAY);
             animalCellLabel.setText("      ");
         }
         plantCellLabel = cellPanels[i].getPlantCellLabel();
@@ -336,7 +336,7 @@ public class IslandGui implements IIslandGui{
             plantCellLabel.setBackground(Color.GREEN);
             plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
         } else {
-            plantCellLabel.setBackground(Color.LIGHT_GRAY);
+            plantCellLabel.setBackground(null); //Color.LIGHT_GRAY);
             plantCellLabel.removeAll();
             plantCellLabel.setText("      ");
         }
