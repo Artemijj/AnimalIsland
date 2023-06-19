@@ -95,11 +95,11 @@ public class ModelParameter {
         return animalMap;
     }
 
-    public Map<Species, Integer> getMaxQuantity() {
-        return maxQuantity;
+    public int getMaxQuantity(Species species) {
+        return maxQuantity.get(species);
     }
 
-    public void readParameters(String fileName) {
+    public boolean readParameters(String fileName) {
         File file = new File(fileName);
         BufferedReader bufferedReader;
 //        parametersMap = new HashMap<>();
@@ -118,10 +118,10 @@ public class ModelParameter {
             }
 
             bufferedReader.close();
-        } catch (IOException ex) {
-            setWrongFile(true);
-            throw new RuntimeException(ex);
-        }
+//        } catch (IOException ex) {
+////            setWrongFile(true);
+////            throw new RuntimeException(ex);
+//        }
 
 
 //        try {
@@ -142,7 +142,7 @@ public class ModelParameter {
 //        }
 
 
-        try {
+//        try {
             for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
                 String key = "quantity" + entry.getKey();
                 Integer value = Integer.parseInt(parametersMap.get(key));
@@ -153,9 +153,11 @@ public class ModelParameter {
                 Integer value = Integer.parseInt(parametersMap.get(key));
                 animalMap.put(entry.getKey(), getIntParameter(key, value));
             }
-        } catch (NumberFormatException ex) {
-            setWrongFile(true);
-            throw new RuntimeException(ex);
+            return true;
+        } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException ex) {
+//            setWrongFile(true);
+//            throw new RuntimeException(ex);
+            return false;
         }
     }
 

@@ -71,7 +71,7 @@ public abstract class Animal implements IAnimal {
             stepPosition = calculatePosition;
         }
         Integer counter = island.arrayCells[initialPosition].animalsCount(getSpecies());
-        if (counter < island.getModelParameter().getMaxQuantity().get(species)) {
+        if (counter < island.getModelParameter().getMaxQuantity(species)) {
             island.arrayCells[initialPosition].removeFromCellAnimalList(this);
             island.arrayCells[stepPosition].addToCellAnimalList(this);
             Logger.printLog(getDescription() + " move to field " + stepPosition);
@@ -86,7 +86,7 @@ public abstract class Animal implements IAnimal {
             return;
         }
         Integer counter = island.arrayCells[position].animalsCount(getSpecies());
-        if (counter >= island.getModelParameter().getMaxQuantity().get(species)) {
+        if (counter >= island.getModelParameter().getMaxQuantity(species)) {
             return;
         }
         List<Animal> list = new ArrayList<>(island.arrayCells[position].getAnimals());

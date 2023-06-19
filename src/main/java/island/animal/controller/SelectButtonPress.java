@@ -24,10 +24,9 @@ public class SelectButtonPress implements ActionListener {
                 if (ret == JFileChooser.APPROVE_OPTION) {
                     File file = fileOpen.getSelectedFile();
                     islandGui.setFileSelectLabel(file.getAbsolutePath());
-                    island.getModelParameter().readParameters(file.getAbsolutePath());
-                    if (island.getModelParameter().isWrongFile()) {
+                    if (!island.getModelParameter().readParameters(file.getAbsolutePath())) {
                         islandGui.alertDialog("<html>" + "Wrong file!" + "<br>" + "<br>" + "Select correct file." + "</html>");
-                        island.getModelParameter().setWrongFile(false);
+//                        island.getModelParameter().setWrongFile(false);
                     }
                 }
 
