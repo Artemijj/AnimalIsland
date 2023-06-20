@@ -196,11 +196,11 @@ public class IslandGui implements IIslandGui{
         window.revalidate();
     }
 
-    public void gridPanelUpdate() {
-        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
-        window.repaint();
-        window.revalidate();
-    }
+//    public void gridPanelUpdate() {
+//        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
+//        window.repaint();
+//        window.revalidate();
+//    }
 
     public void panelUpdateStart() {
         ses = Executors.newScheduledThreadPool(5);

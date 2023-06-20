@@ -14,6 +14,6 @@ public class GridPanelUpdate implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        islandGui.gridPanelUpdate();
+//        islandGui.gridPanelUpdate();
     }
 }
