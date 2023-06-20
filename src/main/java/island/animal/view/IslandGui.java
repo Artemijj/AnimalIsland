@@ -191,10 +191,13 @@ public class IslandGui implements IIslandGui{
         herbivoreStatLabel.setText(herbivoreString);
         String plantString = String.format("Plants - %S", myFormat.format(allPlants));
         plantStatLabel.setText(plantString);
+        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
+        window.repaint();
+        window.revalidate();
     }
 
     public void gridPanelUpdate() {
-        gridPanel.setPreferredSize(new Dimension(widthIsland * 200, heightIsland * 77));
+        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
         window.repaint();
         window.revalidate();
     }
