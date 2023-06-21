@@ -10,9 +10,9 @@ public class IslandGuiUpdate {
 
 //    private static ModelParameter modelParameter = new ModelParameter(null);
     private Island island;
-    private IslandGui islandGui;
+    private IIslandGui islandGui;
 
-    public IslandGuiUpdate(Island island, IslandGui islandGui) {
+    public IslandGuiUpdate(Island island, IIslandGui islandGui) {
         this.island = island;
         this.islandGui = islandGui;
     }

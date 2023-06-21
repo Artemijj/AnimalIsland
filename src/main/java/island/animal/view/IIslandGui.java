@@ -1,6 +1,8 @@
 package island.animal.view;
 
 public interface IIslandGui {
+    int getWidthIsland();
+    int getHeightIsland();
     void mainWindow();
     void loadGridPanel();
     void setTextCellLabels(int i);

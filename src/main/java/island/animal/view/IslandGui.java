@@ -17,13 +17,17 @@ import java.awt.*;
 import static java.awt.Component.LEFT_ALIGNMENT;
 
 public class IslandGui implements IIslandGui{
-    private static ModelParameter modelParameter = new ModelParameter(null);
-    private static Island island = new Island(modelParameter);
-    private static IslandGuiUpdate islandGuiUpdate;
+    private ModelParameter modelParameter; // = new ModelParameter(null);
+    private Island island; // = new Island(modelParameter);
+    private IslandGuiUpdate islandGuiUpdate;
+    private int widthIsland;
+    private int heightIsland;
 
-    public IslandGui(Island island, IslandGuiUpdate islandGuiUpdate) {
+    public IslandGui(Island island) {
         this.island = island;
-        this.islandGuiUpdate = islandGuiUpdate;
+        islandGuiUpdate = new IslandGuiUpdate(island, this);
+        widthIsland = island.getModelParameter().getWidthIsland();
+        heightIsland = island.getModelParameter().getHeightIsland();
     }
 
     private JFrame window;
@@ -32,8 +36,8 @@ public class IslandGui implements IIslandGui{
     private JPanel gridPanel;
     private JPanel statPanel;
     private CellView[] cellPanels;
-    private int widthIsland = island.getModelParameter().getWidthIsland();
-    private int heightIsland = island.getModelParameter().getHeightIsland();
+//    private int widthIsland = island.getModelParameter().getWidthIsland();
+//    private int heightIsland = island.getModelParameter().getHeightIsland();
     private JLabel predatorStatLabel;
     private JLabel omnivorousStatLabel;
     private JLabel herbivoreStatLabel;
@@ -51,9 +55,13 @@ public class IslandGui implements IIslandGui{
     }
 
     public static void main(String[] args) {
-        IIslandGui islandGui = new IslandGui(island, islandGuiUpdate);
+        ModelParameter modelParameter = new ModelParameter(null);
+        Island island = new Island(modelParameter);
+        IIslandGui islandGui = new IslandGui(island);
+//        islandGuiUpdate = new IslandGuiUpdate(island, this);
         islandGui.mainWindow();
     }
+
 
     private JToolBar createToolBar() {
         JToolBar tb = new JToolBar();
