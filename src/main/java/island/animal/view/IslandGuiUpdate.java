@@ -11,10 +11,12 @@ public class IslandGuiUpdate {
 //    private static ModelParameter modelParameter = new ModelParameter(null);
     private Island island;
     private IIslandGui islandGui;
+    private CellView cellView;
 
     public IslandGuiUpdate(Island island, IIslandGui islandGui) {
         this.island = island;
         this.islandGui = islandGui;
+        cellView = new CellView(island, islandGui);
     }
 
     private ScheduledExecutorService ses;
@@ -40,7 +42,7 @@ public class IslandGuiUpdate {
         int i = 0;
         for (int j = 0; j < islandGui.getHeightIsland(); j++) {
             for (int k = 0; k < islandGui.getWidthIsland(); k++) {
-                islandGui.setTextCellLabels(i);
+                cellView.setTextCellLabels(i);
                 i++;
             }
         }
