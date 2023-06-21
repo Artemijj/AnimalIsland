@@ -19,9 +19,11 @@ import static java.awt.Component.LEFT_ALIGNMENT;
 public class IslandGui implements IIslandGui{
     private static ModelParameter modelParameter = new ModelParameter(null);
     private static Island island = new Island(modelParameter);
+    private static IslandGuiUpdate islandGuiUpdate;
 
-    public IslandGui(Island island) {
+    public IslandGui(Island island, IslandGuiUpdate islandGuiUpdate) {
         this.island = island;
+        this.islandGuiUpdate = islandGuiUpdate;
     }
 
     private JFrame window;
@@ -37,10 +39,19 @@ public class IslandGui implements IIslandGui{
     private JLabel herbivoreStatLabel;
     private JLabel plantStatLabel;
     private DecimalFormat myFormat = new DecimalFormat("#.##");
-    private ScheduledExecutorService ses;
+//    private ScheduledExecutorService ses;
+
+
+    public int getWidthIsland() {
+        return widthIsland;
+    }
+
+    public int getHeightIsland() {
+        return heightIsland;
+    }
 
     public static void main(String[] args) {
-        IIslandGui islandGui = new IslandGui(island);
+        IIslandGui islandGui = new IslandGui(island, islandGuiUpdate);
         islandGui.mainWindow();
     }
 
@@ -52,9 +63,9 @@ public class IslandGui implements IIslandGui{
 //        tb.setBackground(Color.GREEN);  //?????????????????????????????
 
         JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonPress(this, island));
+        start.addActionListener(new StartButtonPress(this, island, islandGuiUpdate));
         JButton stop = new JButton("Stop");
-        stop.addActionListener(new StopButtonPress(this, island));
+        stop.addActionListener(new StopButtonPress(this, island, islandGuiUpdate));
 
         fileSelectLabel.setPreferredSize(new Dimension(300, fileSelectLabel.getPreferredSize().height));
 
@@ -172,7 +183,7 @@ public class IslandGui implements IIslandGui{
 //        gridPanel.setPreferredSize(new Dimension(widthIsland * 200, heightIsland * 77));
     }
 
-    private void loadStatPanel() {
+    public void loadStatPanel() {
         int allPredators = 0;
         int allOmnivorous = 0;
         int allHerbivores = 0;
@@ -202,22 +213,22 @@ public class IslandGui implements IIslandGui{
 //        window.revalidate();
 //    }
 
-    public void panelUpdateStart() {
-        ses = Executors.newScheduledThreadPool(5);
-        ses.scheduleWithFixedDelay(() -> gridPanelUpdateStart(), 1, 5, TimeUnit.SECONDS);
-        ses.scheduleWithFixedDelay(() -> loadStatPanel(), 1, 5, TimeUnit.SECONDS);
-        ses.scheduleWithFixedDelay(() -> {
-            if (island.getAnimalCount() == 0) {
-                System.out.println("Count of animal is " + island.getAnimalCount());
-                island.stop();
-                alertDialog("<html>" + "This is the END." + "<br>" + "<br>" + "All animals is dead..." + "</html>");
-            }
-        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
-    }
-
-    public void panelUpdateStop() {
-        ses.shutdown();
-    }
+//    public void panelUpdateStart() {
+//        ses = Executors.newScheduledThreadPool(5);
+//        ses.scheduleWithFixedDelay(() -> gridPanelUpdateStart(), 1, 5, TimeUnit.SECONDS);
+//        ses.scheduleWithFixedDelay(() -> loadStatPanel(), 1, 5, TimeUnit.SECONDS);
+//        ses.scheduleWithFixedDelay(() -> {
+//            if (island.getAnimalCount() == 0) {
+//                System.out.println("Count of animal is " + island.getAnimalCount());
+//                island.stop();
+//                alertDialog("<html>" + "This is the END." + "<br>" + "<br>" + "All animals is dead..." + "</html>");
+//            }
+//        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
+//    }
+//
+//    public void panelUpdateStop() {
+//        ses.shutdown();
+//    }
 
     private String toolTipText(int i) {
         StringBuffer sb = new StringBuffer();
@@ -233,7 +244,7 @@ public class IslandGui implements IIslandGui{
         return sb.toString();
     }
 
-    private void setTextCellLabels(int i) {
+    public void setTextCellLabels(int i) {
         int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
         String predatorString = String.format("Predators - %d", predators);
         JLabel predatorCellLabel = cellPanels[i].getPredatorCellLabel();
@@ -286,15 +297,15 @@ public class IslandGui implements IIslandGui{
         cellPanels[i].getCellPanel().setToolTipText(toolTipText(i));
     }
 
-    private void gridPanelUpdateStart() {
-        int i = 0;
-        for (int j = 0; j < heightIsland; j++) {
-            for (int k = 0; k < widthIsland; k++) {
-                setTextCellLabels(i);
-                i++;
-            }
-        }
-    }
+//    private void gridPanelUpdateStart() {
+//        int i = 0;
+//        for (int j = 0; j < heightIsland; j++) {
+//            for (int k = 0; k < widthIsland; k++) {
+//                setTextCellLabels(i);
+//                i++;
+//            }
+//        }
+//    }
 
     public void alertDialog(String alert) {
         JOptionPane.showMessageDialog(window, alert);
