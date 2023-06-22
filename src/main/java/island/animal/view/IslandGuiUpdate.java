@@ -25,7 +25,9 @@ public class IslandGuiUpdate {
     private ScheduledExecutorService ses;
 
     public void panelIslandGuiUpdateStart() {
-        ses = Executors.newScheduledThreadPool(5, new ThreadFactory() {
+
+        ses = Executors.newScheduledThreadPool(5,new ThreadFactory() {
+
             @Override
             public Thread newThread(Runnable r) {
                 Thread t = Executors.defaultThreadFactory().newThread(r);

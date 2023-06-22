@@ -98,7 +98,7 @@ public abstract class Animal implements IAnimal {
                 if (cnt >= island.getModelParameter().getMaxQuantity(species)) {
                     break;
                 }
-                Logger.printLog(newAnimal.getDescription() + " was born, at field " + position);
+               Logger.printLog(newAnimal.getDescription() + " was born, at field " + position);
                 Logger.printLog(newAnimal.getDescription() + " parents: " + getDescription() + " & " + animal.getDescription());
             }
         }

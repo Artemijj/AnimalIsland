@@ -5,6 +5,7 @@ import island.animal.controller.StartButtonPress;
 import island.animal.controller.StopButtonPress;
 import island.animal.model.*;
 
+import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
 
 import javax.swing.*;
@@ -69,16 +70,19 @@ public class IslandGui implements IIslandGui{
         islandGui.createMainWindow();
     }
 
+    public void startButton(ActionEvent actionEvent) {
+        island.start();
+        loadGridPanel();
+        islandGuiUpdate.panelIslandGuiUpdateStart();
+    }
+
 
     private JToolBar createToolBar() {
         JToolBar tb = new JToolBar();
         tb.setFloatable(false);
         tb.setAlignmentX(LEFT_ALIGNMENT);
-
-//        tb.setBackground(Color.GREEN);  //?????????????????????????????
-
         JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonPress(this, island, islandGuiUpdate));
+        start.addActionListener(x -> startButton(x));
         JButton stop = new JButton("Stop");
         stop.addActionListener(new StopButtonPress(this, island, islandGuiUpdate));
 
