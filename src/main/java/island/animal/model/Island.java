@@ -94,7 +94,7 @@ public class Island {
 //        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
 
-    ExecutorService executorService = Executors.newCachedThreadPool();
+    ExecutorService executorService = Executors.newFixedThreadPool(16);
     public void startMove() {
         try {
         for (int j = 0; j < arrayCells.length; j++) {
