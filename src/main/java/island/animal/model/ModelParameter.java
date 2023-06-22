@@ -76,7 +76,7 @@ public class ModelParameter {
     }
 
     public double getPlantDensity() {
-        return getDoubleParameter("plantDensity", 1.2);
+        return getDoubleParameter("plantDensity", 2);
     }
 
     public int getDurationOfTact() {

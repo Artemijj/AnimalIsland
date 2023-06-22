@@ -85,7 +85,7 @@ public class Island {
         ses.scheduleWithFixedDelay(() -> startMove(), 1, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
-        ses.scheduleWithFixedDelay(() -> plantedPlant(), 5, modelParameter.getDurationOfTact() * 1, TimeUnit.MILLISECONDS);
+        ses.scheduleWithFixedDelay(() -> plantedPlant(), 5, modelParameter.getDurationOfTact() * 10, TimeUnit.MICROSECONDS);
 //        ses.scheduleWithFixedDelay(() -> {
 //            if (getAnimalCount() == 0) {
 //                System.out.println("Count of animal is " + getAnimalCount());
@@ -138,7 +138,10 @@ public class Island {
     }
 
     public void plantedPlant() {
-        arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(1);
+        int i = RandomValue.getIntRandom(arrayCells.length);
+        if (arrayCells[i].getPlantCount() < 200) {
+            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.5);
+        }
     }
 
     public void isAnimalZero() {

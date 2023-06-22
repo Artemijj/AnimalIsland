@@ -92,7 +92,7 @@ public class Cell {
         animals.remove(animal);
     }
 
-    public synchronized void addPlant(int p) {
+    public synchronized void addPlant(double p) {
         plantCount += p;
     }
 
