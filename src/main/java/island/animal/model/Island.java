@@ -140,7 +140,7 @@ public class Island {
     public void plantedPlant() {
         int i = RandomValue.getIntRandom(arrayCells.length);
         if (arrayCells[i].getPlantCount() < 200) {
-            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.5);
+            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.01);
         }
     }
 
