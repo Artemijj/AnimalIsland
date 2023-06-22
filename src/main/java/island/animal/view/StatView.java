@@ -23,9 +23,12 @@ public class StatView {
         int allHerbivores = 0;
         double allPlants = 0;
         for (Cell cell : island.arrayCells) {
-            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
-            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+//            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
+            allPredators += cell.typeAnimalCount("Predator");
+//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
+            allOmnivorous += cell.typeAnimalCount("Omnivorous");
+//            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+            allHerbivores += cell.typeAnimalCount("Herbivore");
             allPlants += cell.getPlantCount();
         }
         String predatorString = String.format("Predators - %d", allPredators);

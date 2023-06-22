@@ -1,6 +1,7 @@
 package island.animal.view;
 
 import island.animal.model.Animal;
+import island.animal.model.Cell;
 import island.animal.model.Island;
 
 import javax.swing.*;
@@ -126,42 +127,47 @@ public class CellView {
         return cellPanel;
     }
 
-    public String toolTipText(int i) {
+    public String toolTipText(Cell cell) {
+        int index = cell.getIndex();
         StringBuffer sb = new StringBuffer();
-        sb.append("<html>" + "Cell № " + i + "<br>" + "<br>");
-        if (island.getCell(i).getAnimals().size() == 0) {
+        sb.append("<html>" + "Cell № " + index + "<br>" + "<br>");
+        if (cell.getAnimals().size() == 0) {
             sb.append("Animal numbers - 0" + "<br>");
         } else {
-            for (Animal animal : island.getCell(i).getAnimals()) {
+            for (Animal animal : cell.getAnimals()) {
                 sb.append(animal.getSpecies() + " " + animal.getSpecies().icon + " (" + animal.getUuid() + ") weight " + myFormat.format(animal.getWeight()) + "kg." + "<br>");
             }
         }
-        sb.append("Plants 🌱 - " + island.getCell(i).getPlantCount() + "kg." + "</html>");
+        sb.append("Plants 🌱 - " + myFormat.format(cell.getPlantCount()) + "kg." + "</html>");
         return sb.toString();
     }
 
-    public void setTextCellLabels(int i) {
-        int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
+    public void setTextCellLabels(Cell cell) {
+        int index = cell.getIndex();
+//        int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
+        int predators = cell.typeAnimalCount("Predator");
         String predatorString = String.format("Predators - %d", predators);
-        JLabel predatorCellLabel = islandGui.getCellPanels()[i].getPredatorCellLabel();
+        JLabel predatorCellLabel = islandGui.getCellPanels()[index].getPredatorCellLabel();
         if (predators != 0) {
             predatorCellLabel.setText(predatorString);
         } else {
             predatorCellLabel.setText("      ");
         }
 
-        int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
+//        int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
+        int omnivorous = cell.typeAnimalCount("Omnivorous");
         String omnivorousString = String.format("Omnivorous - %d", omnivorous);
-        JLabel omnivorousCellLabel = islandGui.getCellPanels()[i].getOmnivorousCellLabel();
+        JLabel omnivorousCellLabel = islandGui.getCellPanels()[index].getOmnivorousCellLabel();
         if (omnivorous != 0) {
             omnivorousCellLabel.setText(omnivorousString);
         } else {
             omnivorousCellLabel.setText("      ");
         }
 
-        int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+//        int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+        int herbivores = cell.typeAnimalCount("Herbivore");
         String herbivoreString = String.format("Herbivores - %d", herbivores);
-        JLabel herbivoreCellLabel = islandGui.getCellPanels()[i].getHerbivoreCellLabel();
+        JLabel herbivoreCellLabel = islandGui.getCellPanels()[index].getHerbivoreCellLabel();
         if (herbivores != 0) {
             herbivoreCellLabel.setText(herbivoreString);
         } else {
@@ -169,9 +175,9 @@ public class CellView {
         }
 
         StringBuffer sba = new StringBuffer();
-        JLabel animalCellLabel = islandGui.getCellPanels()[i].getAnimalCellLabel();
-        if (island.arrayCells[i].getAnimals().size() != 0) {
-            for (Animal animal : island.arrayCells[i].getAnimals()) {
+        JLabel animalCellLabel = islandGui.getCellPanels()[index].getAnimalCellLabel();
+        if (cell.getAnimals().size() != 0) {
+            for (Animal animal : cell.getAnimals()) {
                 sba.append(animal.getSpecies().icon + "(" + animal.getUuid() + ")");
             }
             animalCellLabel.setBackground(Color.RED);
@@ -180,8 +186,8 @@ public class CellView {
             animalCellLabel.setBackground(null); //Color.LIGHT_GRAY);
             animalCellLabel.setText("      ");
         }
-        JLabel plantCellLabel = islandGui.getCellPanels()[i].getPlantCellLabel();
-        if (island.arrayCells[i].getPlantCount() != 0) {
+        JLabel plantCellLabel = islandGui.getCellPanels()[index].getPlantCellLabel();
+        if (cell.getPlantCount() != 0) {
             plantCellLabel.setBackground(Color.GREEN);
             plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
         } else {
@@ -190,6 +196,6 @@ public class CellView {
             plantCellLabel.setText("      ");
         }
 
-        islandGui.getCellPanels()[i].getCellPanel().setToolTipText(toolTipText(i));
+        islandGui.getCellPanels()[index].getCellPanel().setToolTipText(toolTipText(cell));
     }
 }

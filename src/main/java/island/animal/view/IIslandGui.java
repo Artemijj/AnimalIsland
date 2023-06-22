@@ -3,11 +3,12 @@ package island.animal.view;
 import javax.swing.*;
 
 public interface IIslandGui {
+    JFrame createMainWindow();
     int getWidthIsland();
     int getHeightIsland();
     CellView[] getCellPanels();
     JLabel getStatLabelArray(int i);
-    void mainWindow();
+//    JFrame mainWindow();
     void loadGridPanel();
 //    void setTextCellLabels(int i);
 //    void loadStatPanel();

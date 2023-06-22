@@ -99,4 +99,8 @@ public class Cell {
     public synchronized int animalsCount(Species species) {
         return (int) getAnimals().stream().filter((x) -> x.getSpecies() == species).count();
     }
+
+    public synchronized int typeAnimalCount(String animalParentType) {
+        return (int) getAnimals().stream().filter((x) -> x.getSpecies().parentType.equals(animalParentType)).count();
+    }
 }

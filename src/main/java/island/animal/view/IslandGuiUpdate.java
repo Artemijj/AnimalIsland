@@ -44,7 +44,7 @@ public class IslandGuiUpdate {
         int i = 0;
         for (int j = 0; j < islandGui.getHeightIsland(); j++) {
             for (int k = 0; k < islandGui.getWidthIsland(); k++) {
-                cellView.setTextCellLabels(i);
+                cellView.setTextCellLabels(island.arrayCells[i]);
                 i++;
             }
         }
