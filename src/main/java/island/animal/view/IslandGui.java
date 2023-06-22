@@ -5,6 +5,7 @@ import island.animal.controller.StartButtonPress;
 import island.animal.controller.StopButtonPress;
 import island.animal.model.*;
 
+import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -71,16 +72,19 @@ public class IslandGui implements IIslandGui{
         islandGui.mainWindow();
     }
 
+    public void startButton(ActionEvent actionEvent) {
+        island.start();
+        loadGridPanel();
+        islandGuiUpdate.panelIslandGuiUpdateStart();
+    }
+
 
     private JToolBar createToolBar() {
         JToolBar tb = new JToolBar();
         tb.setFloatable(false);
         tb.setAlignmentX(LEFT_ALIGNMENT);
-
-//        tb.setBackground(Color.GREEN);  //?????????????????????????????
-
         JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonPress(this, island, islandGuiUpdate));
+        start.addActionListener(x -> startButton(x));
         JButton stop = new JButton("Stop");
         stop.addActionListener(new StopButtonPress(this, island, islandGuiUpdate));
 
@@ -208,129 +212,7 @@ public class IslandGui implements IIslandGui{
         window.revalidate();
     }
 
-//    public void loadStatPanel() {
-//        int allPredators = 0;
-//        int allOmnivorous = 0;
-//        int allHerbivores = 0;
-//        double allPlants = 0;
-//        for (Cell cell : island.arrayCells) {
-//            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
-//            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
-//            allPlants += cell.getPlantCount();
-//        }
-//        String predatorString = String.format("Predators - %d", allPredators);
-//        predatorStatLabel.setText(predatorString);
-//        String omnivorousString = String.format("Omnivorous - %d", allOmnivorous);
-//        omnivorousStatLabel.setText(omnivorousString);
-//        String herbivoreString = String.format("Herbivores - %d", allHerbivores);
-//        herbivoreStatLabel.setText(herbivoreString);
-//        String plantString = String.format("Plants - %S", myFormat.format(allPlants));
-//        plantStatLabel.setText(plantString);
-//        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
-//        window.repaint();
-//        window.revalidate();
-//    }
 
-//    public void gridPanelUpdate() {
-//        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
-//        window.repaint();
-//        window.revalidate();
-//    }
-
-//    public void panelUpdateStart() {
-//        ses = Executors.newScheduledThreadPool(5);
-//        ses.scheduleWithFixedDelay(() -> gridPanelUpdateStart(), 1, 5, TimeUnit.SECONDS);
-//        ses.scheduleWithFixedDelay(() -> loadStatPanel(), 1, 5, TimeUnit.SECONDS);
-//        ses.scheduleWithFixedDelay(() -> {
-//            if (island.getAnimalCount() == 0) {
-//                System.out.println("Count of animal is " + island.getAnimalCount());
-//                island.stop();
-//                alertDialog("<html>" + "This is the END." + "<br>" + "<br>" + "All animals is dead..." + "</html>");
-//            }
-//        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
-//    }
-//
-//    public void panelUpdateStop() {
-//        ses.shutdown();
-//    }
-
-//    private String toolTipText(int i) {
-//        StringBuffer sb = new StringBuffer();
-//        sb.append("<html>" + "Cell № " + i + "<br>" + "<br>");
-//        if (island.getCell(i).getAnimals().size() == 0) {
-//            sb.append("Animal numbers - 0" + "<br>");
-//        } else {
-//            for (Animal animal : island.getCell(i).getAnimals()) {
-//                sb.append(animal.getSpecies() + " " + animal.getSpecies().icon + " (" + animal.getUuid() + ") weight " + myFormat.format(animal.getWeight()) + "kg." + "<br>");
-//            }
-//        }
-//        sb.append("Plants 🌱 - " + island.getCell(i).getPlantCount() + "kg." + "</html>");
-//        return sb.toString();
-//    }
-//
-//    public void setTextCellLabels(int i) {
-//        int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-//        String predatorString = String.format("Predators - %d", predators);
-//        JLabel predatorCellLabel = cellPanels[i].getPredatorCellLabel();
-//        if (predators != 0) {
-//            predatorCellLabel.setText(predatorString);
-//        } else {
-//            predatorCellLabel.setText("      ");
-//        }
-//
-//        int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
-//        String omnivorousString = String.format("Omnivorous - %d", omnivorous);
-//        JLabel omnivorousCellLabel = cellPanels[i].getOmnivorousCellLabel();
-//        if (omnivorous != 0) {
-//            omnivorousCellLabel.setText(omnivorousString);
-//        } else {
-//            omnivorousCellLabel.setText("      ");
-//        }
-//
-//        int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
-//        String herbivoreString = String.format("Herbivores - %d", herbivores);
-//        JLabel herbivoreCellLabel = cellPanels[i].getHerbivoreCellLabel();
-//        if (herbivores != 0) {
-//            herbivoreCellLabel.setText(herbivoreString);
-//        } else {
-//            herbivoreCellLabel.setText("      ");
-//        }
-//
-//        StringBuffer sba = new StringBuffer();
-//        JLabel animalCellLabel = cellPanels[i].getAnimalCellLabel();
-//        if (island.arrayCells[i].getAnimals().size() != 0) {
-//            for (Animal animal : island.arrayCells[i].getAnimals()) {
-//                sba.append(animal.getSpecies().icon + "(" + animal.getUuid() + ")");
-//            }
-//            animalCellLabel.setBackground(Color.RED);
-//            animalCellLabel.setText(sba.toString());
-//        } else {
-//            animalCellLabel.setBackground(null); //Color.LIGHT_GRAY);
-//            animalCellLabel.setText("      ");
-//        }
-//        JLabel plantCellLabel = cellPanels[i].getPlantCellLabel();
-//        if (island.arrayCells[i].getPlantCount() != 0) {
-//            plantCellLabel.setBackground(Color.GREEN);
-//            plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
-//        } else {
-//            plantCellLabel.setBackground(null); //Color.LIGHT_GRAY);
-//            plantCellLabel.removeAll();
-//            plantCellLabel.setText("      ");
-//        }
-//
-//        cellPanels[i].getCellPanel().setToolTipText(toolTipText(i));
-//    }
-
-//    private void gridPanelUpdateStart() {
-//        int i = 0;
-//        for (int j = 0; j < heightIsland; j++) {
-//            for (int k = 0; k < widthIsland; k++) {
-//                setTextCellLabels(i);
-//                i++;
-//            }
-//        }
-//    }
 
     public void alertDialog(String alert) {
         JOptionPane.showMessageDialog(window, alert);

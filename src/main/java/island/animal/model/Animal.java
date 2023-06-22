@@ -94,6 +94,11 @@ public abstract class Animal implements IAnimal {
             if (species.equals(animal.species) && isSex() != animal.isSex()) {
                 Animal newAnimal = species.create();
                 island.arrayCells[position].addToCellAnimalList(newAnimal);
+                Integer cnt = island.arrayCells[position].animalsCount(getSpecies());
+                if (cnt >= island.getModelParameter().getMaxQuantity(species)) {
+                    break;
+                }
+
                 Logger.printLog(newAnimal.getDescription() + " was born, at field " + position);
                 Logger.printLog(newAnimal.getDescription() + " parents: " + getDescription() + " & " + animal.getDescription());
             }

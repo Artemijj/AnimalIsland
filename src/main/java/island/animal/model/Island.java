@@ -94,7 +94,7 @@ public class Island {
 //        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
 
-    ExecutorService executorService = Executors.newCachedThreadPool();
+    ExecutorService executorService = Executors.newFixedThreadPool(16);
     public void startMove() {
         try {
         for (int j = 0; j < arrayCells.length; j++) {
@@ -140,7 +140,7 @@ public class Island {
     public void plantedPlant() {
         int i = RandomValue.getIntRandom(arrayCells.length);
         if (arrayCells[i].getPlantCount() < 200) {
-            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.5);
+            arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.01);
         }
     }
 
