@@ -148,6 +148,7 @@ public class IslandGui implements IIslandGui{
         statLabelArray[3] = plantStatLabel = new JLabel("Plants - 0");
 //        statLabelArray[3] = plantStatLabel;
 
+
         statPanel.add(statLabelArray[0]);
         statPanel.add(statLabelArray[1]);
         statPanel.add(statLabelArray[2]);
