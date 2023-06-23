@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) {
-        ModelParameter modelParameter = new ModelParameter("parameter1.txt");
+        ModelParameter modelParameter = new ModelParameter(null);
         Island island = new Island(modelParameter);
 //        modelParameter.readParameters("/home/artemij/IdeaProjects/Island/src/main/java/parameter1.txt");
         int islandSize = modelParameter.getWidthIsland() * modelParameter.getHeightIsland();

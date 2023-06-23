@@ -1,5 +1,6 @@
 package island.animal.view;
 
+import island.animal.controller.ButtonPressActions;
 import island.animal.controller.SelectButtonPress;
 import island.animal.controller.StartButtonPress;
 import island.animal.controller.StopButtonPress;
@@ -17,12 +18,14 @@ public class IslandGui implements IIslandGui{
 //    private ModelParameter modelParameter; // = new ModelParameter(null);
     private Island island; // = new Island(modelParameter);
     private IslandGuiUpdate islandGuiUpdate;
+    private ButtonPressActions buttonPressActions;
     private int widthIsland;
     private int heightIsland;
 
     public IslandGui(Island island) {
         this.island = island;
         islandGuiUpdate = new IslandGuiUpdate(island, this);
+        buttonPressActions = new ButtonPressActions(island, this, islandGuiUpdate);
         widthIsland = island.getModelParameter().getWidthIsland();
         heightIsland = island.getModelParameter().getHeightIsland();
     }
@@ -78,14 +81,14 @@ public class IslandGui implements IIslandGui{
 //        tb.setBackground(Color.GREEN);  //?????????????????????????????
 
         JButton start = new JButton("Start");
-        start.addActionListener(new StartButtonPress(this, island, islandGuiUpdate));
+        start.addActionListener(x -> buttonPressActions.startButton(x));
         JButton stop = new JButton("Stop");
-        stop.addActionListener(new StopButtonPress(this, island, islandGuiUpdate));
+        stop.addActionListener(x -> buttonPressActions.stopButton(x));
 
         fileSelectLabel.setPreferredSize(new Dimension(300, fileSelectLabel.getPreferredSize().height));
 
         JButton fileSelectButton = new JButton("...");
-        fileSelectButton.addActionListener(new SelectButtonPress(this, island));
+        fileSelectButton.addActionListener(x -> buttonPressActions.selectButton(x));
 
         tb.add(start);
         tb.add(stop);

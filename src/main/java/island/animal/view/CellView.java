@@ -128,6 +128,7 @@ public class CellView {
     }
 
     public String toolTipText(Cell cell) {
+        int cnt = 0;
         int index = cell.getIndex();
         StringBuffer sb = new StringBuffer();
         sb.append("<html>" + "Cell № " + index + "<br>" + "<br>");
@@ -135,6 +136,10 @@ public class CellView {
             sb.append("Animal numbers - 0" + "<br>");
         } else {
             for (Animal animal : cell.getAnimals()) {
+                cnt++;
+                if (cnt > 10) {
+                    break;
+                }
                 sb.append(animal.getSpecies() + " " + animal.getSpecies().icon + " (" + animal.getUuid() + ") weight " + myFormat.format(animal.getWeight()) + "kg." + "<br>");
             }
         }
