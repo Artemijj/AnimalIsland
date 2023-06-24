@@ -1,9 +1,6 @@
 package island.animal.view;
 
 import island.animal.controller.ButtonPressActions;
-import island.animal.controller.SelectButtonPress;
-import island.animal.controller.StartButtonPress;
-import island.animal.controller.StopButtonPress;
 import island.animal.model.*;
 
 import java.text.DecimalFormat;
@@ -78,17 +75,16 @@ public class IslandGui implements IIslandGui{
         tb.setFloatable(false);
         tb.setAlignmentX(LEFT_ALIGNMENT);
 
-//        tb.setBackground(Color.GREEN);  //?????????????????????????????
 
         JButton start = new JButton("Start");
-        start.addActionListener(x -> buttonPressActions.startButton(x));
+        start.addActionListener(x -> buttonPressActions.startButton());
         JButton stop = new JButton("Stop");
-        stop.addActionListener(x -> buttonPressActions.stopButton(x));
+        stop.addActionListener(x -> buttonPressActions.stopButton());
 
         fileSelectLabel.setPreferredSize(new Dimension(300, fileSelectLabel.getPreferredSize().height));
 
         JButton fileSelectButton = new JButton("...");
-        fileSelectButton.addActionListener(x -> buttonPressActions.selectButton(x));
+        fileSelectButton.addActionListener(x -> buttonPressActions.selectButton());
 
         tb.add(start);
         tb.add(stop);

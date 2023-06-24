@@ -18,18 +18,18 @@ public class ButtonPressActions {
         this.islandGui = islandGui;
         this.islandGuiUpdate = islandGuiUpdate;
     }
-    public void startButton(ActionEvent actionEvent) {
+    public void startButton() {
         island.start();
         islandGui.loadGridPanel();
         islandGuiUpdate.panelIslandGuiUpdateStart();
     }
 
-    public void stopButton(ActionEvent actionEvent) {
+    public void stopButton() {
         island.stop();
         islandGuiUpdate.panelUpdateStop();
     }
 
-    public void selectButton(ActionEvent actionEvent) {
+    public void selectButton() {
         JFileChooser fileOpen = new JFileChooser();
         int ret = fileOpen.showDialog(null, "Open file");
                 if (ret == JFileChooser.APPROVE_OPTION) {
