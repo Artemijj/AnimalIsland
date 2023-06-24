@@ -138,6 +138,7 @@ public class CellView {
             for (Animal animal : cell.getAnimals()) {
                 cnt++;
                 if (cnt > 10) {
+                    sb.append("etc..." + "<br>");
                     break;
                 }
                 sb.append(animal.getSpecies() + " " + animal.getSpecies().icon + " (" + animal.getUuid() + ") weight " + myFormat.format(animal.getWeight()) + "kg." + "<br>");
