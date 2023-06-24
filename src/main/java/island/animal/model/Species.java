@@ -169,7 +169,6 @@ public enum Species {
 
     Species(double weight, int speed, double feed, String icon, String parentType) {
         this.weight = weight;
-//        this.quantity = quantity;
         this.speed = speed;
         this.feed = feed;
         this.icon = icon;

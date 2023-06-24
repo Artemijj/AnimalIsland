@@ -4,7 +4,6 @@ import island.animal.model.Island;
 import island.animal.view.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.io.File;
 
 public class ButtonPressActions {

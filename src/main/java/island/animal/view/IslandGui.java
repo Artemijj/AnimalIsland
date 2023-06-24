@@ -12,8 +12,7 @@ import java.awt.*;
 import static java.awt.Component.LEFT_ALIGNMENT;
 
 public class IslandGui implements IIslandGui{
-//    private ModelParameter modelParameter; // = new ModelParameter(null);
-    private Island island; // = new Island(modelParameter);
+    private Island island;
     private IslandGuiUpdate islandGuiUpdate;
     private ButtonPressActions buttonPressActions;
     private int widthIsland;
@@ -34,16 +33,12 @@ public class IslandGui implements IIslandGui{
     private JPanel statPanel;
     private JPanel bottomPanel;
     private CellView[] cellPanels;
-//    private int widthIsland = island.getModelParameter().getWidthIsland();
-//    private int heightIsland = island.getModelParameter().getHeightIsland();
     private JLabel predatorStatLabel;
     private JLabel omnivorousStatLabel;
     private JLabel herbivoreStatLabel;
     private JLabel plantStatLabel;
     private JLabel[] statLabelArray = new JLabel[4];
     private DecimalFormat myFormat = new DecimalFormat("#.##");
-//    private ScheduledExecutorService ses;
-
 
     public int getWidthIsland() {
         return widthIsland;
@@ -65,7 +60,6 @@ public class IslandGui implements IIslandGui{
         ModelParameter modelParameter = new ModelParameter(null);
         Island island = new Island(modelParameter);
         IIslandGui islandGui = new IslandGui(island);
-//        islandGuiUpdate = new IslandGuiUpdate(island, this);
         islandGui.createMainWindow();
     }
 
@@ -127,14 +121,9 @@ public class IslandGui implements IIslandGui{
         statPanel.setAlignmentX(LEFT_ALIGNMENT);
 
         statLabelArray[0] = predatorStatLabel = new JLabel("Predators - 0");
-//        statLabelArray[0] = plantStatLabel;
         statLabelArray[1] = omnivorousStatLabel = new JLabel("Omnivorous - 0");
-//        statLabelArray[1] = omnivorousStatLabel;
         statLabelArray[2] = herbivoreStatLabel = new JLabel("Herbivores - 0");
-//        statLabelArray[2] = herbivoreStatLabel;
         statLabelArray[3] = plantStatLabel = new JLabel("Plants - 0");
-//        statLabelArray[3] = plantStatLabel;
-
 
         statPanel.add(statLabelArray[0]);
         statPanel.add(statLabelArray[1]);

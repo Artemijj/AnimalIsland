@@ -1,7 +1,6 @@
 package island.animal.view;
 
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import island.animal.model.*;
 
@@ -9,7 +8,6 @@ import java.util.concurrent.ScheduledExecutorService;
 
 public class IslandGuiUpdate {
 
-//    private static ModelParameter modelParameter = new ModelParameter(null);
     private Island island;
     private IIslandGui islandGui;
     private CellView cellView;
@@ -25,13 +23,10 @@ public class IslandGuiUpdate {
     private ScheduledExecutorService ses;
 
     public void panelIslandGuiUpdateStart() {
-        ses = Executors.newScheduledThreadPool(5, new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                Thread t = Executors.defaultThreadFactory().newThread(r);
-                t.setPriority(Thread.MAX_PRIORITY);
-                return t;
-            }
+        ses = Executors.newScheduledThreadPool(5, r -> {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setPriority(Thread.MAX_PRIORITY);
+            return t;
         });
         ses.scheduleWithFixedDelay(() -> gridPanelIslandGuiUpdateStart(), 1, 5, TimeUnit.SECONDS);
         ses.scheduleWithFixedDelay(() -> statView.loadStatPanel(), 1, 5, TimeUnit.SECONDS);

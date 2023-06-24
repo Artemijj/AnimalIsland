@@ -11,7 +11,7 @@ public class Logger {
     public synchronized static void printLog(String txt) {
         if (logFile == null) {
             try {
-                logFile = new FileWriter("log.txt"); //, true);
+                logFile = new FileWriter("log.txt");
                 log = new PrintWriter(logFile);
             } catch (IOException ex) {
                 ex.printStackTrace();

@@ -1,9 +1,7 @@
 package island.animal.view;
 
-import island.animal.model.Cell;
 import island.animal.model.Island;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 public class Statistics implements Runnable{
     private Island island;
@@ -60,7 +58,7 @@ public class Statistics implements Runnable{
             while (i < k) {
                 double plantCount = island.arrayCells[i].getPlantCount();
                 if (plantCount == 0) {
-                    System.out.print("|              "); //, myFormat.format(plantCount));
+                    System.out.print("|              ");
                 } else {
                     System.out.printf("|🌱         %2s ", myFormat.format(plantCount));
                 }
@@ -74,13 +72,7 @@ public class Statistics implements Runnable{
             }
             System.out.println("+");
         }
-//        System.out.println();
-//        for (Cell cell : island.arrayCells) {
-//            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
-//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
-//            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
-//            allPlants += cell.getPlantCount();
-//        }
+
         System.out.println("All predators - " + allPredators);
         System.out.println("All omnivorous - " + allOmnivorous);
         System.out.println("All herbivores - " + allHerbivores);

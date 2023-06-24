@@ -5,18 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModelParameter {
-//    private int widthIsland = 20;
-//    private int heightIsland = 10;
-//
-//    private double plantDensity = 1;
-//    private int durationOfTact = 1000;
-//    private int numberWolf = 10;
-//    private int numberFox = 10;
-//    private int numberSheep = 10;
-//
-//    private int quantityWolf = 40;
-//    private int quantityFox = 40;
-//    private int quantitySheep = 150;
     private boolean wrongFile = false;
 
     private Map<String, String> parametersMap = new HashMap<>();
@@ -27,8 +15,9 @@ public class ModelParameter {
     public ModelParameter(String fileName) {
         if (fileName != null) {
             readParameters(fileName);
+        } else {
+            addParameters();
         }
-        addParameters();
     }
 
     private void addParameters() {
@@ -83,38 +72,6 @@ public class ModelParameter {
         return getIntParameter("durationOfTact", 1000);
     }
 
-    public boolean isWrongFile() {
-        return wrongFile;
-    }
-
-    public void setWrongFile(boolean wrongFile) {
-        this.wrongFile = wrongFile;
-    }
-
-    //    public int getNumberWolf() {
-//        return numberWolf;
-//    }
-//
-//    public int getNumberFox() {
-//        return numberFox;
-//    }
-//
-//    public int getNumberSheep() {
-//        return numberSheep;
-//    }
-//
-//    public int getWolfMaxQuantity() {
-//        return wolfMaxQuantity;
-//    }
-//
-//    public int getFoxMaxQuantity() {
-//        return foxMaxQuantity;
-//    }
-//
-//    public int getSeepMaxQuantity() {
-//        return seepMaxQuantity;
-//    }
-
     public Map<Species, Integer> getAnimalMap() {
         return animalMap;
     }
@@ -126,7 +83,6 @@ public class ModelParameter {
     public boolean readParameters(String fileName) {
         File file = new File(fileName);
         BufferedReader bufferedReader;
-//        parametersMap = new HashMap<>();
 
         try {
             bufferedReader = new BufferedReader(new FileReader(file));
@@ -134,39 +90,12 @@ public class ModelParameter {
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.startsWith("#")) {
                     String[] tempArr = line.split("=");
-//                    System.out.println(tempArr.length);
-//                    System.out.println("0" + tempArr[0]);
-//                    System.out.println("1" + tempArr[1]);
                     parametersMap.put(tempArr[0].strip(), tempArr[1].strip());
                 }
             }
 
             bufferedReader.close();
-//        } catch (IOException ex) {
-////            setWrongFile(true);
-////            throw new RuntimeException(ex);
-//        }
 
-
-//        try {
-//            widthIsland = Integer.parseInt(parametersMap.get("widthIsland"));
-//            heightIsland = Integer.parseInt(parametersMap.get("heightIsland"));
-//            plantDensity = Double.parseDouble(parametersMap.get("plantDensity"));
-//            durationOfTact = Integer.parseInt(parametersMap.get("durationOfTact"));
-//
-//            numberWolf = Integer.parseInt(parametersMap.get("numberWolf"));
-//            numberFox = Integer.parseInt(parametersMap.get("numberFox"));
-//            numberSheep = Integer.parseInt(parametersMap.get("numberSheep"));
-//
-//            quantityWolf = Integer.parseInt(parametersMap.get("quantityWolf"));
-//            quantityFox = Integer.parseInt(parametersMap.get("quantityFox"));
-//            quantitySheep = Integer.parseInt(parametersMap.get("quantitySheep"));
-//        } catch (NumberFormatException ex) {
-//            throw new RuntimeException(ex);
-//        }
-
-
-//        try {
             for (Map.Entry<Species, Integer> entry : animalMap.entrySet()) {
                 String key = "quantity" + entry.getKey();
                 Integer value = Integer.parseInt(parametersMap.get(key));
@@ -179,13 +108,9 @@ public class ModelParameter {
             }
             return true;
         } catch (IOException | NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-//            setWrongFile(true);
-//            throw new RuntimeException(ex);
             return false;
         }
     }
-
-
 
     private int getIntParameter(String name, int defaultValue) {
         if (parametersMap.get(name) != null) {
@@ -202,5 +127,4 @@ public class ModelParameter {
             return defaultValue;
         }
     }
-
 }

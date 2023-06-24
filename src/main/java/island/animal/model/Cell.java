@@ -9,13 +9,11 @@ public class Cell {
     private int index;
     private int width;
     private int height;
-//    private Island island;
 
     public Cell(int index, int width, int height) {
         this.index = index;
         this.width = width;
         this.height = height;
-//        this.island = island;
         createList();
     }
 
@@ -54,36 +52,6 @@ public class Cell {
         return -1;
     }
 
-    public int next(int i) {
-        if (i ==0) {
-            int[] arr = {i + 1, i + width};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == width - 1) {
-            int[] arr = {i - 1, i + width};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == width * height - width) {
-            int[] arr = {i + 1, i - width};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i == width * height - 1) {
-            int[] arr = {i - 1, i - width};
-            return arr[RandomValue.getIntRandom(2)];
-        } else if (i > 0 && i < width - 1) {
-            int[] arr = {i + 1, i - 1, i + width};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > 0 && i < width * height - width && i % width == 0) {
-            int[] arr = {i + 1, i + width, i - width};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > width * height - width && i < width * height) {
-            int[] arr = {i + 1, i - 1, i - width};
-            return arr[RandomValue.getIntRandom(3)];
-        } else if (i > width - 1 && (i + 1) % width == 0 && i < width * height - 1) {
-            int[] arr = {i - 1, i + width, i - width};
-            return arr[RandomValue.getIntRandom(3)];
-        } else {
-            int[] arr = {i + 1, i - 1, i + width, i - width};
-            return arr[RandomValue.getIntRandom(4)];
-        }
-    }
     public synchronized void addToCellAnimalList(Animal animal) {
         animals.add(animal);
     }

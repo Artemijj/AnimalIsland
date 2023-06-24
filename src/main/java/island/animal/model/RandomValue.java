@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class RandomValue {
-//    private static Random random = new Random();
     private static ThreadLocalRandom random = ThreadLocalRandom.current();
     public static boolean getBoolRandom() {
         return random.nextBoolean();

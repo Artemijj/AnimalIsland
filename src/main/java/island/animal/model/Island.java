@@ -15,22 +15,6 @@ public class Island {
 
     public Island(ModelParameter modelParameter) {
         this.modelParameter = modelParameter;
-//        arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
-//        for (int i = 0; i < arrayCells.length; i++) {
-//            arrayCells[i] = new Cell(i, modelParameter.getWidthIsland(), modelParameter.getHeightIsland());
-//        }
-//        for (Map.Entry<Species, Integer> entry : modelParameter.getAnimalMap().entrySet()) {
-//            for (int j = 0; j < entry.getValue(); j++) {
-//                int position = RandomValue.getIntRandom(arrayCells.length);
-//                Animal animal = entry.getKey().create();
-//                arrayCells[position].addToCellAnimalList(animal);
-//                Logger.printLog(animal.getDescription() + " create in position:" + position);
-//            }
-//        }
-//
-//        for (int j = 0; j < arrayCells.length * modelParameter.getPlantDensity(); j++) {
-//            plantedPlant();
-//        }
     }
 
     public int getWidth() {
@@ -39,10 +23,6 @@ public class Island {
 
     public int getHeight() {
         return modelParameter.getHeightIsland();
-    }
-
-    public Cell getArrayCell(int i) {
-        return arrayCells[i];
     }
 
     public int getAnimalCount() {
@@ -57,11 +37,7 @@ public class Island {
         return modelParameter;
     }
 
-    public Cell getCell(int i) {
-        return arrayCells[i];
-    }
-
-    ScheduledExecutorService ses; // = Executors.newScheduledThreadPool(5);
+    ScheduledExecutorService ses;
 
     public void start() {
         arrayCells = new Cell[modelParameter.getWidthIsland() * modelParameter.getHeightIsland()];
@@ -86,12 +62,6 @@ public class Island {
         ses.scheduleWithFixedDelay(() -> startEat(), 1, modelParameter.getDurationOfTact() * 2, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> startReproduction(), 1, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
         ses.scheduleWithFixedDelay(() -> plantedPlant(), 5, modelParameter.getDurationOfTact() * 10, TimeUnit.MICROSECONDS);
-//        ses.scheduleWithFixedDelay(() -> {
-//            if (getAnimalCount() == 0) {
-//                System.out.println("Count of animal is " + getAnimalCount());
-//                System.exit(0);
-//            }
-//        }, 1, modelParameter.getDurationOfTact() * 10, TimeUnit.MILLISECONDS);
     }
 
     ExecutorService executorService = Executors.newFixedThreadPool(16);
@@ -141,14 +111,6 @@ public class Island {
         int i = RandomValue.getIntRandom(arrayCells.length);
         if (arrayCells[i].getPlantCount() < 200) {
             arrayCells[RandomValue.getIntRandom(arrayCells.length)].addPlant(0.01);
-        }
-    }
-
-    public void isAnimalZero() {
-        System.out.println("Count of animal is " + getAnimalCount());
-        if (getAnimalCount() == 0) {
-            System.out.println("Count of animal is " + getAnimalCount());
-            System.exit(0);
         }
     }
 

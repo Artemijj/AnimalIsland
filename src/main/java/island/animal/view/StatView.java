@@ -23,11 +23,8 @@ public class StatView {
         int allHerbivores = 0;
         double allPlants = 0;
         for (Cell cell : island.arrayCells) {
-//            allPredators += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
             allPredators += cell.typeAnimalCount("Predator");
-//            allOmnivorous += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
             allOmnivorous += cell.typeAnimalCount("Omnivorous");
-//            allHerbivores += cell.getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
             allHerbivores += cell.typeAnimalCount("Herbivore");
             allPlants += cell.getPlantCount();
         }
@@ -39,8 +36,5 @@ public class StatView {
         islandGui.getStatLabelArray(2).setText(herbivoreString);
         String plantString = String.format("Plants - %S", myFormat.format(allPlants));
         islandGui.getStatLabelArray(3).setText(plantString);
-//        gridPanel.setPreferredSize(new Dimension(islandGui.getWidthIsland() * 100, islandGui.getHeightIsland() * 77));
-//        window.repaint();
-//        window.revalidate();
     }
 }

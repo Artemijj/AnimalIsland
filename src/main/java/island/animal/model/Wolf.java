@@ -10,7 +10,6 @@ public class Wolf extends Predator{
 
     @Override
     public void eat(Island island, int position) {
-//        super.eat(island, position);
         List<Animal> list = new ArrayList<>(island.arrayCells[position].getAnimals());
         for (Animal animal : list) {
             if (species.canEat.containsKey(animal.getSpecies())) {
