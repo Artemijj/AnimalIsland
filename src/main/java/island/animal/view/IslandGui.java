@@ -206,7 +206,7 @@ public class IslandGui implements IIslandGui{
                 i++;
             }
         }
-//        gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
+
         gridPanel.setPreferredSize(new Dimension(widthIsland * 100, heightIsland * 77));
         window.repaint();
         window.revalidate();
