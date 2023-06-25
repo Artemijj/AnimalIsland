@@ -3,8 +3,6 @@ package island.animal.view;
 import island.animal.controller.ButtonPressActions;
 import island.animal.model.*;
 
-import java.text.DecimalFormat;
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -27,18 +25,10 @@ public class IslandGui implements IIslandGui{
     }
 
     private JFrame window;
-    private JPanel mainPanel;
     private JLabel fileSelectLabel = new JLabel("Select preference file.");
     private JPanel gridPanel;
-    private JPanel statPanel;
-    private JPanel bottomPanel;
     private CellView[] cellPanels;
-    private JLabel predatorStatLabel;
-    private JLabel omnivorousStatLabel;
-    private JLabel herbivoreStatLabel;
-    private JLabel plantStatLabel;
     private JLabel[] statLabelArray = new JLabel[4];
-    private DecimalFormat myFormat = new DecimalFormat("#.##");
 
     public int getWidthIsland() {
         return widthIsland;
@@ -116,14 +106,14 @@ public class IslandGui implements IIslandGui{
     }
 
     private JPanel createStatPanel() {
-        statPanel = new JPanel();
+        JPanel statPanel = new JPanel();
         statPanel.setLayout(new BoxLayout(statPanel, BoxLayout.Y_AXIS));
         statPanel.setAlignmentX(LEFT_ALIGNMENT);
 
-        statLabelArray[0] = predatorStatLabel = new JLabel("Predators - 0");
-        statLabelArray[1] = omnivorousStatLabel = new JLabel("Omnivorous - 0");
-        statLabelArray[2] = herbivoreStatLabel = new JLabel("Herbivores - 0");
-        statLabelArray[3] = plantStatLabel = new JLabel("Plants - 0");
+        statLabelArray[0] = new JLabel("Predators - 0");
+        statLabelArray[1] = new JLabel("Omnivorous - 0");
+        statLabelArray[2] = new JLabel("Herbivores - 0");
+        statLabelArray[3] = new JLabel("Plants - 0");
 
         statPanel.add(statLabelArray[0]);
         statPanel.add(statLabelArray[1]);
@@ -134,7 +124,7 @@ public class IslandGui implements IIslandGui{
     }
 
     private JPanel createBottomPanel() {
-        bottomPanel = new JPanel();
+        JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
         bottomPanel.setAlignmentX(LEFT_ALIGNMENT);
         bottomPanel.add(createStatPanel());
@@ -147,7 +137,7 @@ public class IslandGui implements IIslandGui{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
 
-        mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setAlignmentX(LEFT_ALIGNMENT);
 
