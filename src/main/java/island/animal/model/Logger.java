@@ -39,8 +39,8 @@ public class Logger {
         }
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
-        System.out.println(new Date());
         exception.printStackTrace(pw);
+        error.println(new Date());
         error.println(sw);
         error.println();
         error.flush();
