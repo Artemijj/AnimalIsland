@@ -31,7 +31,7 @@ public class Statistics implements Runnable{
         System.out.println();
         for (int j = 0; j < island.getHeight(); j++) {
             while (i < k) {
-                int predators = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Predator")).count();
+                int predators = island.arrayCells[i].typeAnimalCount("Predator");
                 System.out.printf("|Predators  %2d ", predators);
                 allPredators += predators;
                 i++;
@@ -39,7 +39,7 @@ public class Statistics implements Runnable{
             i -= island.getWidth();
             System.out.println("|");
             while (i < k) {
-                int omnivorous = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Omnivorous")).count();
+                int omnivorous = island.arrayCells[i].typeAnimalCount("Omnivorous");
                 System.out.printf("|Omnivorous %2d ", omnivorous);
                 allOmnivorous += omnivorous;
                 i++;
@@ -47,7 +47,7 @@ public class Statistics implements Runnable{
             i -= island.getWidth();
             System.out.println("|");
             while (i < k) {
-                int herbivores = (int)island.arrayCells[i].getAnimals().stream().filter(x -> x.getSpecies().parentType.equals("Herbivore")).count();
+                int herbivores = island.arrayCells[i].typeAnimalCount("Herbivore");
                 System.out.printf("|Herbivores %2d ", herbivores);
                 allHerbivores += herbivores;
                 i++;

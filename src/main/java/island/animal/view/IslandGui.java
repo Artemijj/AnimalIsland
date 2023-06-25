@@ -174,7 +174,7 @@ public class IslandGui implements IIslandGui{
 
         for (int j = 0; j < heightIsland; j++) {
             for (int k = 0; k < widthIsland; k++) {
-                CellView cellPanelClass = new CellView(island, this);
+                CellView cellPanelClass = new CellView();
                 cellPanels[i] = cellPanelClass;
                 JPanel cellPanel = cellPanelClass.createCell();
 

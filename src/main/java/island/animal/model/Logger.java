@@ -1,20 +1,23 @@
 package island.animal.model;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Date;
 
 public class Logger {
     private static PrintWriter log;
     private static FileWriter logFile;
+    private static PrintWriter error;
+    private static FileWriter errorFile;
+    private static PrintStream ps;
+
     public synchronized static void printLog(String txt) {
         if (logFile == null) {
             try {
                 logFile = new FileWriter("log.txt");
                 log = new PrintWriter(logFile);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                printError(ex);
+//                ex.printStackTrace();
                 return;
             }
         }
@@ -22,5 +25,24 @@ public class Logger {
         System.out.println(message);
         log.println(message);
         log.flush();
+    }
+
+    public synchronized static void printError(Exception exception) {
+        if (errorFile == null) {
+            try {
+                errorFile = new FileWriter("error.txt");
+                error = new PrintWriter(errorFile);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return;
+            }
+        }
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        System.out.println(new Date());
+        exception.printStackTrace(pw);
+        error.println(sw);
+        error.println();
+        error.flush();
     }
 }

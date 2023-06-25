@@ -9,8 +9,6 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 public class CellView {
-    private Island island;
-    private IIslandGui islandGui;
     private JPanel cellPanel;
     private JLabel predatorCellLabel;
     private JLabel omnivorousCellLabel;
@@ -18,11 +16,6 @@ public class CellView {
     private JLabel animalCellLabel;
     private JLabel plantCellLabel;
     private DecimalFormat myFormat = new DecimalFormat("#.##");
-
-    public CellView(Island island, IIslandGui islandGui) {
-        this.island = island;
-        this.islandGui = islandGui;
-    }
 
     public JPanel getCellPanel() {
         return cellPanel;
@@ -96,10 +89,9 @@ public class CellView {
     }
 
     public void setTextCellLabels(Cell cell) {
-        int index = cell.getIndex();
         int predators = cell.typeAnimalCount("Predator");
         String predatorString = String.format("Predators - %d", predators);
-        JLabel predatorCellLabel = islandGui.getCellPanels()[index].getPredatorCellLabel();
+        JLabel predatorCellLabel = getPredatorCellLabel();
         if (predators != 0) {
             predatorCellLabel.setText(predatorString);
         } else {
@@ -108,7 +100,7 @@ public class CellView {
 
         int omnivorous = cell.typeAnimalCount("Omnivorous");
         String omnivorousString = String.format("Omnivorous - %d", omnivorous);
-        JLabel omnivorousCellLabel = islandGui.getCellPanels()[index].getOmnivorousCellLabel();
+        JLabel omnivorousCellLabel = getOmnivorousCellLabel();
         if (omnivorous != 0) {
             omnivorousCellLabel.setText(omnivorousString);
         } else {
@@ -117,7 +109,7 @@ public class CellView {
 
         int herbivores = cell.typeAnimalCount("Herbivore");
         String herbivoreString = String.format("Herbivores - %d", herbivores);
-        JLabel herbivoreCellLabel = islandGui.getCellPanels()[index].getHerbivoreCellLabel();
+        JLabel herbivoreCellLabel = getHerbivoreCellLabel();
         if (herbivores != 0) {
             herbivoreCellLabel.setText(herbivoreString);
         } else {
@@ -125,7 +117,7 @@ public class CellView {
         }
 
         StringBuffer sba = new StringBuffer();
-        JLabel animalCellLabel = islandGui.getCellPanels()[index].getAnimalCellLabel();
+        JLabel animalCellLabel = getAnimalCellLabel();
         if (cell.getAnimals().size() != 0) {
             for (Animal animal : cell.getAnimals()) {
                 sba.append(animal.getSpecies().icon + "(" + animal.getUuid() + ")");
@@ -133,10 +125,10 @@ public class CellView {
             animalCellLabel.setBackground(Color.RED);
             animalCellLabel.setText(sba.toString());
         } else {
-            animalCellLabel.setBackground(null); //Color.LIGHT_GRAY);
+            animalCellLabel.setBackground(null);
             animalCellLabel.setText("      ");
         }
-        JLabel plantCellLabel = islandGui.getCellPanels()[index].getPlantCellLabel();
+        JLabel plantCellLabel = getPlantCellLabel();
         if (cell.getPlantCount() != 0) {
             plantCellLabel.setBackground(Color.GREEN);
             plantCellLabel.setText("🌱🌱🌱🌱🌱🌱");
@@ -146,6 +138,6 @@ public class CellView {
             plantCellLabel.setText("      ");
         }
 
-        islandGui.getCellPanels()[index].getCellPanel().setToolTipText(toolTipText(cell));
+        getCellPanel().setToolTipText(toolTipText(cell));
     }
 }

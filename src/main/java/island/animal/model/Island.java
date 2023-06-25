@@ -75,7 +75,8 @@ public class Island {
             }
         }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.printError(ex);
+//          ex.printStackTrace();
         }
     }
 
@@ -89,7 +90,8 @@ public class Island {
             }
         }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.printError(ex);
+//            ex.printStackTrace();
         }
     }
 
@@ -103,7 +105,8 @@ public class Island {
             }
         }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.printError(ex);
+//            ex.printStackTrace();
         }
     }
 
