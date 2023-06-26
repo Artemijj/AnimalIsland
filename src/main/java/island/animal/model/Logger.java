@@ -28,7 +28,7 @@ public class Logger {
     }
 
     public synchronized static void printError(Exception exception) {
-        if (errorFile == null) {
+        if (error == null) {
             try {
                 errorFile = new FileWriter("error.txt");
                 error = new PrintWriter(errorFile);
