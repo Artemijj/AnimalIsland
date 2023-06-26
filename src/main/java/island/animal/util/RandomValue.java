@@ -1,4 +1,4 @@
-package island.animal.model;
+package island.animal.util;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

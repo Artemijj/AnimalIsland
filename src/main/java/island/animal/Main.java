@@ -1,9 +1,9 @@
 package island.animal;
 
-import island.animal.model.Island;
-import island.animal.model.Logger;
-import island.animal.model.ModelParameter;
-import island.animal.view.Statistics;
+import island.animal.model.island.Island;
+import island.animal.util.Logger;
+import island.animal.model.island.ModelParameter;
+import island.animal.view.IslandConsole;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,7 +16,7 @@ public class Main {
 
         try {
             ScheduledExecutorService ses = Executors.newScheduledThreadPool(5);
-            ses.scheduleWithFixedDelay(new Statistics(island), 5, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
+            ses.scheduleWithFixedDelay(new IslandConsole(island), 5, modelParameter.getDurationOfTact() * 5, TimeUnit.MILLISECONDS);
             ses.scheduleWithFixedDelay(() -> {
                 if (island.getAnimalCount() == 0) {
                     System.out.println("Count of animal is " + island.getAnimalCount());

@@ -1,4 +1,4 @@
-package island.animal.model;
+package island.animal.model.animals;
 
 import java.util.EnumMap;
 

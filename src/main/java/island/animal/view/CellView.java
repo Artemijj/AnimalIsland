@@ -1,8 +1,7 @@
 package island.animal.view;
 
-import island.animal.model.Animal;
-import island.animal.model.Cell;
-import island.animal.model.Island;
+import island.animal.model.animals.Animal;
+import island.animal.model.island.Cell;
 
 import javax.swing.*;
 import java.awt.*;

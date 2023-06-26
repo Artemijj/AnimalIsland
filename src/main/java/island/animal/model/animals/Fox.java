@@ -1,4 +1,4 @@
-package island.animal.model;
+package island.animal.model.animals;
 
 public class Fox extends Predator{
     public Fox(Species species) {

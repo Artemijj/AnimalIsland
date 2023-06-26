@@ -1,12 +1,12 @@
 package island.animal.view;
 
-import island.animal.model.Island;
+import island.animal.model.island.Island;
 import java.text.DecimalFormat;
 
-public class Statistics implements Runnable{
+public class IslandConsole implements Runnable{
     private Island island;
 
-    public Statistics(Island island) {
+    public IslandConsole(Island island) {
         this.island = island;
     }
 

@@ -2,7 +2,9 @@ package island.animal.view;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import island.animal.model.*;
+
+import island.animal.model.island.Island;
+import island.animal.util.Logger;
 
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -47,12 +49,16 @@ public class IslandGuiUpdate {
     }
 
     private void gridPanelIslandGuiUpdateStart() {
-        int i = 0;
-        for (int j = 0; j < islandGui.getHeightIsland(); j++) {
-            for (int k = 0; k < islandGui.getWidthIsland(); k++) {
-                islandGui.getCellPanels()[i].setTextCellLabels(island.arrayCells[i]);
-                i++;
+        try {
+            int i = 0;
+            for (int j = 0; j < islandGui.getHeightIsland(); j++) {
+                for (int k = 0; k < islandGui.getWidthIsland(); k++) {
+                    islandGui.getCellPanels()[i].setTextCellLabels(island.arrayCells[i]);
+                    i++;
+                }
             }
+        } catch (Exception ex) {
+            Logger.printError(ex);
         }
     }
 }

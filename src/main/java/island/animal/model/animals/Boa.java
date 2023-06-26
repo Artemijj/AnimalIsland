@@ -1,4 +1,4 @@
-package island.animal.model;
+package island.animal.model.animals;
 
 public class Boa extends Predator{
     public Boa(Species species) {

@@ -1,7 +1,8 @@
 package island.animal.view;
 
 import island.animal.controller.ButtonPressActions;
-import island.animal.model.*;
+import island.animal.model.island.Island;
+import island.animal.model.island.ModelParameter;
 
 import javax.swing.*;
 

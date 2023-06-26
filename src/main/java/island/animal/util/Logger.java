@@ -1,4 +1,4 @@
-package island.animal.model;
+package island.animal.util;
 
 import java.io.*;
 import java.util.Date;
@@ -11,7 +11,7 @@ public class Logger {
     private static PrintStream ps;
 
     public synchronized static void printLog(String txt) {
-        if (logFile == null) {
+        if (log == null) {
             try {
                 logFile = new FileWriter("log.txt");
                 log = new PrintWriter(logFile);
@@ -28,7 +28,7 @@ public class Logger {
     }
 
     public synchronized static void printError(Exception exception) {
-        if (errorFile == null) {
+        if (error == null) {
             try {
                 errorFile = new FileWriter("error.txt");
                 error = new PrintWriter(errorFile);

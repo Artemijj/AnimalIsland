@@ -1,6 +1,6 @@
 package island.animal.controller;
 
-import island.animal.model.Island;
+import island.animal.model.island.Island;
 import island.animal.view.*;
 
 import javax.swing.*;

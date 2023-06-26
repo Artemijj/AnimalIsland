@@ -1,4 +1,6 @@
-package island.animal.model;
+package island.animal.model.animals;
+
+import island.animal.model.island.Island;
 
 public interface IAnimal {
     void eat(Island island, int position);

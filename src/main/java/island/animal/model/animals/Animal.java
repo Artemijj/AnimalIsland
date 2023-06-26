@@ -1,4 +1,9 @@
-package island.animal.model;
+package island.animal.model.animals;
+
+import island.animal.model.island.Cell;
+import island.animal.model.island.Island;
+import island.animal.util.Logger;
+import island.animal.util.RandomValue;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

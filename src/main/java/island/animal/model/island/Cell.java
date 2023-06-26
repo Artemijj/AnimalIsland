@@ -1,4 +1,7 @@
-package island.animal.model;
+package island.animal.model.island;
+
+import island.animal.model.animals.Animal;
+import island.animal.model.animals.Species;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ public class Cell {
     }
 
     public synchronized List<Animal> getAnimals() {
-        return animals;
+        return new ArrayList<>(animals);
     }
 
     public enum Direction { UP, DOWN, LEFT, RIGHT }

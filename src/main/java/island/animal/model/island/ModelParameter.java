@@ -1,4 +1,6 @@
-package island.animal.model;
+package island.animal.model.island;
+
+import island.animal.model.animals.Species;
 
 import java.io.*;
 import java.util.HashMap;
